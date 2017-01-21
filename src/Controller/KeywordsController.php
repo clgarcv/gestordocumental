@@ -10,6 +10,10 @@ use App\Controller\AppController;
  */
 class KeywordsController extends AppController
 {
+    public function isAuthorized($user)
+    {
+        return true;
+    }
 
     /**
      * Index method

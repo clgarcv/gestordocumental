@@ -2,6 +2,8 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
+
 
 /**
  * Users Controller
@@ -10,6 +12,45 @@ use App\Controller\AppController;
  */
 class UsersController extends AppController
 {
+
+    public function beforeFilter(Event $event)
+    {
+        //parent::beforeFilter($event);
+        $this->Auth->allow('add');
+    }
+
+    public function login()
+    {
+        if($this->request->is('post'))
+        {
+            $user = $this->Auth->identify();
+            if($user) 
+            {
+                $this->Auth->setUser($user);
+                return $this->redirect($this->Auth->redirectUrl());
+            }
+            else
+            {
+                $this->Flash->error('Datos de inicio invalidos, por favor intentelo de nuevo.', ['key' => 'auth']);
+            }
+        }
+    }
+
+    public function logout()
+    {
+        return $this->redirect($this->Auth->logout());
+    }
+
+    public function isAuthorized($user)
+    {
+        return true;
+    }
+
+    public function home()
+    {
+        $this->set(compact('user'));
+        $this->set('_serialize', ['user']);
+    }
 
     /**
      * Index method

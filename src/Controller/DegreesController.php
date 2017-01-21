@@ -10,6 +10,10 @@ use App\Controller\AppController;
  */
 class DegreesController extends AppController
 {
+    public function isAuthorized($user)
+    {
+        return true;
+    }
 
     /**
      * Index method

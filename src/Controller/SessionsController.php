@@ -11,6 +11,11 @@ use App\Controller\AppController;
 class SessionsController extends AppController
 {
 
+    public function isAuthorized($user)
+    {
+        return true;
+    }
+
     /**
      * Index method
      *

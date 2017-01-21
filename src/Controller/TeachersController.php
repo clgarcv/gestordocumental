@@ -24,6 +24,11 @@ class TeachersController extends AppController
         $this->set('_serialize', ['teachers']);
     }
 
+    public function isAuthorized($user)
+    {
+        return true;
+    }
+
     /**
      * View method
      *
