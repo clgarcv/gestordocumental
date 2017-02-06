@@ -2,6 +2,9 @@
 namespace App\Controller;
 
 use App\Controller\AppController;
+use Cake\Event\Event;
+use Cake\ORM\Query;
+use Cake\ORM\TableRegistry;
 
 /**
  * Sessions Controller
@@ -12,8 +15,52 @@ class SessionsController extends AppController
 {
 
     public function isAuthorized($user)
-    {
-        return true;
+    {        
+        //return true;
+        if(isset($user['role']) && $user['role'] == 2){
+            //damos autorizacion a determinadas acciones del controlador
+            if(in_array($this->request->action, array('add', 'edit', 'index', 'view'))){
+                return true;
+            } else {
+                if($this->Auth->user('id')){
+                    $this->Flash->error(__('No tiene permisos de acceso.'));
+                    return $this->redirect([
+                        'controller' => 'Users',
+                        'action' => 'buscador'
+                    ]);
+
+                }
+            }            
+        }
+        if(isset($user['role']) && $user['role'] == 1){
+            //damos autorizacion a determinadas acciones del controlador
+            if(in_array($this->request->action, array('add', 'edit', 'index', 'view'))){
+                return true;
+            } else {
+                if($this->Auth->user('id')){
+                    $this->Flash->error(__('No tiene permisos de acceso.'));
+                    return $this->redirect([
+                        'controller' => 'Users',
+                        'action' => 'buscador'
+                    ]);
+
+                }
+            }            
+        }
+        if(isset($user['role']) && $user['role'] == 0){
+            //damos autorizacion a determinadas acciones del controlador
+            
+                if($this->Auth->user('id')){
+                    $this->Flash->error(__('No tiene permisos de acceso.'));
+                    return $this->redirect([
+                        'controller' => 'Users',
+                        'action' => 'buscador'
+                    ]);
+
+                }
+                       
+        }
+        return parent::isAuthorized($user);
     }
 
     /**
@@ -91,7 +138,8 @@ class SessionsController extends AppController
                 $this->Flash->error(__('La sesión no se ha podido modificar. Por favor, inténtelo de nuevo.'));
             }
         }
-        $keywords = $this->Sessions->Keywords->find('list', ['limit' => 200]);
+        $keywords = $this->Sessions->Keywords->find('list', ['order'=>'Keywords.nombre']);
+
         $this->set(compact('session', 'keywords'));
         $this->set('_serialize', ['session']);
     }

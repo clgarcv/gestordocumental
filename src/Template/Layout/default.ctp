@@ -46,9 +46,20 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         </div>
     </nav>
     -->
-          
-  <?= $this->fetch('content') ?>
-  
+    <?php if (isset($current_user)): ?>
+        <?= $this->element('cabecera_menu', array("role" => $current_user['role'])) ?>
+    
+    <?php endif;?>
+
+    <?= $this->Flash->render() ?>
+    <?= $this->Flash->render('auth') ?>
+    <div class="contenido">
+        <?= $this->fetch('content') ?>
+    </div>
+
+
+    <footer>
+    </footer> 
    
 </body>
 </html>

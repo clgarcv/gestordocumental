@@ -40,6 +40,7 @@ class AppView extends View
     public function initialize()
     {
         $this->initializeUI(['layout' => false]);
+         $this->loadHelper('Paginator');
     }
 
 }

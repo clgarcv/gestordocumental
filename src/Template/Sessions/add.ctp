@@ -19,7 +19,7 @@
             echo $this->Form->input('keywords._ids', ['options' => $keywords]);
         ?>
     </fieldset>
-    <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../users/index\';')); ?>
+    <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../buscador\';')); ?>
     <?= $this->Form->button('Guardar') ?>
     <?= $this->Form->end() ?>
 </div>

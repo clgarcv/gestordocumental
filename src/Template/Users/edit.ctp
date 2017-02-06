@@ -21,8 +21,11 @@
         <?php
             echo $this->Form->input('username');
             echo $this->Form->input('password');
-            echo $this->Form->input('role');
-            echo $this->Form->input('teacher_id', ['options' => $teachers, 'empty' => true]);
+            if ($current_user['role'] == 3): 
+            echo $this->Form->input('role',['options' => array('Usuario básico', 'Usuario avanzado', 'Administrador', 'Súper administrador')]);
+            //echo $this->Form->input('teacher_id',['options' => $teachers, 'disabled' => true]);
+            endif;
+
         ?>
     </fieldset>
     <?= $this->Form->button(__('Guardar')) ?>

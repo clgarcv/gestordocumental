@@ -36,7 +36,7 @@ class TeachersTable extends Table
         parent::initialize($config);
 
         $this->table('teachers');
-        $this->displayField('id');
+        $this->displayField('full_name');
         //campo virtual para unir dos campos nombre y apellidos.
         $this->primaryKey('id');
 

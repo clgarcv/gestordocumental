@@ -35,7 +35,7 @@ class SessionsTable extends Table
         parent::initialize($config);
 
         $this->table('sessions');
-        $this->displayField('id');
+        $this->displayField('nombre');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');

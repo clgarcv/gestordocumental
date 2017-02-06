@@ -16,7 +16,7 @@
 <div class="login"> 
     <div class="container">
         <div class="row">
-            <div class="col-md-4 col-md-offset-4 col-sm-4-offset-4 col-xs-4-offset-2">
+            <div class="col-md-4 col-md-offset-4 col-xs-4-offset-2">
                 <?= $this->Html->image('UR.jpeg', array('alt' => 'Universidad de La Rioja', 'class' => 'img-responsive'));?>       
             </div>    
         </div>
@@ -33,7 +33,7 @@
                             <div class="form-group">
                                 <?= $this->Form->password('password', ['class' => 'form-control input-lg', 'placeholder' => 'Contraseña', 'label' => false, 'required']) ?>
                             </div>
-                            <!--label><a href="#">Recordar contraseña</a></label>
+                            <?= $this->Html->link(__('Registrarse'), ['controller' => 'Users', 'action' => 'add']) ?>
                             <!--div class="checkbox">
                                 <label>
                                     <input name="remember" type="checkbox" value="Remember Me"> Recuerdamé

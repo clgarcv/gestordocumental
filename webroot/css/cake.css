@@ -101,19 +101,6 @@ ul.pagination .disabled:hover a {
     background: none;
 }
 
-.paginator {
-    text-align: center;
-}
-
-.paginator ul.pagination li {
-    float: none;
-    display: inline-block;
-}
-
-.paginator p {
-    text-align: right;
-    color: rgba(0, 0 ,0 , 0.54);
-}
 
 .asc:after {
     content: " \2193";

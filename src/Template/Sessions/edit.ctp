@@ -17,10 +17,10 @@
     <fieldset>
         <legend><?= __('Edit Session') ?></legend>
         <?php
-            echo $this->Form->input('codigo');
+            echo $this->Form->input('codigo', ['disabled' => 'true']);
             echo $this->Form->input('nombre');
             echo $this->Form->input('descripcion');
-            echo $this->Form->input('keywords._ids', ['options' => $keywords]);
+            echo $this->Form->input('keywords._ids', ['options' => $keywords, 'style'=>'height: 400px']);
         ?>
     </fieldset>
     <?= $this->Form->button(__('Submit')) ?>

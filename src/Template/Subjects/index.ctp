@@ -1,3 +1,4 @@
+<!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -8,6 +9,7 @@
         <li><?= $this->Html->link(__('New Teacher'), ['controller' => 'Teachers', 'action' => 'add']) ?></li>
     </ul>
 </nav>
+-->
 <div class="subjects index large-9 medium-8 columns content">
     <h3><?= __('Subjects') ?></h3>
     <table cellpadding="0" cellspacing="0">
@@ -20,8 +22,7 @@
                 <th scope="col"><?= $this->Paginator->sort('curso') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('semestre') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('materia') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
+                
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -35,12 +36,10 @@
                 <td><?= $this->Number->format($subject->curso) ?></td>
                 <td><?= h($subject->semestre) ?></td>
                 <td><?= h($subject->materia) ?></td>
-                <td><?= h($subject->created) ?></td>
-                <td><?= h($subject->modified) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $subject->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $subject->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $subject->id], ['confirm' => __('Are you sure you want to delete # {0}?', $subject->id)]) ?>
+                    <?= $this->Html->link(__('Ver'), ['action' => 'view', $subject->id], ['class' => 'btn btn-default']) ?>
+                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $subject->id], ['class' => 'btn btn-default']) ?>
+                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $subject->id], ['confirm' => __('Are you sure you want to delete # {0}?', $subject->nombre), 'class' => 'btn btn-default']) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -48,12 +47,12 @@
     </table>
     <div class="paginator">
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
+            <?= $this->Paginator->first('<< ' . __('Primera')) ?>
+            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
             <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
+            <?= $this->Paginator->last(__('Última') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
+        <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} asignaturas de {{count}} totales')]) ?></p>
     </div>
 </div>

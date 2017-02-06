@@ -13,35 +13,33 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('nombre') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('created') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
         <tbody>
             <?php foreach ($keywords as $keyword): ?>
             <tr>
-                <td><?= $this->Number->format($keyword->id) ?></td>
+                <td><?= h($keyword->id) ?></td>
                 <td><?= h($keyword->nombre) ?></td>
-                <td><?= h($keyword->created) ?></td>
-                <td><?= h($keyword->modified) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['action' => 'view', $keyword->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $keyword->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $keyword->id], ['confirm' => __('Are you sure you want to delete # {0}?', $keyword->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['action' => 'view', $keyword->id], ['class' => 'btn btn-default']) ?>
+                    <?= $this->Html->link(__('Edit'), ['action' => 'edit', $keyword->id], ['class' => 'btn btn-default']) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['action' => 'delete', $keyword->id], ['confirm' => __('Are you sure you want to delete # {0}?', $keyword->id), 'class' => 'btn btn-default']) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
+    <nav aria-label="Page navigation example">
+
         <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('first')) ?>
-            <?= $this->Paginator->prev('< ' . __('previous')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('next') . ' >') ?>
-            <?= $this->Paginator->last(__('last') . ' >>') ?>
+            <?= $this->Paginator->first('<< ' . __('Primera')) ?>
+            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
+            
+            <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
+            <?= $this->Paginator->last(__('Última') . ' >>') ?>
         </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Page {{page}} of {{pages}}, showing {{current}} record(s) out of {{count}} total')]) ?></p>
-    </div>
+        <?= $this->Paginator->numbers() ?>
+        <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} palabras clave de {{count}} totales')]) ?></p>
+    </nav>
 </div>

@@ -50,10 +50,10 @@ class AppController extends Controller
                     'controller' => 'Users',
                     'action' => 'login'
                 ],
-                'authError' => 'Por favor, ingrese los datos de acceso.',
+                'authError' => '',
                 'loginRedirect' => [
                     'controller' => 'Users',
-                    'action' => 'home'
+                    'action' => 'buscador'
                 ],
                 'logoutRedirect' => [
                     'controller' => 'Users',
@@ -87,4 +87,32 @@ class AppController extends Controller
             $this->set('_serialize', true);
         }
     }
+
+    /**
+     * beforeFilter callback
+     *
+     * @return void
+     */
+    public function beforeFilter(Event $event) 
+    {
+        $this->Auth->allow('login', 'add');
+        $this->set('current_user', $this->Auth->user());
+    }
+
+    public function isAuthorized($user){
+        //return false;
+        //si es super administrador puede acceder a cualquier accion de cualquier controlador
+        if(isset($user['role']) && $user['role'] == 3)
+        {
+            return true;
+        }
+        $this->Flash->error(__('No tiene permisos de acceso.'));
+                    return $this->redirect([
+                        'controller' => 'Users',
+                        'action' => 'buscador'
+                    ]);  
+    }
+
+    
+
 }

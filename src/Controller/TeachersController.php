@@ -11,6 +11,12 @@ use App\Controller\AppController;
 class TeachersController extends AppController
 {
 
+    public function isAuthorized($user)
+    {
+        //unicamente tendra permisos los super administrador
+        return parent::isAuthorized($user);
+    }
+
     /**
      * Index method
      *
@@ -24,10 +30,7 @@ class TeachersController extends AppController
         $this->set('_serialize', ['teachers']);
     }
 
-    public function isAuthorized($user)
-    {
-        return true;
-    }
+    
 
     /**
      * View method

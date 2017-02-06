@@ -10,6 +10,42 @@ use App\Controller\AppController;
  */
 class SubjectsController extends AppController
 {
+    public function isAuthorized($user)
+    {
+        //return true;
+        if(isset($user['role']) && $user['role'] == 2){
+            //damos autorizacion a determinadas acciones del controlador
+            if(in_array($this->request->action, array('add', 'edit', 'view', 'index'))){
+                return true;
+            } else {
+                if($this->Auth->user('id')){
+                    $this->Flash->error(__('No tiene permisos de acceso.'));
+                    return $this->redirect([
+                        'controller' => 'Users',
+                        'action' => 'buscador'
+                    ]);
+                }
+            }            
+        }
+        if(isset($user['role']) && $user['role'] == 1){
+            //damos autorizacion a determinadas acciones del controlador
+            $this->Flash->error(__('No tiene permisos de acceso.'));
+                    return $this->redirect([
+                        'controller' => 'Users',
+                        'action' => 'buscador'
+                    ]);        
+        }
+        
+        if(isset($user['role']) && $user['role'] == 0){
+            //damos autorizacion a determinadas acciones del controlador
+            $this->Flash->error(__('No tiene permisos de acceso.'));
+                    return $this->redirect([
+                        'controller' => 'Users',
+                        'action' => 'buscador'
+                    ]);     
+        }
+        return parent::isAuthorized($user);
+    }
 
     /**
      * Index method

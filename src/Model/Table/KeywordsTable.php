@@ -35,7 +35,7 @@ class KeywordsTable extends Table
         parent::initialize($config);
 
         $this->table('keywords');
-        $this->displayField('id');
+        $this->displayField('nombre');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
