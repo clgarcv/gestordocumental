@@ -20,7 +20,7 @@
                           <li class="list-group-item">
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox" value="">
+                                <input type="checkbox" value="" name='<?= $m['modulo'] ?>'>
                                 <?= $m['modulo'] ?>
                               </label>
                             </div>
@@ -167,21 +167,21 @@
         </div>
     <div class="col-xs-6 col-sm-8">
         
-         <form class="form-search" method="get" id="s" action="/">
-          <div class="input-append">
-              <input type="text" class="input-medium search-query busqueda" name="s" placeholder="Palabras clave...." value="">
+        <?= $this->Form->create('Keyword', array ('type' => 'GET', 'class' => 'form-search', 'url' => array('controller' => 'users', 'action' => 'buscar'))); ?>
+         <div class="form-group">
+           <?= $this->Form->input('search', array ('label' => false, 'div' => false, 'id' => 's', 'class' => 'form-control s', 'autocomplete' => 'off', 'placeholder'=> 'Palabras clave....')); ?>
+          </div>
+
+              <!-- <input type="text" class="input-medium search-query busqueda" name="s" placeholder="Palabras clave...." value=""> -->
 
               <!--<?= $this->Html->link('',
                         array('controller' => 'users', 'action' => 'logout'), array('type' => 'button', 'class' => 'button glyphicon glyphicon-search'))?> </li>
                         -->
-              <?= $this->Form->button($this->Html->link('' ,
-                        array('controller' => 'users', 'action' => 'buscador'), array('class' => 'glyphicon glyphicon-search'))
-                      ) ?>
+          <?= $this->Form->button($this->Html->link('' ,array('controller' => 'users', 'action' => 'buscador'), array('class' => 'glyphicon glyphicon-search'))) ?>
+          <?php echo $this->Form->end(); ?>
               
 
-              
-          </div>
-        </form>
+         
            
 
     <div class="page-header">
@@ -195,7 +195,8 @@
         <?php endif; ?>
         <div class="col-sm-4">
           <div class="col-padding">
-            <h3><a href="#"><?= $s['nombre'] ?></a></h3>
+            <h3><?= $this->Html->link($s['nombre'] ,
+                    array('controller' => 'sessions', 'action' => 'view', $s['id'] ))?></h3>
             <p><?= $s['descripcion'] ?></p>
           </div>
         </div>
@@ -205,20 +206,27 @@
         <?php $i=0; ?>
         <?php endif; ?>            
       <?php endforeach; ?>
-  
-    </div>  
 
-    <div class="paginator">
-        <ul class="pagination">
-            <?= $this->Paginator->first('<< ' . __('Primera')) ?>
-            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
-            <?= $this->Paginator->last(__('Última') . ' >>') ?>
-        </ul>
-        <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} sesiones de {{count}} totales')]) ?></p>
-    </div>
+    </div> 
+
+    
   </div>
+  <div class="row">
+  <div class="col-xs-6 col-xs-offset-6 col-sm-8 col-sm-offset3">
+        
+          <ul class="pagination">
+            <?= $this->Paginator->first('<< ' . __('Primera')) ?>
+            <?= $this->Paginator->prev('< ' . __('Anterior'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
+          </ul>
+          <?= $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1)) ?>
+          <ul class="pagination">
+            <?= $this->Paginator->next(__('Siguiente') . ' >', array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
+            <?= $this->Paginator->last(__('Última') . ' >>') ?>
+          </ul>
+          <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} sesiones de {{count}} totales')]) ?></p>
+      
+      </div>
+      </div>
 </div>
 
 

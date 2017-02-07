@@ -10,7 +10,7 @@
 </nav>
 -->
 <div class="teachers index large-9 medium-8 columns content">
-    <h3><?= __('Teachers') ?></h3>
+    <h3><?= __('Profesores') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -33,20 +33,20 @@
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $teacher->id], ['class' => 'btn btn-default']) ?>
                     <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $teacher->id], ['confirm' => __('Are you sure you want to delete # {0}?', $teacher->full_name), 'class' => 'btn btn-default']) ?>
 
-                    
+
                 </td>
             </tr>
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator2">
-        <ul class="pagination2">
+    <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('Primera')) ?>
-            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
+            <?= $this->Paginator->prev('< ' . __('Anterior'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
+          </ul>
+          <?= $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1)) ?>
+          <ul class="pagination">
+            <?= $this->Paginator->next(__('Siguiente') . ' >', array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
             <?= $this->Paginator->last(__('Última') . ' >>') ?>
-        </ul>
+          </ul>
         <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} profesores de {{count}} totales')]) ?></p>
-    </div>
 </div>

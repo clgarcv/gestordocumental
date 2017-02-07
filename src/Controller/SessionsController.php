@@ -15,8 +15,8 @@ class SessionsController extends AppController
 {
 
     public function isAuthorized($user)
-    {        
-        //return true;
+    {
+        //Administrador
         if(isset($user['role']) && $user['role'] == 2){
             //damos autorizacion a determinadas acciones del controlador
             if(in_array($this->request->action, array('add', 'edit', 'index', 'view'))){
@@ -30,8 +30,9 @@ class SessionsController extends AppController
                     ]);
 
                 }
-            }            
+            }
         }
+        //usuario avanzado
         if(isset($user['role']) && $user['role'] == 1){
             //damos autorizacion a determinadas acciones del controlador
             if(in_array($this->request->action, array('add', 'edit', 'index', 'view'))){
@@ -45,11 +46,14 @@ class SessionsController extends AppController
                     ]);
 
                 }
-            }            
+            }
         }
+        //usuario basico
         if(isset($user['role']) && $user['role'] == 0){
             //damos autorizacion a determinadas acciones del controlador
-            
+            if(in_array($this->request->action, array('index', 'view'))){
+                return true;
+            } else {
                 if($this->Auth->user('id')){
                     $this->Flash->error(__('No tiene permisos de acceso.'));
                     return $this->redirect([
@@ -58,7 +62,7 @@ class SessionsController extends AppController
                     ]);
 
                 }
-                       
+			}
         }
         return parent::isAuthorized($user);
     }
@@ -70,7 +74,7 @@ class SessionsController extends AppController
      */
     public function index()
     {
-        $sessions = $this->paginate($this->Sessions);
+        $sessions = $this->paginate($this->Sessions, array('limit' => 15));
 
         $this->set(compact('sessions'));
         $this->set('_serialize', ['sessions']);

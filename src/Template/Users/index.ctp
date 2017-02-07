@@ -10,7 +10,7 @@
 -->
 
 <div class="users index large-9 medium-8 columns content">
-    <h3><?= __('Users') ?></h3>
+    <h3><?= __('Usuarios') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -19,7 +19,7 @@
                 <th scope="col"><?= $this->Paginator->sort('password') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('role') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('teacher_id') ?></th>
-                
+
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -47,7 +47,7 @@
                             echo "<td></td>";
                     endswitch;
                 ?>
-                <td><?= $user->has('teacher') ? $this->Html->link($user->teacher->id, ['controller' => 'Teachers', 'action' => 'view', $user->teacher->id]) : '' ?></td>
+                <td><?= $user->has('teacher') ? $this->Html->link($user->teacher->full_name, ['controller' => 'Teachers', 'action' => 'view', $user->teacher->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('Ver'), ['action' => 'view', $user->id], ['class' => 'btn btn-default']) ?>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $user->id], ['class' => 'btn btn-default']) ?>
@@ -57,14 +57,14 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
+    <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('Primera')) ?>
-            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
-            <?= $this->Paginator->last(__('UÚltima') . ' >>') ?>
-        </ul>
+            <?= $this->Paginator->prev('< ' . __('Anterior'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
+          </ul>
+          <?= $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1)) ?>
+          <ul class="pagination">
+            <?= $this->Paginator->next(__('Siguiente') . ' >', array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
+            <?= $this->Paginator->last(__('Última') . ' >>') ?>
+          </ul>
         <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} usuarios de {{count}} totales')]) ?></p>
-    </div>
 </div>

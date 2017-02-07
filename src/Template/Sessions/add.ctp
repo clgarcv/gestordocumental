@@ -11,12 +11,12 @@
 <div class="sessions form large-9 medium-8 columns content">
     <?= $this->Form->create($session) ?>
     <fieldset>
-        <legend><?= __('Añadir neuva sesión') ?></legend>
+        <legend><?= __('Añadir nueva sesión') ?></legend>
         <?php
-            echo $this->Form->input('codigo');
+            echo $this->Form->input('codigo',  array('label' => 'Código'));
             echo $this->Form->input('nombre');
-            echo $this->Form->input('descripcion');
-            echo $this->Form->input('keywords._ids', ['options' => $keywords]);
+            echo $this->Form->input('descripcion', array('label' => 'Descripción'));
+            echo $this->Form->input('keywords._ids',array('label' => 'Palabras clave'), ['options' => $keywords]);
         ?>
     </fieldset>
     <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../buscador\';')); ?>

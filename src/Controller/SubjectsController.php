@@ -25,7 +25,7 @@ class SubjectsController extends AppController
                         'action' => 'buscador'
                     ]);
                 }
-            }            
+            }
         }
         if(isset($user['role']) && $user['role'] == 1){
             //damos autorizacion a determinadas acciones del controlador
@@ -33,16 +33,16 @@ class SubjectsController extends AppController
                     return $this->redirect([
                         'controller' => 'Users',
                         'action' => 'buscador'
-                    ]);        
+                    ]);
         }
-        
+
         if(isset($user['role']) && $user['role'] == 0){
             //damos autorizacion a determinadas acciones del controlador
             $this->Flash->error(__('No tiene permisos de acceso.'));
                     return $this->redirect([
                         'controller' => 'Users',
                         'action' => 'buscador'
-                    ]);     
+                    ]);
         }
         return parent::isAuthorized($user);
     }
@@ -54,7 +54,7 @@ class SubjectsController extends AppController
      */
     public function index()
     {
-        $subjects = $this->paginate($this->Subjects);
+        $subjects = $this->paginate($this->Subjects, array('limit' => 15));
 
         $this->set(compact('subjects'));
         $this->set('_serialize', ['subjects']);
@@ -70,7 +70,7 @@ class SubjectsController extends AppController
     public function view($id = null)
     {
         $subject = $this->Subjects->get($id, [
-            'contain' => ['Degrees', 'Subjects', 'Teachers']
+            'contain' => ['Degrees', 'Teachers']
         ]);
 
         $this->set('subject', $subject);
@@ -96,11 +96,10 @@ class SubjectsController extends AppController
             }
         }
         $degrees = $this->Subjects->Degrees->find('list', ['limit' => 200]);
-        $subjects = $this->Subjects->Subjects->find('list', ['limit' => 200]);
         $teachers = $this->Subjects->Teachers->find('list', ['limit' => 200]);
-        
 
-        $this->set(compact('subject', 'degrees', 'subjects', 'teachers'));
+
+        $this->set(compact('subject', 'degrees', 'teachers'));
         $this->set('_serialize', ['subject']);
     }
 
@@ -114,7 +113,7 @@ class SubjectsController extends AppController
     public function edit($id = null)
     {
         $subject = $this->Subjects->get($id, [
-            'contain' => ['Degrees', 'Subjects', 'Teachers']
+            'contain' => ['Degrees', 'Teachers']
         ]);
         if ($this->request->is(['patch', 'post', 'put'])) {
             $subject = $this->Subjects->patchEntity($subject, $this->request->data);
@@ -127,9 +126,9 @@ class SubjectsController extends AppController
             }
         }
         $degrees = $this->Subjects->Degrees->find('list', ['limit' => 200]);
-        $subjects = $this->Subjects->Subjects->find('list', ['limit' => 200]);
+
         $teachers = $this->Subjects->Teachers->find('list', ['limit' => 200]);
-        $this->set(compact('subject', 'degrees', 'subjects', 'teachers'));
+        $this->set(compact('subject', 'degrees', 'teachers'));
         $this->set('_serialize', ['subject']);
     }
 

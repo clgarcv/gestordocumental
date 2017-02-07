@@ -11,7 +11,7 @@
 </nav>
 -->
 <div class="subjects index large-9 medium-8 columns content">
-    <h3><?= __('Subjects') ?></h3>
+    <h3><?= __('Asignaturas') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -22,7 +22,7 @@
                 <th scope="col"><?= $this->Paginator->sort('curso') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('semestre') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('materia') ?></th>
-                
+
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -33,7 +33,7 @@
                 <td><?= h($subject->codigo) ?></td>
                 <td><?= h($subject->nombre) ?></td>
                 <td><?= h($subject->modulo) ?></td>
-                <td><?= $this->Number->format($subject->curso) ?></td>
+                <td><?= h($subject->curso) ?></td>
                 <td><?= h($subject->semestre) ?></td>
                 <td><?= h($subject->materia) ?></td>
                 <td class="actions">
@@ -45,14 +45,14 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
+    <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('Primera')) ?>
-            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
+            <?= $this->Paginator->prev('< ' . __('Anterior'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
+          </ul>
+          <?= $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1)) ?>
+          <ul class="pagination">
+            <?= $this->Paginator->next(__('Siguiente') . ' >', array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
             <?= $this->Paginator->last(__('Última') . ' >>') ?>
-        </ul>
+          </ul>
         <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} asignaturas de {{count}} totales')]) ?></p>
-    </div>
 </div>

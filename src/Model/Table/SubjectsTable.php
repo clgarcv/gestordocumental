@@ -47,11 +47,7 @@ class SubjectsTable extends Table
             'targetForeignKey' => 'degree_id',
             'joinTable' => 'degrees_subjects'
         ]);
-        $this->belongsToMany('Subjects', [
-            'foreignKey' => 'subject_id',
-            'targetForeignKey' => 'subject_id',
-            'joinTable' => 'subjects_subjects'
-        ]);
+        
         $this->belongsToMany('Teachers', [
             'foreignKey' => 'subject_id',
             'targetForeignKey' => 'teacher_id',
@@ -85,7 +81,6 @@ class SubjectsTable extends Table
             ->notEmpty('modulo');
 
         $validator
-            ->integer('curso')
             ->requirePresence('curso', 'create')
             ->notEmpty('curso');
 

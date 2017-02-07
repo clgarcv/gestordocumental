@@ -42,7 +42,7 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Curso') ?></th>
-            <td><?= $this->Number->format($subject->curso) ?></td>
+            <td><?= h($subject->curso) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Created') ?></th>
@@ -82,43 +82,7 @@
         </table>
         <?php endif; ?>
     </div>
-    <div class="related">
-        <h4><?= __('Related Subjects') ?></h4>
-        <?php if (!empty($subject->subjects)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Codigo') ?></th>
-                <th scope="col"><?= __('Nombre') ?></th>
-                <th scope="col"><?= __('Modulo') ?></th>
-                <th scope="col"><?= __('Curso') ?></th>
-                <th scope="col"><?= __('Semestre') ?></th>
-                <th scope="col"><?= __('Materia') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($subject->subjects as $subjects): ?>
-            <tr>
-                <td><?= h($subjects->id) ?></td>
-                <td><?= h($subjects->codigo) ?></td>
-                <td><?= h($subjects->nombre) ?></td>
-                <td><?= h($subjects->modulo) ?></td>
-                <td><?= h($subjects->curso) ?></td>
-                <td><?= h($subjects->semestre) ?></td>
-                <td><?= h($subjects->materia) ?></td>
-                <td><?= h($subjects->created) ?></td>
-                <td><?= h($subjects->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Subjects', 'action' => 'view', $subjects->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Subjects', 'action' => 'edit', $subjects->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Subjects', 'action' => 'delete', $subjects->id], ['confirm' => __('Are you sure you want to delete # {0}?', $subjects->id)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
+    
     <div class="related">
         <h4><?= __('Related Teachers') ?></h4>
         <?php if (!empty($subject->teachers)): ?>

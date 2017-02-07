@@ -11,7 +11,7 @@ use App\Controller\AppController;
 class DegreesController extends AppController
 {
     public function isAuthorized($user)
-    {        
+    {
         //return true;
         if(isset($user['role']) && $user['role'] == 2){
             //damos autorizacion a determinadas acciones del controlador
@@ -20,7 +20,7 @@ class DegreesController extends AppController
                     return $this->redirect([
                         'controller' => 'Users',
                         'action' => 'buscador'
-                    ]);         
+                    ]);
         }
         if(isset($user['role']) && $user['role'] == 1){
             //damos autorizacion a determinadas acciones del controlador
@@ -28,7 +28,7 @@ class DegreesController extends AppController
                     return $this->redirect([
                         'controller' => 'Users',
                         'action' => 'buscador'
-                    ]);      
+                    ]);
         }
         if(isset($user['role']) && $user['role'] == 0){
             //damos autorizacion a determinadas acciones del controlador
@@ -36,10 +36,10 @@ class DegreesController extends AppController
                     return $this->redirect([
                         'controller' => 'Users',
                         'action' => 'buscador'
-                    ]);          
+                    ]);
         }
         return parent::isAuthorized($user);
-    } 
+    }
 
     /**
      * Index method
@@ -48,7 +48,7 @@ class DegreesController extends AppController
      */
     public function index()
     {
-        $degrees = $this->paginate($this->Degrees);
+        $degrees = $this->paginate($this->Degrees, array('limit' => 15));
 
         $this->set(compact('degrees'));
         $this->set('_serialize', ['degrees']);

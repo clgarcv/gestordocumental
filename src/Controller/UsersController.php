@@ -26,7 +26,7 @@ class UsersController extends AppController
         if($this->request->is('post'))
         {
             $user = $this->Auth->identify();
-            if($user) 
+            if($user)
             {
                 $this->Auth->setUser($user);
                 return $this->redirect($this->Auth->redirectUrl());
@@ -49,7 +49,7 @@ class UsersController extends AppController
     }
 
     public function isAuthorized($user)
-    {        
+    {
         //return true;
         if(isset($user['role']) && $user['role'] == 2){
             //damos autorizacion a determinadas acciones del controlador
@@ -63,7 +63,7 @@ class UsersController extends AppController
                         'action' => 'buscador'
                     ]);
                 }
-            }            
+            }
         }
         if(isset($user['role']) && $user['role'] == 1){
             //damos autorizacion a determinadas acciones del controlador
@@ -78,7 +78,7 @@ class UsersController extends AppController
                     ]);
 
                 }
-            }            
+            }
         }
         if(isset($user['role']) && $user['role'] == 0){
             //damos autorizacion a determinadas acciones del controlador
@@ -93,7 +93,7 @@ class UsersController extends AppController
                     ]);
 
                 }
-            }            
+            }
         }
         return parent::isAuthorized($user);
     }
@@ -125,18 +125,10 @@ class UsersController extends AppController
         $sesPag = $this->paginate($sesiones, array('limit' => 6));
 
         $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones', 'totSes', 'sesPag'));
-        
+
     }
 
-    public function buscarSesiones(){
 
-        $this->loadComponent('Paginator');
-        $query = $this->Users->find();
-
-        $resultados = $this->paginate($query);
-
-        $this->set(compact('resultados'));
-    }
 
     /**
      * Index method
@@ -148,7 +140,7 @@ class UsersController extends AppController
         $this->paginate = [
             'contain' => ['Teachers']
         ];
-        $users = $this->paginate($this->Users);
+        $users = $this->paginate($this->Users, array('limit' => 15));
 
         $this->set(compact('users'));
         $this->set('_serialize', ['users']);
@@ -246,5 +238,16 @@ class UsersController extends AppController
         }
 
         return $this->redirect(['action' => 'index']);
+    }
+
+    public function buscar(){
+
+        $this->loadComponent('Paginator');
+        $query = $this->Users->find();
+
+        $resultados = $this->paginate($query);
+
+        $this->set(compact('resultados'));
+        $this->autoRender = false;
     }
 }

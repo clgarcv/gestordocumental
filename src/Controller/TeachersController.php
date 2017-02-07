@@ -24,13 +24,13 @@ class TeachersController extends AppController
      */
     public function index()
     {
-        $teachers = $this->paginate($this->Teachers);
+        $teachers = $this->paginate($this->Teachers, array('limit' => 15));
 
         $this->set(compact('teachers'));
         $this->set('_serialize', ['teachers']);
     }
 
-    
+
 
     /**
      * View method

@@ -14,6 +14,7 @@
  */
 
 $cakeDescription = 'CakePHP: the rapid development php framework';
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,12 +24,15 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <title>Gestor Prácticas en Laboratorios</title>
     <?= $this->Html->meta('icon') ?>
 
-    <?= $this->Html->css(['bootstrap.min', 'menu', 'estiloweb']) ?>
-    <?= $this->Html->script(['jquery-3.1.1.min', 'bootstrap.min', 'menuppal']) ?>
+    <?= $this->Html->css(['bootstrap.min', 'bootstrap-theme.min', 'menu', 'estiloweb', 'jquery-ui.min']) ?>
+    <?= $this->Html->script(['jquery-3.1.1.min', 'bootstrap.min', 'menuppal', 'jquery-ui.min', 'autocompletar']) ?>
 
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
+    <script type="text/javascript">        
+        var basePath = "<?php echo Cake\Routing\Router::url('/'); ?>"
+    </script>
 </head>
 <body>
     <!--

@@ -1,4 +1,4 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('New Degree'), ['action' => 'add']) ?></li>
@@ -6,8 +6,9 @@
         <li><?= $this->Html->link(__('New Subject'), ['controller' => 'Subjects', 'action' => 'add']) ?></li>
     </ul>
 </nav>
+-->
 <div class="degrees index large-9 medium-8 columns content">
-    <h3><?= __('Degrees') ?></h3>
+    <h3><?= __('Titulaciones') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
@@ -32,14 +33,14 @@
             <?php endforeach; ?>
         </tbody>
     </table>
-    <div class="paginator">
-        <ul class="pagination">
+    <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('Primera')) ?>
-            <?= $this->Paginator->prev('< ' . __('Anterior')) ?>
-            <?= $this->Paginator->numbers() ?>
-            <?= $this->Paginator->next(__('Siguiente') . ' >') ?>
+            <?= $this->Paginator->prev('< ' . __('Anterior'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
+          </ul>
+          <?= $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1)) ?>
+          <ul class="pagination">
+            <?= $this->Paginator->next(__('Siguiente') . ' >', array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
             <?= $this->Paginator->last(__('Última') . ' >>') ?>
-        </ul>
+          </ul>
         <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} titulaciones de {{count}} totales')]) ?></p>
-    </div>
 </div>

@@ -49,57 +49,6 @@ ul.pagination2 li a,ul.pagination2 li button{
     padding:0.0625rem 0.625rem 0.0625rem
 }
 
-ul.pagination2 li:hover a,ul.pagination2 li a:focus,ul.pagination2 li:hover button,ul.pagination2 li button:focus{background:#e6e6e6}
-
-ul.pagination2 li.unavailable a,ul.pagination2 li.unavailable button{cursor:default;color:#999}ul.pagination2 li.unavailable:hover a,ul.pagination2 li.unavailable a:focus,ul.pagination2 li.unavailable:hover button,ul.pagination2 li.unavailable button:focus{background:transparent}
-
-ul.pagination2 li.current a,ul.pagination2 li.current button{background:#008CBA;color:#fff;cursor:default;font-weight:bold}
-
-ul.pagination2 li.current a:hover,ul.pagination2 li.current a:focus,ul.pagination2 li.current button:hover,ul.pagination2 li.current button:focus{background:#008CBA}
-
-ul.pagination2 li{display:block;float:left}
-
-.pagination2-centered{text-align:center}
-
-.pagination2-centered ul.pagination2 li{display:inline-block;float:none}
-
-ul.pagination2 li a {
-    color: rgba(0, 0 ,0 , 0.54);
-}
-
-ul.pagination2 li.active a {
-    background-color: #DCE47E;
-    color: #FFF;
-    font-weight: bold;
-    cursor: default;
-}
-ul.pagination2 .disabled:hover a {
-    background: none;
-}
-
-.paginator2 {
-    text-align: center;
-}
-
-.paginator2 ul.pagination2 li {
-    float: none;
-    display: inline-block;
-}
-
-
-.paginator2 {
-    text-align: center;
-}
-
-.paginator2 ul.pagination2 li {
-    float: none;
-    display: inline-block;
-}
-
-.paginator2 p {
-    text-align: right;
-    color: rgba(0, 0 ,0 , 0.54);
-}
 
 //cuadricula de sesiones
 .row{ margin:20px 20px 20px 20px;width: 100%;}

@@ -27,11 +27,10 @@
             echo $this->Form->input('curso');
             echo $this->Form->input('semestre');
             echo $this->Form->input('materia');
-            echo $this->Form->input('degrees._ids', ['options' => $degrees]);
-            echo $this->Form->input('subjects._ids', ['options' => $subjects]);
+            echo $this->Form->input('degrees._ids', ['options' => $degrees]);            
             echo $this->Form->input('teachers._ids', ['options' => $teachers]);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button(__('Guardar')) ?>
     <?= $this->Form->end() ?>
 </div>

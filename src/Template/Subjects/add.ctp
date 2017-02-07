@@ -23,28 +23,10 @@
             echo $this->Form->input('curso');
             echo $this->Form->input('semestre');
             echo $this->Form->input('materia');
-            //php foreach ($reservations as $reservation)
-            //echo $this->Form->input('degrees._ids', ['options' => $degrees]);
-            //echo $this->Form->input('subjects._ids', ['options' => $subjects]);
-            //echo $this->Form->input('teachers._ids', ['options' => $teachers]);
+            echo $this->Form->input('degrees._ids', ['options' => $degrees]);
+            echo $this->Form->input('teachers._ids', ['options' => $teachers]);
         ?>
-        <label> Titulación </label> <br>
-        <?php foreach($degrees as $d): ?>
-        <?php echo $this->Form->checkbox($d);
-                echo ' ' . $d;?>
-        <?php endforeach; ?>
 
-        <br><label> Asignaturas Relacionadas </label> <br>
-        <?php foreach($subjects as $s): ?>
-        <?php echo $this->Form->checkbox($s);
-                echo ' ' . $s;?>
-        <?php endforeach; ?>
-
-        <br><label> Profesores </label> <br>
-        <?php foreach($teachers as $t): ?>
-        <?php echo $this->Form->checkbox($t); 
-                echo ' ' . $t ?>
-        <?php endforeach; ?>
 
 
     </fieldset>
