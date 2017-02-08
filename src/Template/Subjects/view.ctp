@@ -1,3 +1,4 @@
+<!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -13,6 +14,7 @@
         <li><?= $this->Html->link(__('New Teacher'), ['controller' => 'Teachers', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
+-->
 <div class="subjects view large-9 medium-8 columns content">
     <h3><?= h($subject->id) ?></h3>
     <table class="vertical-table">
@@ -54,6 +56,39 @@
         </tr>
     </table>
     <div class="related">
+        <h4><?= __('Related Sessions') ?></h4>
+        <?php if (!empty($subject->sessions)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th scope="col"><?= __('Id') ?></th>
+                <th scope="col"><?= __('Codigo') ?></th>
+                <th scope="col"><?= __('Nombre') ?></th>
+                <th scope="col"><?= __('Descripcion') ?></th>
+                <th scope="col"><?= __('Subject Id') ?></th>
+                <th scope="col"><?= __('Created') ?></th>
+                <th scope="col"><?= __('Modified') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th>
+            </tr>
+            <?php foreach ($subject->sessions as $sessions): ?>
+            <tr>
+                <td><?= h($sessions->id) ?></td>
+                <td><?= h($sessions->codigo) ?></td>
+                <td><?= h($sessions->nombre) ?></td>
+                <td><?= h($sessions->descripcion) ?></td>
+                <td><?= h($sessions->subject_id) ?></td>
+                <td><?= h($sessions->created) ?></td>
+                <td><?= h($sessions->modified) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Sessions', 'action' => 'view', $sessions->id]) ?>
+                    <?= $this->Html->link(__('Edit'), ['controller' => 'Sessions', 'action' => 'edit', $sessions->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Sessions', 'action' => 'delete', $sessions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $sessions->id)]) ?>
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+    </div>
+    <div class="related">
         <h4><?= __('Related Degrees') ?></h4>
         <?php if (!empty($subject->degrees)): ?>
         <table cellpadding="0" cellspacing="0">
@@ -82,7 +117,7 @@
         </table>
         <?php endif; ?>
     </div>
-    
+
     <div class="related">
         <h4><?= __('Related Teachers') ?></h4>
         <?php if (!empty($subject->teachers)): ?>

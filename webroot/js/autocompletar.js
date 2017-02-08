@@ -3,16 +3,17 @@ $(document).ready(function(){
         minLength: 2,
         source: function(request, response){
              $.ajax({
-                url: basePath + "keywords/searchJSON", 
+                url: basePath + "keywords/searchJSON",
                 data: {
                     term: request.term
-                }, 
-                dataType: "json", 
+                },
+                dataType: "json",
                 success: function(data){
                     response($.map(data, function(el, index){
                         return {
-                            value: el.nombre, 
-                            nombre: el.nombre
+                            value: el.nombre,
+                            nombre: el.nombre,
+                            id: el.id
                         };
                     }));
                 }

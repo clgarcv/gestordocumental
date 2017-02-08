@@ -3,7 +3,7 @@
     <div class="row">
         <div class="col-xs-6 col-sm-3">
             <div class="well">
-                <div id="accordion">    
+                <div id="accordion">
                 <div class="panel-body" >
 
                     <div class="panel-heading " >
@@ -16,7 +16,7 @@
                       <div id="collapse0" class="panel-collapse collapse" >
                         <ul class="list-group">
                           <?php foreach ($modulos as $m): ?>
-                          
+
                           <li class="list-group-item">
                             <div class="checkbox">
                               <label>
@@ -24,12 +24,12 @@
                                 <?= $m['modulo'] ?>
                               </label>
                             </div>
-                          </li> 
+                          </li>
                           <?php endforeach; ?>
 
                         </ul>
                       </div>
-                    
+
 
                       <div class="panel-heading " >
                         <h4 class="panel-title">
@@ -41,7 +41,7 @@
                       <div id="collapse1" class="panel-collapse collapse" >
                         <ul class="list-group">
                           <?php foreach ($materias as $m): ?>
-                          
+
                           <li class="list-group-item">
                             <div class="checkbox">
                               <label>
@@ -49,7 +49,7 @@
                                 <?= $m['materia'] ?>
                               </label>
                             </div>
-                          </li> 
+                          </li>
                           <?php endforeach; ?>
                         </ul>
                       </div>
@@ -145,7 +145,7 @@
                       <div id="collapse4" class="panel-collapse collapse" >
                         <ul class="list-group">
                           <?php foreach ($asignaturas as $a): ?>
-                          
+
                           <li class="list-group-item">
                             <div class="checkbox">
                               <label>
@@ -153,21 +153,21 @@
                                 <?= $a['nombre'] ?>
                               </label>
                             </div>
-                          </li> 
+                          </li>
                           <?php endforeach; ?>
                         </ul>
                       </div>
 
 
-                    
+
 
                 </div>
-              </div>   
+              </div>
           </div>
         </div>
     <div class="col-xs-6 col-sm-8">
-        
-        <?= $this->Form->create('Keyword', array ('type' => 'GET', 'class' => 'form-search', 'url' => array('controller' => 'users', 'action' => 'buscar'))); ?>
+
+        <?= $this->Form->create('Session', array ('type' => 'GET', 'class' => 'form-search', 'url' => array('controller' => 'sessions', 'action' => 'buscarSesion'))); ?>
          <div class="form-group">
            <?= $this->Form->input('search', array ('label' => false, 'div' => false, 'id' => 's', 'class' => 'form-control s', 'autocomplete' => 'off', 'placeholder'=> 'Palabras clave....')); ?>
           </div>
@@ -177,12 +177,12 @@
               <!--<?= $this->Html->link('',
                         array('controller' => 'users', 'action' => 'logout'), array('type' => 'button', 'class' => 'button glyphicon glyphicon-search'))?> </li>
                         -->
-          <?= $this->Form->button($this->Html->link('' ,array('controller' => 'users', 'action' => 'buscador'), array('class' => 'glyphicon glyphicon-search'))) ?>
+          <?= $this->Form->button('', array('class' => 'glyphicon glyphicon-search')) ?>
           <?php echo $this->Form->end(); ?>
-              
 
-         
-           
+
+
+
 
     <div class="page-header">
         <h3>Sesiones encontradas....</h3>
@@ -204,16 +204,16 @@
         <?php if ($i ==3): ?>
         </div>
         <?php $i=0; ?>
-        <?php endif; ?>            
+        <?php endif; ?>
       <?php endforeach; ?>
 
-    </div> 
+    </div>
 
-    
+
   </div>
   <div class="row">
   <div class="col-xs-6 col-xs-offset-6 col-sm-8 col-sm-offset3">
-        
+
           <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('Primera')) ?>
             <?= $this->Paginator->prev('< ' . __('Anterior'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
@@ -224,7 +224,7 @@
             <?= $this->Paginator->last(__('Última') . ' >>') ?>
           </ul>
           <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} sesiones de {{count}} totales')]) ?></p>
-      
+
       </div>
       </div>
 </div>

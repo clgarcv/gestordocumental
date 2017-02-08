@@ -1,4 +1,4 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
@@ -12,6 +12,7 @@
         <li><?= $this->Html->link(__('New Keyword'), ['controller' => 'Keywords', 'action' => 'add']) ?></li>
     </ul>
 </nav>
+-->
 <div class="sessions form large-9 medium-8 columns content">
     <?= $this->Form->create($session) ?>
     <fieldset>
@@ -20,6 +21,7 @@
             echo $this->Form->input('codigo', ['disabled' => 'true']);
             echo $this->Form->input('nombre');
             echo $this->Form->input('descripcion');
+            echo $this->Form->input('subject_id', ['options' => $subjects])
             echo $this->Form->input('keywords._ids', ['options' => $keywords, 'style'=>'height: 400px']);
         ?>
     </fieldset>

@@ -21,6 +21,10 @@
             <td><?= h($session->nombre) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Subject') ?></th>
+            <td><?= $session->has('subject') ? $this->Html->link($session->subject->id, ['controller' => 'Subjects', 'action' => 'view', $session->subject->id]) : '' ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($session->id) ?></td>
         </tr>

@@ -70,7 +70,7 @@ class SubjectsController extends AppController
     public function view($id = null)
     {
         $subject = $this->Subjects->get($id, [
-            'contain' => ['Degrees', 'Teachers']
+            'contain' => ['Degrees', 'Teachers', 'Sessions']
         ]);
 
         $this->set('subject', $subject);

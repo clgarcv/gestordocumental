@@ -240,14 +240,4 @@ class UsersController extends AppController
         return $this->redirect(['action' => 'index']);
     }
 
-    public function buscar(){
-
-        $this->loadComponent('Paginator');
-        $query = $this->Users->find();
-
-        $resultados = $this->paginate($query);
-
-        $this->set(compact('resultados'));
-        $this->autoRender = false;
-    }
 }

@@ -14,6 +14,38 @@ use Cake\ORM\TableRegistry;
 class SessionsController extends AppController
 {
 
+	public function buscarSesion()
+	{
+		/*
+        $this->loadComponent('Paginator');
+        $query = $this->Users->find();
+
+        $resultados = $this->paginate($query);
+
+        $this->set(compact('resultados'));
+        $this->autoRender = false;
+		*/
+
+		print_r($_POST);
+
+		$busqueda = null;
+		if(!empty($this->request->query['busqueda']))
+		{
+			$busqueda = $this->request->query['busqueda'];
+			//$busqueda = preg_replace('', '', $busqueda);
+			$sesions = explode(' ', trim($busqueda));
+			$sesions = array_diff($sesions, array(''));
+			foreach ($sesions as $s) {
+				$sesions1 = preg_replace('', '', 's');
+				$conditions = array();
+			}
+		}
+
+		$this->autoRender = false;
+
+
+    }
+
     public function isAuthorized($user)
     {
         //Administrador
@@ -74,7 +106,11 @@ class SessionsController extends AppController
      */
     public function index()
     {
-        $sessions = $this->paginate($this->Sessions, array('limit' => 15));
+        //$sessions = $this->paginate($this->Sessions, array('limit' => 15));
+        $this->paginate = [
+            'contain' => ['Subjects']
+        ];
+        $sessions = $this->paginate($this->Sessions);
 
         $this->set(compact('sessions'));
         $this->set('_serialize', ['sessions']);
@@ -90,7 +126,7 @@ class SessionsController extends AppController
     public function view($id = null)
     {
         $session = $this->Sessions->get($id, [
-            'contain' => ['Keywords']
+            'contain' => ['Subjects', 'Keywords']
         ]);
 
         $this->set('session', $session);
@@ -115,8 +151,9 @@ class SessionsController extends AppController
                 $this->Flash->error(__('La sesión no se ha podido añadir. Por favor, inténtelo de nuevo.'));
             }
         }
+        $subjects = $this->Sessions->Subjects->find('list', ['limit' => 200]);
         $keywords = $this->Sessions->Keywords->find('list', ['limit' => 200]);
-        $this->set(compact('session', 'keywords'));
+        $this->set(compact('session', 'subjects', 'keywords'));
         $this->set('_serialize', ['session']);
     }
 
@@ -142,9 +179,10 @@ class SessionsController extends AppController
                 $this->Flash->error(__('La sesión no se ha podido modificar. Por favor, inténtelo de nuevo.'));
             }
         }
+ 		$subjects = $this->Sessions->Subjects->find('list', ['limit' => 200]);
         $keywords = $this->Sessions->Keywords->find('list', ['order'=>'Keywords.nombre']);
 
-        $this->set(compact('session', 'keywords'));
+        $this->set(compact('session', 'subjects', 'keywords'));
         $this->set('_serialize', ['session']);
     }
 

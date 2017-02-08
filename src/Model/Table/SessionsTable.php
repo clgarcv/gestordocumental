@@ -40,6 +40,8 @@ class SessionsTable extends Table
 
         $this->addBehavior('Timestamp');
 
+        $this->belongsTo('Subjects');
+
         $this->belongsToMany('Keywords', [
             'foreignKey' => 'session_id',
             'targetForeignKey' => 'keyword_id',
@@ -85,6 +87,7 @@ class SessionsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['codigo']));
+        $rules->add($rules->existsIn(['subject_id'], 'Subjects'));
 
         return $rules;
     }

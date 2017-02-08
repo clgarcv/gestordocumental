@@ -37,17 +37,19 @@ class SubjectsTable extends Table
         parent::initialize($config);
 
         $this->table('subjects');
-        $this->displayField('id');
+        $this->displayField('nombre');
         $this->primaryKey('id');
 
         $this->addBehavior('Timestamp');
+
+        $this->hasMany('Sessions');
 
         $this->belongsToMany('Degrees', [
             'foreignKey' => 'subject_id',
             'targetForeignKey' => 'degree_id',
             'joinTable' => 'degrees_subjects'
         ]);
-        
+
         $this->belongsToMany('Teachers', [
             'foreignKey' => 'subject_id',
             'targetForeignKey' => 'teacher_id',

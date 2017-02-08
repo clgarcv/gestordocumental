@@ -16,6 +16,7 @@
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('codigo') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('nombre') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('subject_id') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
         </thead>
@@ -25,6 +26,7 @@
                 <td><?= $this->Number->format($session->id) ?></td>
                 <td><?= h($session->codigo) ?></td>
                 <td><?= h($session->nombre) ?></td>
+                <td><?= $session->has('subject') ? $this->Html->link($session->subject->id, ['controller' => 'Subjects', 'action' => 'view', $session->subject->id]) : '' ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('Ver'), ['action' => 'view', $session->id], ['class' => 'btn btn-default']) ?>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $session->id], ['class' => 'btn btn-default']) ?>
