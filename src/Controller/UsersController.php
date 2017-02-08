@@ -15,6 +15,7 @@ use Cake\ORM\TableRegistry;
 class UsersController extends AppController
 {
 
+
     public function beforeFilter(Event $event)
     {
         parent::beforeFilter($event);
@@ -121,10 +122,22 @@ class UsersController extends AppController
                             ->select(['nombre']);
 
         $session = TableRegistry::get('Sessions');
-        $sesiones = $session->find();
-        $sesPag = $this->paginate($sesiones, array('limit' => 6));
 
-        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones', 'totSes', 'sesPag'));
+
+        //print_r($this->request->params['sessionsFiltradas']);
+        if(empty($sessionsFiltradas))
+        {
+        	$sesiones = $session->find();
+        } else {
+        	$sesiones = $sessionsFiltradas;
+        }
+
+        //else $sesiones = $this->request->session->read('sesiones');
+        //print_r($sesiones);
+        //$sesPag = $this->paginate($sesiones);
+        $this->paginate($sesiones, array('limit' => 6));
+
+        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones'));
 
     }
 

@@ -5,7 +5,7 @@
             <div class="well">
                 <div id="accordion">
                 <div class="panel-body" >
-
+				<?= $this->Form->create('Session', array ('type' => 'POST', 'class' => 'form-search', 'url' => array('controller' => 'sessions', 'action' => 'buscarSesion'))); ?>
                     <div class="panel-heading " >
                         <h4 class="panel-title">
                           <a data-toggle="collapse" href="#collapse0">
@@ -20,7 +20,7 @@
                           <li class="list-group-item">
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox" value="" name='<?= $m['modulo'] ?>'>
+                                <input type="checkbox" value="<?= $m['modulo'] ?>" name='modulo[]'>
                                 <?= $m['modulo'] ?>
                               </label>
                             </div>
@@ -41,11 +41,10 @@
                       <div id="collapse1" class="panel-collapse collapse" >
                         <ul class="list-group">
                           <?php foreach ($materias as $m): ?>
-
                           <li class="list-group-item">
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox" value="">
+                                <input type="checkbox" value="<?= $m['materia'] ?>" name='materia[]'>
                                 <?= $m['materia'] ?>
                               </label>
                             </div>
@@ -63,38 +62,16 @@
                       </div>
                       <div id="collapse2" class="panel-collapse collapse" >
                         <ul class="list-group">
+                        <?php foreach (array('PRIMERO', 'SEGUNDO', 'TERCERO', 'CUARTO') as $c): ?>
                           <li class="list-group-item">
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox" value="">
-                                Primero
+                                <input type="checkbox" value="<?= $c?>" name='curso[]'>
+                                <?= $c ?>
                               </label>
                             </div>
                           </li>
-                          <li class="list-group-item">
-                            <div class="checkbox" >
-                              <label>
-                                <input type="checkbox" value="">
-                                Segundo
-                              </label>
-                            </div>
-                          </li>
-                          <li class="list-group-item">
-                            <div class="checkbox"  >
-                              <label>
-                                <input type="checkbox" value="">
-                                Tercero
-                              </label>
-                            </div>
-                          </li>
-                          <li class="list-group-item">
-                            <div class="checkbox"  >
-                              <label>
-                                <input type="checkbox" value="">
-                                Cuarto
-                              </label>
-                            </div>
-                          </li>
+                          <?php endforeach; ?>
                         </ul>
                       </div>
 
@@ -107,34 +84,20 @@
                       </div>
                       <div id="collapse3" class="panel-collapse collapse" >
                         <ul class="list-group">
+                          <?php foreach (array('PRIMERO', 'SEGUNDO', 'ANUAL') as $sem): ?>
                           <li class="list-group-item">
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox" value="">
-                                Primero
+                                <input type="checkbox" value="<?= $sem?>" name='semestre[]'>
+                                <?= $sem ?>
                               </label>
                             </div>
                           </li>
-                          <li class="list-group-item">
-                            <div class="checkbox" >
-                              <label>
-                                <input type="checkbox" value="">
-                                Segundo
-                              </label>
-                            </div>
-                          </li>
-                          <li class="list-group-item">
-                            <div class="checkbox"  >
-                              <label>
-                                <input type="checkbox" value="">
-                                Anual
-                              </label>
-                            </div>
-                          </li>
+                          <?php endforeach; ?>
                         </ul>
                       </div>
 
-
+                      <!--
                       <div class="panel-heading " >
                         <h4 class="panel-title">
                           <a data-toggle="collapse" href="#collapse4">
@@ -149,7 +112,7 @@
                           <li class="list-group-item">
                             <div class="checkbox">
                               <label>
-                                <input type="checkbox" value="">
+                                <input type="checkbox" value="<?= $a['nombre'] ?>" name='asignatura[]'>
                                 <?= $a['nombre'] ?>
                               </label>
                             </div>
@@ -157,8 +120,7 @@
                           <?php endforeach; ?>
                         </ul>
                       </div>
-
-
+                      -->
 
 
                 </div>
@@ -167,7 +129,6 @@
         </div>
     <div class="col-xs-6 col-sm-8">
 
-        <?= $this->Form->create('Session', array ('type' => 'GET', 'class' => 'form-search', 'url' => array('controller' => 'sessions', 'action' => 'buscarSesion'))); ?>
          <div class="form-group">
            <?= $this->Form->input('search', array ('label' => false, 'div' => false, 'id' => 's', 'class' => 'form-control s', 'autocomplete' => 'off', 'placeholder'=> 'Palabras clave....')); ?>
           </div>
@@ -218,12 +179,14 @@
             <?= $this->Paginator->first('<< ' . __('Primera')) ?>
             <?= $this->Paginator->prev('< ' . __('Anterior'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
           </ul>
-          <?= $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1)) ?>
+          <?= $this->Paginator->numbers() ?>
           <ul class="pagination">
             <?= $this->Paginator->next(__('Siguiente') . ' >', array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
             <?= $this->Paginator->last(__('Última') . ' >>') ?>
           </ul>
-          <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} sesiones de {{count}} totales')]) ?></p>
+        <p><?= $this->Paginator->counter(['format' => __('Página {{page}} de {{pages}}, mostrando {{current}} sesiones de {{count}} totales')]) ?></p>
+
+
 
       </div>
       </div>

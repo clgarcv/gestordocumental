@@ -6,7 +6,7 @@
         <li><?= $this->Html->link(__('New Subject'), ['controller' => 'Subjects', 'action' => 'add']) ?></li>
     </ul>
 </nav>
---> 
+-->
 
 <div class="degrees form large-9 medium-8 columns content">
     <?= $this->Form->create($degree) ?>
@@ -15,13 +15,9 @@
         <?php
             echo $this->Form->input('codigo');
             echo $this->Form->input('nombre');
-            //echo $this->Form->input('subjects._ids', ['options' => $subjects]);
+            echo $this->Form->input('subjects._ids', array('label' => 'Asignaturas'),['options' => $subjects]);
         ?>
-        <br><label> Asignaturas de la titulación</label> <br>
-        <?php foreach($subjects as $s): ?>
-        <?php echo $this->Form->checkbox($s);
-                echo ' ' . $s;?>
-        <?php endforeach; ?>
+
     </fieldset>
     <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../users/index\';')); ?>
     <?= $this->Form->button('Guardar') ?>

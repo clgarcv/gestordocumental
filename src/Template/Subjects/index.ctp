@@ -49,7 +49,7 @@
             <?= $this->Paginator->first('<< ' . __('Primera')) ?>
             <?= $this->Paginator->prev('< ' . __('Anterior'), array('tag' => 'li'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
           </ul>
-          <?= $this->Paginator->numbers(array('separator' => '','currentTag' => 'a', 'currentClass' => 'active','tag' => 'li','first' => 1)) ?>
+          <?= $this->Paginator->numbers() ?>
           <ul class="pagination">
             <?= $this->Paginator->next(__('Siguiente') . ' >', array('tag' => 'li','currentClass' => 'disabled'), null, array('tag' => 'li','class' => 'disabled','disabledTag' => 'a')) ?>
             <?= $this->Paginator->last(__('Última') . ' >>') ?>

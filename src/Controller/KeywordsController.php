@@ -10,6 +10,7 @@ use App\Controller\AppController;
  */
 class KeywordsController extends AppController
 {
+	//funcion que devuelve las keywords con un determinado patron
 	public function searchJSON(){
 		$term = null;
 		if(!empty($this->request->query['term']))
@@ -27,12 +28,7 @@ class KeywordsController extends AppController
 		$serialized = serialize($keyW);
 		echo json_encode($keyW);
 		$this->autoRender = false;
-
 	}
-
-
-
-
 
 	public function isAuthorized($user)
 	{
