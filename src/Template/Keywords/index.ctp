@@ -13,18 +13,22 @@
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('nombre') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+
             </tr>
         </thead>
         <tbody>
             <?php foreach ($keywords as $keyword): ?>
             <tr>
                 <td><?= h($keyword->id) ?></td>
-                <td><?= h($keyword->nombre) ?></td>
+                <!-- <td><?= h($keyword->nombre) ?></td> -->
+                <td><?= $this->Html->link(__($keyword->nombre), ['action' => 'view', $keyword->id]) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('Ver'), ['action' => 'view', $keyword->id], ['class' => 'btn btn-default']) ?>
+
+                <?php if ($current_user['role'] == 3): ?>
+
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $keyword->id], ['class' => 'btn btn-default']) ?>
-                    <?= $this->Html->link(__('Eliminar'), ['action' => 'delete', $keyword->id], ['confirm' => __('¿Saeguro que desea eliminar la palabra clave #{0}?', $keyword->nombre), 'class' => 'btn btn-default']) ?>
+                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $keyword->id], ['confirm' => __('¿Seguro que desea eliminar la palabra clave #{0}?', $keyword->nombre), 'class' => 'btn btn-default']) ?>
+                <?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -5,6 +5,7 @@ use App\Controller\AppController;
 use Cake\Event\Event;
 use Cake\ORM\Query;
 use Cake\ORM\TableRegistry;
+use Cake\View\Helper\SessionHelper;
 
 
 /**
@@ -21,6 +22,7 @@ class UsersController extends AppController
         parent::beforeFilter($event);
         $this->Auth->allow('add');
     }
+
 
     public function login()
     {
@@ -101,6 +103,13 @@ class UsersController extends AppController
 
     public function buscador()
     {
+
+    	//$this->session = $this->controller->request->session();
+
+    	$keyword = TableRegistry::get('Keywords');
+    	$keywords = $keyword->find()
+    						->select(['nombre']);
+
         $subject = TableRegistry::get('Subjects');
         $modulos = $subject->find()
                             ->select(['modulo'])
@@ -112,12 +121,12 @@ class UsersController extends AppController
 
         $cursos = $subject->find()
                             ->select(['curso'])
-                            ->distinct(['curso'])
-                            ->toList();
+                            ->distinct(['curso']);
 
         $semestres = $subject->find()
                             ->select(['semestre'])
                             ->distinct(['semestre']);
+
         $asignaturas = $subject->find()
                             ->select(['nombre']);
 
@@ -149,6 +158,8 @@ class UsersController extends AppController
 		else $semestre = array();
 		//print_r($semestre);
 
+
+		//obtenemos las palabras clave introducidas en el input
 		if(!empty($_POST['search']))
 			$search = $_POST['search'];
 		else $search = "";
@@ -183,10 +194,9 @@ class UsersController extends AppController
 
 
 		$asig = TableRegistry::get('Subjects');
-		//$conditions[] = array('Subjects.modulo LIKE' => '%' . $condicionModulo . '%','Subjects.materia LIKE' => '%' . $condicionMateria . '%', 'Subjects.curso LIKE' => '%' . $condicionCurso . '%', 'Subjects.semestre LIKE' => '%' . $condicionSemestre . '%');
-		//print_r($conditions);
 
 		//comprobamos si hay condiciones o no
+		//si hay condiciones obtenemos las asignaturas que las cumplen
 		$asignaturas=array();
 		if(!empty($conditions)){
 			$asignaturas = $asig->find('all', array('fields' => array('Subjects.id'), 'conditions' => array('AND' => $conditions)))->toArray();
@@ -208,48 +218,58 @@ class UsersController extends AppController
         	# code...
         	//print_r($a['id']);
         	$conditions2[] = array('Sessions.subject_id LIKE' => $a['id']);
-        	//print_r('entra en bucle for asignaturas');
+        	print_r(' entra en bucle for asignaturas');
         	}
+		} else
+		{
+			print_r(' no entra en bucle for asignaturas');
 		}
+
+		//print_r($sesiones);
+
+		//$sesiones = $this->request->session()->read('sesiones');
+
+
 
         //print_r($conditions2);
         $ses = TableRegistry::get('Sessions');
-        $sessionsFiltradas = $ses->find('all');
-        if(!empty($conditions2)){
-        	$sessionsFiltradas = $ses->find('all', array('conditions' => array('OR' => $conditions2)));
+        //$sessionsFiltradas = $ses->find('all');
+
+        if(empty($sesiones))
+        {
+        	print_r(' sesiones vacio');
+        	if(!empty($conditions2))
+        	{
+        		print_r(' conditions 2 no vacio');
+        		$sessionesFiltradas = $ses->find('all', array('conditions' => array('OR' => $conditions2)));
+	        }
+	        else
+	        {
+	        	print_r(' conditions2 vacio');
+	        	$sessionesFiltradas = $session->find();
+	        }
+	        $sesiones = $sessionesFiltradas;
+	        print_r(' las legundas sesiones    ' . $sesiones);
         }
-        //print_r($sessionsFiltradas->toArray());
-        //$sesiones = $sessionsFiltradas;
-        //print_r($sesiones);
 
-
-
-		//$session = TableRegistry::get('Sessions');
-        //$sesiones = $session->find('all','conditions' => array('OR' => $conditions2));
-        //$sesPag = $this->paginate($sesiones);
-        //$sesPag = $this->paginate($sesiones, array('limit' => 6));
-
-        //$this->set(compact('sesiones'));
-        //$this->set('sesionesFiltradas', $sessionsFiltradas);
-		//$this->redirect(array('controller' => 'users', 'action' => 'buscador'));
-
-
-        //print_r($asignaturas[0]['id']);
-
-        if(empty($sessionsFiltradas))
+/*
+        if(empty($sessionsFiltradas) && empty($sesiones))
         {
         	$sesiones = $session->find();
-        	//print_r('entra en if sesiones');
+        	print_r('entra en primer if sesiones');
         } else {
-        	$sesiones = $sessionsFiltradas;
+        	if(empty($sesiones)){
+        		$sesiones = $sessionsFiltradas;
+        		print_r('entra en 2 if sesiones');
+        	}
         	//print_r('entra en else sesiones');
-        }
+        }*/
 
-        //else $sesiones = $this->request->session->read('sesiones');
-        //print_r($sesiones);
-        //$sesPag = $this->paginate($sesiones);
-        $this->paginate($sesiones, array('limit' => 6));
-        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones'));
+        //$this->request->session()->write('sesiones', $sesiones);
+
+
+        $paginador = $this->paginate($sesiones, array('limit' => 6));
+        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones','keywords', 'paginador'));
 
     }
 

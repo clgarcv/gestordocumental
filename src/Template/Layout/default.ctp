@@ -14,7 +14,7 @@
  */
 
 $cakeDescription = 'CakePHP: the rapid development php framework';
-
+use Cake\ORM\TableRegistry;
 ?>
 <!DOCTYPE html>
 <html>
@@ -32,6 +32,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('script') ?>
     <script type="text/javascript">
         var basePath = "<?php echo Cake\Routing\Router::url('/'); ?>"
+
+
     </script>
 </head>
 <body>

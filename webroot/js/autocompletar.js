@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
     $("#s").autocomplete({
         minLength: 2,
@@ -26,5 +27,6 @@ $(document).ready(function(){
         .appendTo(ul)
     };
 });
+
 
 

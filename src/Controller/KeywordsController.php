@@ -169,6 +169,7 @@ class KeywordsController extends AppController
 	 */
 	public function delete($id = null)
 	{
+
 		//$this->request->allowMethod(['post', 'delete']);
 		if ($this->request->is(['patch', 'post', 'put'])) {
 			$keyword = $this->Keywords->get($id);
@@ -178,6 +179,7 @@ class KeywordsController extends AppController
 				$this->Flash->error(__('La palabra clave no se ha podido eliminar. Por favor, inténtelo de nuevo.'));
 			}
 		}
+
 
 		return $this->redirect(['action' => 'index']);
 	}
