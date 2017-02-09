@@ -13,18 +13,20 @@
     </ul>
 </nav>
 -->
-<div class="sessions form large-9 medium-8 columns content">
+<div class="col-md-5 col-md-offset-3">
     <?= $this->Form->create($session) ?>
     <fieldset>
-        <legend><?= __('Edit Session') ?></legend>
+        <legend><?= __('Editar Sesión') ?></legend>
         <?php
             echo $this->Form->input('codigo', ['disabled' => 'true']);
             echo $this->Form->input('nombre');
-            echo $this->Form->input('descripcion');
-            echo $this->Form->input('subject_id', ['options' => $subjects])
-            echo $this->Form->input('keywords._ids', ['options' => $keywords, 'style'=>'height: 400px']);
+            echo $this->Form->input('descripcion', array('label' => 'Descripción'));
+            echo $this->Form->input('subject_id', array('label' => 'Asignatura'), ['options' => $subjects]);
+            echo $this->Form->input('keywords._ids', array('label' => 'Palabras Clave', 'style'=>'height: 300px'), ['options' => $keywords]);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+   	<?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../../sessions/\';')); ?>
+    <?= $this->Form->button(__('Guardar')) ?>
     <?= $this->Form->end() ?>
 </div>
+

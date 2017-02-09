@@ -89,7 +89,7 @@ class DegreesController extends AppController
                 $this->Flash->error(__('La titulación no se ha podido añadir. Por favor, inténtelo de nuevo.'));
             }
         }
-        $subjects = $this->Degrees->Subjects->find('list', ['limit' => 200]);
+        $subjects = $this->Degrees->Subjects->find('list', ['order'=>'Subjects.nombre']);
         $this->set(compact('degree', 'subjects'));
         $this->set('_serialize', ['degree']);
     }
@@ -116,7 +116,7 @@ class DegreesController extends AppController
                 $this->Flash->error(__('La titulación no se ha podido modificar. Por favor, inténtelo de nuevo.'));
             }
         }
-        $subjects = $this->Degrees->Subjects->find('list', ['limit' => 200]);
+        $subjects = $this->Degrees->Subjects->find('list');
         $this->set(compact('degree', 'subjects'));
         $this->set('_serialize', ['degree']);
     }
@@ -130,13 +130,15 @@ class DegreesController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $degree = $this->Degrees->get($id);
-        if ($this->Degrees->delete($degree)) {
-            $this->Flash->success(__('Titulación eliminada correctamente.'));
-        } else {
-            $this->Flash->error(__('La titulación no se ha podido eliminar. Por favor, inténtelo de nuevo.'));
-        }
+        //$this->request->allowMethod(['post', 'delete']);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+		        $degree = $this->Degrees->get($id);
+		        if ($this->Degrees->delete($degree)) {
+		            $this->Flash->success(__('Titulación eliminada correctamente.'));
+		        } else {
+		            $this->Flash->error(__('La titulación no se ha podido eliminar. Por favor, inténtelo de nuevo.'));
+		        }
+		    }
 
         return $this->redirect(['action' => 'index']);
     }

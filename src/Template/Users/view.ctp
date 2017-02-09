@@ -12,7 +12,7 @@
 </nav>
 -->
 
-<div class="users view large-9 medium-8 columns content">
+<div class="col-md-5 col-md-offset-3">
     <h3><?= h($user->username) ?></h3>
     <table class="vertical-table">
         <tr>

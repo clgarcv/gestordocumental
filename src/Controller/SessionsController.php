@@ -300,8 +300,8 @@ class SessionsController extends AppController
                 $this->Flash->error(__('La sesión no se ha podido añadir. Por favor, inténtelo de nuevo.'));
             }
         }
-        $subjects = $this->Sessions->Subjects->find('list', ['limit' => 200]);
-        $keywords = $this->Sessions->Keywords->find('list', ['limit' => 200]);
+        $subjects = $this->Sessions->Subjects->find('list', ['order'=>'Subjects.nombre']);
+        $keywords = $this->Sessions->Keywords->find('list', ['order'=>'Keywords.nombre']);
         $this->set(compact('session', 'subjects', 'keywords'));
         $this->set('_serialize', ['session']);
     }
@@ -328,7 +328,7 @@ class SessionsController extends AppController
                 $this->Flash->error(__('La sesión no se ha podido modificar. Por favor, inténtelo de nuevo.'));
             }
         }
- 		$subjects = $this->Sessions->Subjects->find('list', ['limit' => 200]);
+ 		$subjects = $this->Sessions->Subjects->find('list', ['order'=>'Subjects.nombre']);
         $keywords = $this->Sessions->Keywords->find('list', ['order'=>'Keywords.nombre']);
 
         $this->set(compact('session', 'subjects', 'keywords'));
@@ -344,13 +344,15 @@ class SessionsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $session = $this->Sessions->get($id);
-        if ($this->Sessions->delete($session)) {
-            $this->Flash->success(__('Sesión eliminada correctamente.'));
-        } else {
-            $this->Flash->error(__('La sesión no se ha podido eliminar. Por favor, inténtelo de nuevo.'));
-        }
+        //$this->request->allowMethod(['post', 'delete']);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+	        $session = $this->Sessions->get($id);
+	        if ($this->Sessions->delete($session)) {
+	            $this->Flash->success(__('Sesión eliminada correctamente.'));
+	        } else {
+	            $this->Flash->error(__('La sesión no se ha podido eliminar. Por favor, inténtelo de nuevo.'));
+	        }
+	    }
 
         return $this->redirect(['action' => 'index']);
     }

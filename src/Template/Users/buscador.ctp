@@ -173,7 +173,7 @@
 
   </div>
   <div class="row">
-  <div class="col-xs-6 col-xs-offset-6 col-sm-8 col-sm-offset3">
+  	<div class="col-xs-6 col-xs-offset-3">
 
           <ul class="pagination">
             <?= $this->Paginator->first('<< ' . __('Primera')) ?>
@@ -188,8 +188,8 @@
 
 
 
-      </div>
-      </div>
+		</div>
+    </div>
 </div>
 
 

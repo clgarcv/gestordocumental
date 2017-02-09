@@ -242,13 +242,15 @@ class UsersController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $user = $this->Users->get($id);
-        if ($this->Users->delete($user)) {
-            $this->Flash->success(__('Usuario eliminado correctamente.'));
-        } else {
-            $this->Flash->error(__('El usuario no se ha podido eliminar. Por favor, inténtelo de nuevo.'));
-        }
+        //$this->request->allowMethod(['post', 'delete']);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+	        $user = $this->Users->get($id);
+	        if ($this->Users->delete($user)) {
+	            $this->Flash->success(__('Usuario eliminado correctamente.'));
+	        } else {
+	            $this->Flash->error(__('El usuario no se ha podido eliminar. Por favor, inténtelo de nuevo.'));
+	        }
+	    }
 
         return $this->redirect(['action' => 'index']);
     }

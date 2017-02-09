@@ -14,20 +14,22 @@
     </ul>
 </nav>
 -->
-<div class="users form large-9 medium-8 columns content">
+
+<div class="col-md-5 col-md-offset-3">
     <?= $this->Form->create($user) ?>
     <fieldset>
         <legend><?= __('Editar Usuario') ?></legend>
         <?php
             echo $this->Form->input('username');
             echo $this->Form->input('password');
-            if ($current_user['role'] == 3): 
-            echo $this->Form->input('role',['options' => array('Usuario básico', 'Usuario avanzado', 'Administrador', 'Súper administrador')]);
+            if ($current_user['role'] == 3):
+            echo $this->Form->input('rol', ['options' => array('Usuario básico', 'Usuario avanzado', 'Administrador', 'Súper administrador')]);
             //echo $this->Form->input('teacher_id',['options' => $teachers, 'disabled' => true]);
             endif;
 
         ?>
     </fieldset>
+    <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../../users/\';')); ?>
     <?= $this->Form->button(__('Guardar')) ?>
     <?= $this->Form->end() ?>
 </div>

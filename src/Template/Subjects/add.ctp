@@ -12,10 +12,10 @@
     </ul>
 </nav>
 -->
-<div class="subjects form large-9 medium-8 columns content">
+<div class="col-md-5 col-md-offset-3">
     <?= $this->Form->create($subject) ?>
     <fieldset>
-        <legend><?= __('Añadir Nueva Asignatura') ?></legend>
+        <legend><?= __('Añadir Asignatura') ?></legend>
         <?php
             echo $this->Form->input('codigo');
             echo $this->Form->input('nombre');
@@ -30,7 +30,7 @@
 
 
     </fieldset>
-    <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../subjects/index\';')); ?>
+    <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../users/buscador\';')); ?>
     <?= $this->Form->button('Guardar') ?>
     <?= $this->Form->end() ?>
 </div>

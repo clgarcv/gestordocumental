@@ -8,10 +8,10 @@
 </nav>
 -->
 
-<div class="sessions form large-9 medium-8 columns content">
+<div class="col-md-5 col-md-offset-3">
     <?= $this->Form->create($session) ?>
     <fieldset>
-        <legend><?= __('Añadir nueva sesión') ?></legend>
+        <legend><?= __('Añadir Sesión Práctica') ?></legend>
         <?php
             echo $this->Form->input('codigo',  array('label' => 'Código'));
             echo $this->Form->input('nombre');

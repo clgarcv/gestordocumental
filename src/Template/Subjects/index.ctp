@@ -10,20 +10,20 @@
     </ul>
 </nav>
 -->
-<div class="subjects index large-9 medium-8 columns content">
+<div class="col-md-5 col-md-offset-3">
     <h3><?= __('Asignaturas') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('codigo') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('codigo', 'Código') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('nombre') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('modulo') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('modulo', 'Módulo') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('curso') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('semestre') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('materia') ?></th>
 
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col" class="actions"><?= __('Acciones') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -39,7 +39,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Ver'), ['action' => 'view', $subject->id], ['class' => 'btn btn-default']) ?>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $subject->id], ['class' => 'btn btn-default']) ?>
-                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $subject->id], ['confirm' => __('Are you sure you want to delete # {0}?', $subject->nombre), 'class' => 'btn btn-default']) ?>
+                    <?= $this->Html->link(__('Eliminar'), ['action' => 'delete', $subject->id], ['confirm' => __('¿Seguro que desea eliminar la asignatura # {0}?', $subject->nombre), 'class' => 'btn btn-default']) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

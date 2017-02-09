@@ -1,4 +1,4 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
@@ -16,21 +16,23 @@
         <li><?= $this->Html->link(__('New Teacher'), ['controller' => 'Teachers', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="subjects form large-9 medium-8 columns content">
+-->
+<div class="col-md-5 col-md-offset-3">
     <?= $this->Form->create($subject) ?>
     <fieldset>
-        <legend><?= __('Edit Subject') ?></legend>
+        <legend><?= __('Editar Asignaturas') ?></legend>
         <?php
-            echo $this->Form->input('codigo');
+            echo $this->Form->input('codigo', array('label' => 'Código'));
             echo $this->Form->input('nombre');
-            echo $this->Form->input('modulo');
+            echo $this->Form->input('modulo', array('label' => 'Módulo'));
             echo $this->Form->input('curso');
             echo $this->Form->input('semestre');
             echo $this->Form->input('materia');
-            echo $this->Form->input('degrees._ids', ['options' => $degrees]);            
-            echo $this->Form->input('teachers._ids', ['options' => $teachers]);
+            echo $this->Form->input('degrees._ids', array('label' => 'Titulaciones'), ['options' => $degrees]);
+            echo $this->Form->input('teachers._ids', array('label' => 'Profesores'), ['options' => $teachers]);
         ?>
     </fieldset>
+    <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../../subjects/\';')); ?>
     <?= $this->Form->button(__('Guardar')) ?>
     <?= $this->Form->end() ?>
 </div>

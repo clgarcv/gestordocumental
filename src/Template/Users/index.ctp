@@ -9,7 +9,7 @@
 </nav>
 -->
 
-<div class="users index large-9 medium-8 columns content">
+<div class="col-md-5 col-md-offset-3">
     <h3><?= __('Usuarios') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
@@ -51,7 +51,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Ver'), ['action' => 'view', $user->id], ['class' => 'btn btn-default']) ?>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $user->id], ['class' => 'btn btn-default']) ?>
-                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $user->id], ['confirm' => __('¿Seguro que desea eliminar el usuario # {0}?', $user->username),'class' => 'btn btn-default']) ?>
+                    <?= $this->Html->link(__('Eliminar'), ['action' => 'delete', $user->id], ['confirm' => __('¿Seguro que desea eliminar el usuario # {0}?', $user->username),'class' => 'btn btn-default']) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

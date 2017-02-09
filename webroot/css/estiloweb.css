@@ -22,47 +22,14 @@ header {
 html, body { height: 100%;}
 
 .contenido{
-    padding-bottom:3%; 
-    
+    padding-bottom:3%;
+    height: 100%;
 }
-ul.pagination2{
-    display:block;
-    margin-left:-0.3125rem;
-    min-height:1.5rem}
 
-ul.pagination2 li{
-    color:#222;
-    font-size:1.25rem;
-    height:1.5rem;
-    margin-left:0.3125rem
-    }
-
-ul.pagination2 li a,ul.pagination2 li button{
-    border-radius:3px;
-    transition:background-color 300ms ease-out;
-    background:none;
-    color:#999;
-    display:block;
-    font-size:1.5em;
-    font-weight:normal;
-    line-height:inherit;
-    padding:0.0625rem 0.625rem 0.0625rem
+.cab{
+    margin-bottom: 5%;
 }
 
 
-//cuadricula de sesiones
-.row{ margin:20px 20px 20px 20px;width: 100%;}
-.post-box {width: 30%;float: left;position: relative;min-height: 1px;padding-right: 15px;padding-left: 15px;}
-.post-content {padding: 0;}
-.post-content {display: block;padding: 4px;margin-bottom: 20px;line-height: 1.42857143;background-color: #fff;border: 1px solid #ddd;border-radius: 4px;-webkit-transition: all .2s ease-in-out;transition: all .2s ease-in-out;}
-.post-content .caption {padding: 9px;color: #333;}
-.post-content .caption p{font-size: 14px;}
-.post-content h4 {font-size: 18px;margin-top: 10px;margin-bottom: 10px;}
-.post-content a {color: #428bca;text-decoration: none;background: transparent;}
-.post-content p {margin: 0 0 10px;}
-.no-record{font-size: 16px;font-weight: bold;color: #DD4B39;padding: 10px}
 
-//cuadricula 2
-.container-fluid {
 
-}

@@ -9,18 +9,18 @@
     </ul>
 </nav>
 -->
-<div class="teachers form large-9 medium-8 columns content">
+<div class="col-md-5 col-md-offset-3">
     <?= $this->Form->create($teacher) ?>
     <fieldset>
-        <legend><?= __('Añadir nuevo profesor') ?></legend>
+        <legend><?= __('Añadir Profesor') ?></legend>
         <?php
             echo $this->Form->input('nombre', ['style' => 'text-transform:uppercase']);
             echo $this->Form->input('apellidos');
             echo $this->Form->input('email');
-            echo $this->Form->input('subjects._ids', ['options' => $subjects]);
+            echo $this->Form->input('subjects._ids', array('label' => 'Asignaturas'), ['options' => $subjects]);
         ?>
     </fieldset>
-    <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../teachers/index\';')); ?>
+    <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../users/buscador\';')); ?>
     <?= $this->Form->button('Guardar') ?>
     <?= $this->Form->end() ?>
 </div>

@@ -6,7 +6,7 @@
         <li><?= $this->Html->link(__('New Session'), ['controller' => 'Sessions', 'action' => 'add']) ?></li>
     </ul>
 </nav> -->
-<div class="keywords index large-9 medium-8 columns content">
+<div class="col-md-5 col-md-offset-3">
     <h3><?= __('Palabras Clave') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
@@ -24,7 +24,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Ver'), ['action' => 'view', $keyword->id], ['class' => 'btn btn-default']) ?>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $keyword->id], ['class' => 'btn btn-default']) ?>
-                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $keyword->id], ['confirm' => __('Are you sure you want to delete # {0}?', $keyword->id), 'class' => 'btn btn-default']) ?>
+                    <?= $this->Html->link(__('Eliminar'), ['action' => 'delete', $keyword->id], ['confirm' => __('¿Saeguro que desea eliminar la palabra clave #{0}?', $keyword->nombre), 'class' => 'btn btn-default']) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -1,4 +1,4 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
@@ -12,15 +12,17 @@
         <li><?= $this->Html->link(__('New Session'), ['controller' => 'Sessions', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="keywords form large-9 medium-8 columns content">
+-->
+<div class="col-md-5 col-md-offset-3">
     <?= $this->Form->create($keyword) ?>
     <fieldset>
-        <legend><?= __('Edit Keyword') ?></legend>
+        <legend><?= __('Editar Palabra Clave') ?></legend>
         <?php
             echo $this->Form->input('nombre');
-            echo $this->Form->input('sessions._ids', ['options' => $sessions]);
+            echo $this->Form->input('sessions._ids', array('label' => 'Sesiones', 'style'=>'height: 300px'), ['options' => $sessions]);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../../keywords/\';')); ?>
+    <?= $this->Form->button(__('Guardar')) ?>
     <?= $this->Form->end() ?>
 </div>

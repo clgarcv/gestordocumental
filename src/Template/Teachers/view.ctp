@@ -1,3 +1,4 @@
+<!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -11,7 +12,8 @@
         <li><?= $this->Html->link(__('New Subject'), ['controller' => 'Subjects', 'action' => 'add']) ?> </li>
     </ul>
 </nav>
-<div class="teachers view large-9 medium-8 columns content">
+-->
+<div class="col-md-5 col-md-offset-3">
     <h3><?= h($teacher->id) ?></h3>
     <table class="vertical-table">
         <tr>

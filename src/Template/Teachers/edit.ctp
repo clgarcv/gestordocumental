@@ -1,4 +1,4 @@
-<!-- 
+<!--
 <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
@@ -16,7 +16,7 @@
     </ul>
 </nav>
 -->
-<div class="teachers form large-9 medium-8 columns content">
+<div class="col-md-5 col-md-offset-3">
     <?= $this->Form->create($teacher) ?>
     <fieldset>
         <legend><?= __('Editar Profesor') ?></legend>
@@ -24,9 +24,10 @@
             echo $this->Form->input('nombre');
             echo $this->Form->input('apellidos');
             echo $this->Form->input('email');
-            echo $this->Form->input('subjects._ids', ['options' => $subjects]);
+            echo $this->Form->input('subjects._ids', array('label' => 'Asignaturas'), ['options' => $subjects]);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../../teachers/\';')); ?>
+    <?= $this->Form->button(__('Guardar')) ?>
     <?= $this->Form->end() ?>
 </div>

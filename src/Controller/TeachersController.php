@@ -67,7 +67,7 @@ class TeachersController extends AppController
                 $this->Flash->error(__('El profesor no se ha podido añadir. Por favor, inténtelo de nuevo.'));
             }
         }
-        $subjects = $this->Teachers->Subjects->find('list', ['limit' => 200]);
+        $subjects = $this->Teachers->Subjects->find('list');
         $this->set(compact('teacher', 'subjects'));
         $this->set('_serialize', ['teacher']);
     }
@@ -94,7 +94,7 @@ class TeachersController extends AppController
                 $this->Flash->error(__('El profesor no se ha podido modificar. Por favor, inténtelo de nuevo.'));
             }
         }
-        $subjects = $this->Teachers->Subjects->find('list', ['limit' => 200]);
+        $subjects = $this->Teachers->Subjects->find('list');
         $this->set(compact('teacher', 'subjects'));
         $this->set('_serialize', ['teacher']);
     }
@@ -108,13 +108,15 @@ class TeachersController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $teacher = $this->Teachers->get($id);
-        if ($this->Teachers->delete($teacher)) {
-            $this->Flash->success(__('Profesor eliminado correctamente.'));
-        } else {
-            $this->Flash->error(__('El profesor no se ha podido eliminar. Por favor, inténtelo de nuevo.'));
-        }
+        //$this->request->allowMethod(['post', 'delete']);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+	        $teacher = $this->Teachers->get($id);
+	        if ($this->Teachers->delete($teacher)) {
+	            $this->Flash->success(__('Profesor eliminado correctamente.'));
+	        } else {
+	            $this->Flash->error(__('El profesor no se ha podido eliminar. Por favor, inténtelo de nuevo.'));
+	        }
+	    }
 
         return $this->redirect(['action' => 'index']);
     }

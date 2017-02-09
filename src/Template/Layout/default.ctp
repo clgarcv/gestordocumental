@@ -30,7 +30,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     <?= $this->fetch('meta') ?>
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
-    <script type="text/javascript">        
+    <script type="text/javascript">
         var basePath = "<?php echo Cake\Routing\Router::url('/'); ?>"
     </script>
 </head>
@@ -52,7 +52,7 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
     -->
     <?php if (isset($current_user)): ?>
         <?= $this->element('cabecera_menu', array("role" => $current_user['role'])) ?>
-    
+
     <?php endif;?>
 
     <?= $this->Flash->render() ?>
@@ -61,9 +61,8 @@ $cakeDescription = 'CakePHP: the rapid development php framework';
         <?= $this->fetch('content') ?>
     </div>
 
-
     <footer>
-    </footer> 
-   
+    </footer>
+
 </body>
 </html>

@@ -1,4 +1,4 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Form->postLink(
@@ -12,16 +12,18 @@
         <li><?= $this->Html->link(__('New Subject'), ['controller' => 'Subjects', 'action' => 'add']) ?></li>
     </ul>
 </nav>
-<div class="degrees form large-9 medium-8 columns content">
+-->
+<div class="col-md-5 col-md-offset-3">
     <?= $this->Form->create($degree) ?>
     <fieldset>
-        <legend><?= __('Edit Degree') ?></legend>
+        <legend><?= __('Editar Titulación') ?></legend>
         <?php
             echo $this->Form->input('codigo');
             echo $this->Form->input('nombre');
-            echo $this->Form->input('subjects._ids', ['options' => $subjects]);
+            echo $this->Form->input('subjects._ids', array('label' => 'Asignaturas'),['options' => $subjects]);
         ?>
     </fieldset>
-    <?= $this->Form->button(__('Submit')) ?>
+    <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../../degrees/\';')); ?>
+    <?= $this->Form->button(__('Guardar')) ?>
     <?= $this->Form->end() ?>
 </div>

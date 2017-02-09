@@ -8,18 +8,18 @@
 </nav>
 -->
 
-<div class="degrees form large-9 medium-8 columns content">
+<div class="col-md-5 col-md-offset-3">
     <?= $this->Form->create($degree) ?>
     <fieldset>
-        <legend><?= __('Añadir nueva titulacón') ?></legend>
+        <legend><?= __('Añadir Titulación') ?></legend>
         <?php
             echo $this->Form->input('codigo');
             echo $this->Form->input('nombre');
-            echo $this->Form->input('subjects._ids', array('label' => 'Asignaturas'),['options' => $subjects]);
+            echo $this->Form->input('subjects._ids', array('label' => 'Asignaturas', 'style'=>'height: 300px'),['options' => $subjects]);
         ?>
 
     </fieldset>
-    <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../users/index\';')); ?>
-    <?= $this->Form->button('Guardar') ?>
+    <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../buscador\';')); ?>
+    <?= $this->Form->button(__('Guardar')) ?>
     <?= $this->Form->end() ?>
 </div>

@@ -95,8 +95,8 @@ class SubjectsController extends AppController
                 $this->Flash->error(__('La asignatura no se ha podido añadir. Por favor, inténtelo de nuevo.'));
             }
         }
-        $degrees = $this->Subjects->Degrees->find('list', ['limit' => 200]);
-        $teachers = $this->Subjects->Teachers->find('list', ['limit' => 200]);
+        $degrees = $this->Subjects->Degrees->find('list');
+        $teachers = $this->Subjects->Teachers->find('list');
 
 
         $this->set(compact('subject', 'degrees', 'teachers'));
@@ -125,9 +125,9 @@ class SubjectsController extends AppController
                 $this->Flash->error(__('La asignatura no se ha podido modificar. Por favor, inténtelo de nuevo.'));
             }
         }
-        $degrees = $this->Subjects->Degrees->find('list', ['limit' => 200]);
+        $degrees = $this->Subjects->Degrees->find('list');
 
-        $teachers = $this->Subjects->Teachers->find('list', ['limit' => 200]);
+        $teachers = $this->Subjects->Teachers->find('list');
         $this->set(compact('subject', 'degrees', 'teachers'));
         $this->set('_serialize', ['subject']);
     }
@@ -141,13 +141,15 @@ class SubjectsController extends AppController
      */
     public function delete($id = null)
     {
-        $this->request->allowMethod(['post', 'delete']);
-        $subject = $this->Subjects->get($id);
-        if ($this->Subjects->delete($subject)) {
-            $this->Flash->success(__('Asignatura eliminada correctamente.'));
-        } else {
-            $this->Flash->error(__('La asignatura no se ha podido eliminar. Por favor, inténtelo de nuevo.'));
-        }
+        //$this->request->allowMethod(['post', 'delete']);
+        if ($this->request->is(['patch', 'post', 'put'])) {
+	        $subject = $this->Subjects->get($id);
+	        if ($this->Subjects->delete($subject)) {
+	            $this->Flash->success(__('Asignatura eliminada correctamente.'));
+	        } else {
+	            $this->Flash->error(__('La asignatura no se ha podido eliminar. Por favor, inténtelo de nuevo.'));
+	        }
+	    }
 
         return $this->redirect(['action' => 'index']);
     }

@@ -15,7 +15,7 @@
     </ul>
 </nav>
 -->
-<div class="subjects view large-9 medium-8 columns content">
+<div class="col-md-5 col-md-offset-3">
     <h3><?= h($subject->id) ?></h3>
     <table class="vertical-table">
         <tr>
@@ -81,7 +81,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('View'), ['controller' => 'Sessions', 'action' => 'view', $sessions->id]) ?>
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Sessions', 'action' => 'edit', $sessions->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Sessions', 'action' => 'delete', $sessions->id], ['confirm' => __('Are you sure you want to delete # {0}?', $sessions->id)]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Sessions', 'action' => 'delete', $sessions->id], ['confirm' => __('¿Esta seguro que desea eliminar la sesión # {0}?', $sessions->nombre)]) ?>
                 </td>
             </tr>
             <?php endforeach; ?>

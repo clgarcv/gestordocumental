@@ -1,4 +1,4 @@
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
+<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
     <ul class="side-nav">
         <li class="heading"><?= __('Actions') ?></li>
         <li><?= $this->Html->link(__('Edit Session'), ['action' => 'edit', $session->id]) ?> </li>
@@ -8,9 +8,11 @@
         <li><?= $this->Html->link(__('List Keywords'), ['controller' => 'Keywords', 'action' => 'index']) ?> </li>
         <li><?= $this->Html->link(__('New Keyword'), ['controller' => 'Keywords', 'action' => 'add']) ?> </li>
     </ul>
-</nav>
-<div class="sessions view large-9 medium-8 columns content">
-    <h3><?= h($session->id) ?></h3>
+</nav> -->
+
+<div class="col-md-5 col-md-offset-3">
+    <h3><?= h($session->codigo). ' - ' . h($session->nombre)?></h3>
+    <!--
     <table class="vertical-table">
         <tr>
             <th scope="row"><?= __('Codigo') ?></th>
@@ -37,25 +39,29 @@
             <td><?= h($session->modified) ?></td>
         </tr>
     </table>
+    -->
     <div class="row">
-        <h4><?= __('Descripcion') ?></h4>
+        <h4><?= __('Descripción') ?></h4>
         <?= $this->Text->autoParagraph(h($session->descripcion)); ?>
     </div>
     <div class="related">
-        <h4><?= __('Related Keywords') ?></h4>
+        <h4><?= __('Palabras Clave Asociadas') ?></h4>
         <?php if (!empty($session->keywords)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
                 <th scope="col"><?= __('Nombre') ?></th>
+                <!--
                 <th scope="col"><?= __('Created') ?></th>
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
+                -->
             </tr>
             <?php foreach ($session->keywords as $keywords): ?>
             <tr>
                 <td><?= h($keywords->id) ?></td>
                 <td><?= h($keywords->nombre) ?></td>
+                <!--
                 <td><?= h($keywords->created) ?></td>
                 <td><?= h($keywords->modified) ?></td>
                 <td class="actions">
@@ -63,6 +69,7 @@
                     <?= $this->Html->link(__('Edit'), ['controller' => 'Keywords', 'action' => 'edit', $keywords->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Keywords', 'action' => 'delete', $keywords->id], ['confirm' => __('Are you sure you want to delete # {0}?', $keywords->id)]) ?>
                 </td>
+                -->
             </tr>
             <?php endforeach; ?>
         </table>

@@ -23,7 +23,7 @@ class KeywordsController extends AppController
 				$conditions[] = array('Keywords.nombre LIKE' => '%' . $term . '%');
 			}
 
-			$keyW = $this->Keywords->find('all', array('recursive' => -1, 'fields' => array('Keywords.nombre'), 'conditions' => $conditions, 'limit' => 20))->toArray();
+			$keyW = $this->Keywords->find('all', array('recursive' => -1, 'fields' => array('Keywords.nombre'), 'conditions' => $conditions))->toArray();
 		}
 		$serialized = serialize($keyW);
 		echo json_encode($keyW);
@@ -35,7 +35,7 @@ class KeywordsController extends AppController
 	   //return true;
 		if(isset($user['role']) && $user['role'] == 2){
 			//damos autorizacion a determinadas acciones del controlador
-			if(in_array($this->request->action, array('edit', 'add', 'index', 'view', 'delete'))){
+			if(in_array($this->request->action, array('edit', 'add', 'index', 'view'))){
 				return true;
 			} else {
 				if($this->Auth->user('id')){
@@ -128,7 +128,7 @@ class KeywordsController extends AppController
 				$this->Flash->error(__('La palabra clave no se ha podido añadir. Por favor, inténtelo de nuevo.'));
 			}
 		}
-		$sessions = $this->Keywords->Sessions->find('list', ['limit' => 200]);
+		$sessions = $this->Keywords->Sessions->find('list');
 		$this->set(compact('keyword', 'sessions'));
 		$this->set('_serialize', ['keyword']);
 	}
@@ -155,7 +155,7 @@ class KeywordsController extends AppController
 				$this->Flash->error(__('La palabra clave no se ha podido modificar. Por favor, inténtelo de nuevo.'));
 			}
 		}
-		$sessions = $this->Keywords->Sessions->find('list', ['limit' => 200]);
+		$sessions = $this->Keywords->Sessions->find('list');
 		$this->set(compact('keyword', 'sessions'));
 		$this->set('_serialize', ['keyword']);
 	}
@@ -169,12 +169,14 @@ class KeywordsController extends AppController
 	 */
 	public function delete($id = null)
 	{
-		$this->request->allowMethod(['post', 'delete']);
-		$keyword = $this->Keywords->get($id);
-		if ($this->Keywords->delete($keyword)) {
-			$this->Flash->success(__('Palabra clave eliminada correctamente.'));
-		} else {
-			$this->Flash->error(__('La palabra clave no se ha podido eliminar. Por favor, inténtelo de nuevo.'));
+		//$this->request->allowMethod(['post', 'delete']);
+		if ($this->request->is(['patch', 'post', 'put'])) {
+			$keyword = $this->Keywords->get($id);
+			if ($this->Keywords->delete($keyword)) {
+				$this->Flash->success(__('Palabra clave eliminada correctamente.'));
+			} else {
+				$this->Flash->error(__('La palabra clave no se ha podido eliminar. Por favor, inténtelo de nuevo.'));
+			}
 		}
 
 		return $this->redirect(['action' => 'index']);
