@@ -123,24 +123,135 @@ class UsersController extends AppController
 
         $session = TableRegistry::get('Sessions');
 
+        //print_r('esta en el controlador adecuado');
+        //print_r($_POST);
+
 
         //print_r($this->request->params['sessionsFiltradas']);
+        //obtenemos los elementos del filtro
+		if(!empty($_POST['modulo']))
+			$modulo = $_POST['modulo'];
+		else $modulo = array();
+		//print_r($modulo);
+
+		if(!empty($_POST['materia']))
+			$materia = $_POST['materia'];
+		else $materia = array();
+		//print_r($materia);
+
+		if(!empty($_POST['curso']))
+			$curso = $_POST['curso'];
+		else $curso = array();
+		//print_r($curso);
+
+		if(!empty($_POST['semestre']))
+			$semestre = $_POST['semestre'];
+		else $semestre = array();
+		//print_r($semestre);
+
+		if(!empty($_POST['search']))
+			$search = $_POST['search'];
+		else $search = "";
+		//print_r($search);
+
+
+		$conditions=array();
+		foreach ($modulo as $m)
+		{
+			$conditions[] = array('Subjects.modulo LIKE' => $m);
+			//print_r($conditions);
+		}
+
+		foreach ($materia as $ma)
+		{
+			$conditions[] = array('Subjects.materia LIKE' => $ma);
+			//print_r($conditions);
+		}
+
+		foreach ($curso as $c)
+		{
+			$conditions[] = array('Subjects.curso LIKE' =>  $c);
+			//print_r($conditions);
+		}
+
+		foreach ($semestre as $s)
+		{
+			$conditions[] = array('Subjects.semestre LIKE' => $s);
+			//print_r($conditions);
+		}
+		//print_r($conditions);
+
+
+		$asig = TableRegistry::get('Subjects');
+		//$conditions[] = array('Subjects.modulo LIKE' => '%' . $condicionModulo . '%','Subjects.materia LIKE' => '%' . $condicionMateria . '%', 'Subjects.curso LIKE' => '%' . $condicionCurso . '%', 'Subjects.semestre LIKE' => '%' . $condicionSemestre . '%');
+		//print_r($conditions);
+
+		//comprobamos si hay condiciones o no
+		$asignaturas=array();
+		if(!empty($conditions)){
+			$asignaturas = $asig->find('all', array('fields' => array('Subjects.id'), 'conditions' => array('AND' => $conditions)))->toArray();
+			//print_r('entra en if,  hay condiciones');
+
+
+		}
+		/*else {
+			$asignaturas = $asig->find('all', array('fields' => array('Subjects.id')))->toArray();
+			//print_r('entra en else, no hay condiciones');
+		}*/
+		//print_r($asignaturas);
+		//hasta aqui esta bien saca las asignaturas que tienen q salir
+
+
+		if(!empty($asignaturas)){
+			$conditions2 = array();
+			foreach ($asignaturas as $a) {
+        	# code...
+        	//print_r($a['id']);
+        	$conditions2[] = array('Sessions.subject_id LIKE' => $a['id']);
+        	//print_r('entra en bucle for asignaturas');
+        	}
+		}
+
+        //print_r($conditions2);
+        $ses = TableRegistry::get('Sessions');
+        $sessionsFiltradas = $ses->find('all');
+        if(!empty($conditions2)){
+        	$sessionsFiltradas = $ses->find('all', array('conditions' => array('OR' => $conditions2)));
+        }
+        //print_r($sessionsFiltradas->toArray());
+        //$sesiones = $sessionsFiltradas;
+        //print_r($sesiones);
+
+
+
+		//$session = TableRegistry::get('Sessions');
+        //$sesiones = $session->find('all','conditions' => array('OR' => $conditions2));
+        //$sesPag = $this->paginate($sesiones);
+        //$sesPag = $this->paginate($sesiones, array('limit' => 6));
+
+        //$this->set(compact('sesiones'));
+        //$this->set('sesionesFiltradas', $sessionsFiltradas);
+		//$this->redirect(array('controller' => 'users', 'action' => 'buscador'));
+
+
+        //print_r($asignaturas[0]['id']);
+
         if(empty($sessionsFiltradas))
         {
         	$sesiones = $session->find();
+        	//print_r('entra en if sesiones');
         } else {
         	$sesiones = $sessionsFiltradas;
+        	//print_r('entra en else sesiones');
         }
 
         //else $sesiones = $this->request->session->read('sesiones');
         //print_r($sesiones);
         //$sesPag = $this->paginate($sesiones);
         $this->paginate($sesiones, array('limit' => 6));
-
         $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones'));
 
     }
-
 
 
     /**

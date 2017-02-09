@@ -5,7 +5,11 @@
             <div class="well">
                 <div id="accordion">
                 <div class="panel-body" >
-				<?= $this->Form->create('Session', array ('type' => 'POST', 'class' => 'form-search', 'url' => array('controller' => 'sessions', 'action' => 'buscarSesion'))); ?>
+
+				<form method="post" accept-charset="utf-8" class="form-search" role="form" action="/gestordocumental/users/buscador">
+				<div style="display:none;">
+					<input type="hidden" name="_method" value="POST"/>
+				</div>
                     <div class="panel-heading " >
                         <h4 class="panel-title">
                           <a data-toggle="collapse" href="#collapse0">
