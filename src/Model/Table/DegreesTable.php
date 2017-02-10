@@ -40,6 +40,11 @@ class DegreesTable extends Table
 
         $this->addBehavior('Timestamp');
 
+         $this->belongsTo('Teachers', [
+            'foreignKey' => 'teacher_id',
+            'joinType' => 'INNER'
+        ]);
+
         $this->belongsToMany('Subjects', [
             'foreignKey' => 'degree_id',
             'targetForeignKey' => 'subject_id',
@@ -81,6 +86,7 @@ class DegreesTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['codigo']));
+        $rules->add($rules->existsIn(['teacher_id'], 'Teachers'));
 
         return $rules;
     }

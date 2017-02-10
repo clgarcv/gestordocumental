@@ -22,7 +22,7 @@
                 <th scope="col"><?= $this->Paginator->sort('curso') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('semestre') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('materia') ?></th>
-
+				<th scope="col"><?= $this->Paginator->sort('teacher_id') ?></th>
                 <th scope="col" class="actions"><?= __('Acciones') ?></th>
             </tr>
         </thead>
@@ -36,6 +36,7 @@
                 <td><?= h($subject->curso) ?></td>
                 <td><?= h($subject->semestre) ?></td>
                 <td><?= h($subject->materia) ?></td>
+                <td><?= $this->Number->format($subject->teacher_id) ?></td>
                 <td class="actions">
                     <?= $this->Html->link(__('Ver'), ['action' => 'view', $subject->id], ['class' => 'btn btn-default']) ?>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $subject->id], ['class' => 'btn btn-default']) ?>

@@ -15,6 +15,7 @@
         <?php
             echo $this->Form->input('codigo');
             echo $this->Form->input('nombre');
+            echo $this->Form->input('teacher_id', ['options' => $teachers]);
             echo $this->Form->input('subjects._ids', array('label' => 'Asignaturas', 'style'=>'height: 300px'),['options' => $subjects]);
         ?>
 

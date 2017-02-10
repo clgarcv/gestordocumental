@@ -23,6 +23,10 @@
             <td><?= h($degree->nombre) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Teacher') ?></th>
+            <td><?= $degree->has('teacher') ? $this->Html->link($degree->teacher->id, ['controller' => 'Teachers', 'action' => 'view', $degree->teacher->id]) : '' ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($degree->id) ?></td>
         </tr>
@@ -47,6 +51,7 @@
                 <th scope="col"><?= __('Curso') ?></th>
                 <th scope="col"><?= __('Semestre') ?></th>
                 <th scope="col"><?= __('Materia') ?></th>
+                <th scope="col"><?= __('Teacher Id') ?></th>
                 <th scope="col"><?= __('Created') ?></th>
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
@@ -60,6 +65,7 @@
                 <td><?= h($subjects->curso) ?></td>
                 <td><?= h($subjects->semestre) ?></td>
                 <td><?= h($subjects->materia) ?></td>
+                <td><?= h($subjects->teacher_id) ?></td>
                 <td><?= h($subjects->created) ?></td>
                 <td><?= h($subjects->modified) ?></td>
                 <td class="actions">

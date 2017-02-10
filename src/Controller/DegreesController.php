@@ -89,8 +89,9 @@ class DegreesController extends AppController
                 $this->Flash->error(__('La titulación no se ha podido añadir. Por favor, inténtelo de nuevo.'));
             }
         }
+        $teachers = $this->Degrees->Teachers->find('list', ['limit' => 200]);
         $subjects = $this->Degrees->Subjects->find('list', ['order'=>'Subjects.nombre']);
-        $this->set(compact('degree', 'subjects'));
+        $this->set(compact('degree', 'subjects', 'teachers'));
         $this->set('_serialize', ['degree']);
     }
 
@@ -116,8 +117,9 @@ class DegreesController extends AppController
                 $this->Flash->error(__('La titulación no se ha podido modificar. Por favor, inténtelo de nuevo.'));
             }
         }
+        $teachers = $this->Degrees->Teachers->find('list', ['limit' => 200]);
         $subjects = $this->Degrees->Subjects->find('list');
-        $this->set(compact('degree', 'subjects'));
+        $this->set(compact('degree', 'subjects', 'teachers'));
         $this->set('_serialize', ['degree']);
     }
 

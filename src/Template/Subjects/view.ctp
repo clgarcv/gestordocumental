@@ -47,6 +47,10 @@
             <td><?= h($subject->curso) ?></td>
         </tr>
         <tr>
+            <th scope="row"><?= __('Teacher Id') ?></th>
+            <td><?= $this->Number->format($subject->teacher_id) ?></td>
+        </tr>
+        <tr>
             <th scope="row"><?= __('Created') ?></th>
             <td><?= h($subject->created) ?></td>
         </tr>

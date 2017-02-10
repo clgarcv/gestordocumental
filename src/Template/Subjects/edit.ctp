@@ -28,8 +28,10 @@
             echo $this->Form->input('curso');
             echo $this->Form->input('semestre');
             echo $this->Form->input('materia');
+            echo $this->Form->input('teacher_id');
+            echo $this->Form->input('teachers._ids', array('label' => 'Profesores', 'style'=>'height: 300px'), ['options' => $teachers]);
             echo $this->Form->input('degrees._ids', array('label' => 'Titulaciones'), ['options' => $degrees]);
-             echo $this->Form->input('teachers._ids', array('label' => 'Profesores', 'style'=>'height: 300px'), ['options' => $teachers]);
+
         ?>
     </fieldset>
     <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../../subjects/\';')); ?>

@@ -44,6 +44,11 @@ class SubjectsTable extends Table
 
         $this->hasMany('Sessions');
 
+        $this->belongsTo('Teachers', [
+            'foreignKey' => 'teacher_id',
+            'joinType' => 'INNER'
+        ]);
+
         $this->belongsToMany('Degrees', [
             'foreignKey' => 'subject_id',
             'targetForeignKey' => 'degree_id',
@@ -107,6 +112,7 @@ class SubjectsTable extends Table
     public function buildRules(RulesChecker $rules)
     {
         $rules->add($rules->isUnique(['codigo']));
+        $rules->add($rules->existsIn(['teacher_id'], 'Teachers'));
 
         return $rules;
     }
