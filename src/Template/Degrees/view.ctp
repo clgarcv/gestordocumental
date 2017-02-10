@@ -11,7 +11,7 @@
     </ul>
 </nav>
 -->
-<div class="col-md-5 col-md-offset-3">
+<div class="col-md-9 col-md-offset-2">
     <h3><?= h($degree->id) ?></h3>
     <table class="vertical-table">
         <tr>

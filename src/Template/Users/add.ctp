@@ -23,7 +23,7 @@
 
 <?php endif;?>
 
-<div class="col-md-5 col-md-offset-3">
+<div class="col-md-9 col-md-offset-2">
     <?= $this->Form->create($user) ?>
     <fieldset>
         <legend><?= __('Añadir Usuario') ?></legend>
