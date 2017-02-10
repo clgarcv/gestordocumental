@@ -22,14 +22,14 @@
     <fieldset>
         <legend><?= __('Editar Asignaturas') ?></legend>
         <?php
-            echo $this->Form->input('codigo', array('label' => 'Código'));
+            echo $this->Form->input('codigo', array('label' => 'Código', 'disabled' => 'true'));
             echo $this->Form->input('nombre');
             echo $this->Form->input('modulo', array('label' => 'Módulo'));
             echo $this->Form->input('curso');
             echo $this->Form->input('semestre');
             echo $this->Form->input('materia');
             echo $this->Form->input('degrees._ids', array('label' => 'Titulaciones'), ['options' => $degrees]);
-            echo $this->Form->input('teachers._ids', array('label' => 'Profesores'), ['options' => $teachers]);
+             echo $this->Form->input('teachers._ids', array('label' => 'Profesores', 'style'=>'height: 300px'), ['options' => $teachers]);
         ?>
     </fieldset>
     <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../../subjects/\';')); ?>

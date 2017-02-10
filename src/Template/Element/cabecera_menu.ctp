@@ -49,7 +49,6 @@
         <ul class="dropdown-menu">
 	        <li><?= $this->Html->link('Añadir sesión práctica' ,
 	                array('controller' => 'sessions', 'action' => 'add'))?></li>
-	        <li><a href="#"> Modificar Sesión Práctica </a></li>
 	        <li role="separator" class="divider"></li>
 	        <li><?= $this->Html->link('Ver Todas' ,
 	                array('controller' => 'sessions', 'action' => 'index'))?></li>
@@ -75,7 +74,6 @@
             <ul class="dropdown-menu">
             <li><?= $this->Html->link('Añadir sesión práctica' ,
                     array('controller' => 'sessions', 'action' => 'add'))?></li>
-            <li><a href="#"> Modificar Sesión Práctica </a></li>
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todas' ,
                     array('controller' => 'sessions', 'action' => 'index'))?></li>
@@ -86,7 +84,6 @@
             <ul class="dropdown-menu">
             <li><?= $this->Html->link('Añadir Asignatura' ,
                     array('controller' => 'subjects', 'action' => 'add'))?></li>
-            <li><a href="#">Modificar Asignatura</a></li>
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todas' ,
                     array('controller' => 'subjects', 'action' => 'index'))?></li>
@@ -102,8 +99,6 @@
         <ul class="dropdown-menu">
             <li><?= $this->Html->link('Añadir palabra clave' ,
                     array('controller' => 'keywords', 'action' => 'add'))?></li>
-            <li><a href="#"> Modificar Palabra Clave </a></li>
-            <li><a href="#"> Eliminar Palabra Clave </a></li>
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todas' ,
                     array('controller' => 'keywords', 'action' => 'index'))?></li>
@@ -114,8 +109,6 @@
             <ul class="dropdown-menu">
             <li><?= $this->Html->link('Añadir sesión práctica' ,
                     array('controller' => 'sessions', 'action' => 'add'))?></li>
-            <li><a href="#"> Modificar Sesión Práctica </a></li>
-            <li><a href="#"> Eliminar Sesión Práctica </a></li>
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todas' ,
                     array('controller' => 'sessions', 'action' => 'index'))?></li>
@@ -126,8 +119,6 @@
             <ul class="dropdown-menu">
             <li><?= $this->Html->link('Añadir Asignatura' ,
                     array('controller' => 'subjects', 'action' => 'add'))?></li>
-            <li><a href="#">Modificar Asignatura</a></li>
-            <li><a href="#">Eliminar Asignatura</a></li>
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todas' ,
                     array('controller' => 'subjects', 'action' => 'index'))?></li>
@@ -138,8 +129,6 @@
             <ul class="dropdown-menu">
             <li><?= $this->Html->link('Añadir Titulación' ,
                     array('controller' => 'degrees', 'action' => 'add'))?></li>
-            <li><a href="#">Modificar Titulación</a></li>
-            <li><a href="#">Eliminar Titulación</a></li>
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todas' ,
                     array('controller' => 'degrees', 'action' => 'index'))?></li>
@@ -150,8 +139,6 @@
             <ul class="dropdown-menu">
             <li><?= $this->Html->link('Añadir Usuario' ,
                     array('controller' => 'users', 'action' => 'add'))?></li>
-            <li><a href="#">Modificar Usuario</a></li>
-            <li><a href="#">Eliminar Usuario</a></li>
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todos' ,
                     array('controller' => 'users', 'action' => 'index'))?></li>
@@ -162,8 +149,6 @@
             <ul class="dropdown-menu">
             <li><?= $this->Html->link('Añadir Profesor' ,
                     array('controller' => 'teachers', 'action' => 'add'))?></li>
-            <li><a href="#">Modificar Profesor</a></li>
-            <li><a href="#">Eliminar Profesor</a></li>
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todos' ,
                     array('controller' => 'teachers', 'action' => 'index'))?></li>

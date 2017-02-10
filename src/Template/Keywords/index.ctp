@@ -6,7 +6,8 @@
         <li><?= $this->Html->link(__('New Session'), ['controller' => 'Sessions', 'action' => 'add']) ?></li>
     </ul>
 </nav> -->
-<div class="col-md-5 col-md-offset-3">
+
+<div class="col-md-14 col-md-offset-2">
     <h3><?= __('Palabras Clave') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>

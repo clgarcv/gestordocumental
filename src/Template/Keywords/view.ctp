@@ -10,7 +10,7 @@
     </ul>
 </nav>
 -->
-<div class="col-md-5 col-md-offset-3">
+<div class="col-md-5 col-md-offset-2">
     <h3><?= h($keyword->nombre) ?></h3>
         <!--
     <table class="vertical-table">
@@ -51,7 +51,7 @@
             <?php foreach ($keyword->sessions as $sessions): ?>
             <tr>
                 <td><?= h($sessions->id) ?></td>
-                <td><?= h($sessions->codigo) ?></td>
+                <td><?= $this->Html->link(__($sessions->codigo), ['controller' => 'sessions' ,'action' => 'view', $sessions->id]) ?> </td>
                 <td><?= h($sessions->nombre) ?></td>
                 <td><?= h($sessions->descripcion) ?></td>
                 <!--

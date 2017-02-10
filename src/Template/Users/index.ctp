@@ -9,7 +9,7 @@
 </nav>
 -->
 
-<div class="col-md-5 col-md-offset-3">
+<div class="col-md-14 col-md-offset-2">
     <h3><?= __('Usuarios') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>

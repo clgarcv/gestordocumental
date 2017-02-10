@@ -17,7 +17,7 @@
             echo $this->Form->input('nombre');
             echo $this->Form->input('descripcion', array('label' => 'Descripción'));
             echo $this->Form->input('subject_id',array('label' => 'Asignatura'), ['options' => $subjects]);
-            echo $this->Form->input('keywords._ids',array('label' => 'Palabras clave'), ['options' => $keywords]);
+            echo $this->Form->input('keywords._ids', array('label' => 'Palabras Clave', 'style'=>'height: 300px'), ['options' => $keywords]);
         ?>
     </fieldset>
     <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../buscador\';')); ?>

@@ -18,7 +18,7 @@
     <fieldset>
         <legend><?= __('Editar Sesión') ?></legend>
         <?php
-            echo $this->Form->input('codigo', ['disabled' => 'true']);
+            echo $this->Form->input('codigo', array('label' => 'Código','disabled' => 'true'));
             echo $this->Form->input('nombre');
             echo $this->Form->input('descripcion', array('label' => 'Descripción'));
             echo $this->Form->input('subject_id', array('label' => 'Asignatura'), ['options' => $subjects]);
