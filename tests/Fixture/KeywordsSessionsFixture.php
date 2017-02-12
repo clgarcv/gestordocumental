@@ -43,8 +43,8 @@ class KeywordsSessionsFixture extends TestFixture
             'id' => 1,
             'session_id' => 1,
             'keyword_id' => 1,
-            'created' => '2017-01-19 16:22:16',
-            'modified' => '2017-01-19 16:22:16'
+            'created' => '2017-02-11 14:59:56',
+            'modified' => '2017-02-11 14:59:56'
         ],
     ];
 }

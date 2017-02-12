@@ -15,6 +15,7 @@
 
 $cakeDescription = 'CakePHP: the rapid development php framework';
 use Cake\ORM\TableRegistry;
+use Cake\Core\Configure;
 ?>
 <!DOCTYPE html>
 <html>
@@ -31,10 +32,13 @@ use Cake\ORM\TableRegistry;
     <?= $this->fetch('css') ?>
     <?= $this->fetch('script') ?>
     <script type="text/javascript">
-        var basePath = "<?php echo Cake\Routing\Router::url('/'); ?>"
-
+        var basePath = "<?php echo Cake\Routing\Router::url('/'); ?>";
 
     </script>
+
+    <!-- <?php
+    echo "<script> var keywordList = ". json_encode($keywords) ."</script>";
+	?> -->
 </head>
 <body>
     <!--

@@ -71,7 +71,7 @@ class AppController extends Controller
         //$this->loadComponent('Csrf');
     }
 
-    
+
 
     /**
      * Before render callback.
@@ -93,7 +93,7 @@ class AppController extends Controller
      *
      * @return void
      */
-    public function beforeFilter(Event $event) 
+    public function beforeFilter(Event $event)
     {
         $this->Auth->allow('login', 'add');
         $this->set('current_user', $this->Auth->user());
@@ -110,9 +110,9 @@ class AppController extends Controller
                     return $this->redirect([
                         'controller' => 'Users',
                         'action' => 'buscador'
-                    ]);  
+                    ]);
     }
 
-    
+
 
 }

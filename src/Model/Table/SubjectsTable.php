@@ -99,6 +99,10 @@ class SubjectsTable extends Table
             ->requirePresence('materia', 'create')
             ->notEmpty('materia');
 
+        $validator
+            ->requirePresence('teacher_id', 'create')
+            ->notEmpty('teacher_id');
+
         return $validator;
     }
 

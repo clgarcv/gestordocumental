@@ -23,10 +23,10 @@
                     array('controller' => 'users', 'action' => 'buscador'))?></li>
 
   <?php if ($role == 0): ?>
-	<li><?= $this->Html->link('Sesiones' ,
-    	array('controller' => 'sessions', 'action' => 'index'))?></li>
-	<li><?= $this->Html->link('Palabras Clave' ,
+  	<li><?= $this->Html->link('Palabras Clave' ,
 	    array('controller' => 'keywords', 'action' => 'index'))?></li>
+	<li><?= $this->Html->link('Sesiones Prácticas' ,
+    	array('controller' => 'sessions', 'action' => 'index'))?></li>
 
     </ul>
 
@@ -82,7 +82,7 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Asignaturas <span class="caret"></span></a>
             <ul class="dropdown-menu">
-            <li><?= $this->Html->link('Añadir Asignatura' ,
+            <li><?= $this->Html->link('Añadir asignatura' ,
                     array('controller' => 'subjects', 'action' => 'add'))?></li>
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todas' ,
@@ -117,7 +117,7 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Asignaturas <span class="caret"></span></a>
             <ul class="dropdown-menu">
-            <li><?= $this->Html->link('Añadir Asignatura' ,
+            <li><?= $this->Html->link('Añadir asignatura' ,
                     array('controller' => 'subjects', 'action' => 'add'))?></li>
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todas' ,
@@ -127,7 +127,7 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Titulaciones <span class="caret"></span></a>
             <ul class="dropdown-menu">
-            <li><?= $this->Html->link('Añadir Titulación' ,
+            <li><?= $this->Html->link('Añadir titulación' ,
                     array('controller' => 'degrees', 'action' => 'add'))?></li>
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todas' ,
@@ -137,7 +137,7 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
             <ul class="dropdown-menu">
-            <li><?= $this->Html->link('Añadir Usuario' ,
+            <li><?= $this->Html->link('Añadir usuario' ,
                     array('controller' => 'users', 'action' => 'add'))?></li>
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todos' ,
@@ -147,7 +147,7 @@
         <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profesores <span class="caret"></span></a>
             <ul class="dropdown-menu">
-            <li><?= $this->Html->link('Añadir Profesor' ,
+            <li><?= $this->Html->link('Añadir profesor' ,
                     array('controller' => 'teachers', 'action' => 'add'))?></li>
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todos' ,

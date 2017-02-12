@@ -6,6 +6,7 @@ use Cake\Event\Event;
 use Cake\ORM\Query;
 use Cake\ORM\TableRegistry;
 use Cake\View\Helper\SessionHelper;
+use Cake\Core\Configure;
 
 
 /**
@@ -104,12 +105,13 @@ class UsersController extends AppController
     public function buscador()
     {
 
-    	//$this->session = $this->controller->request->session();
+    	//print_r($sesiones);
 
     	$keyword = TableRegistry::get('Keywords');
     	$keywords = $keyword->find()
-    						->select(['nombre']);
+                            ->select(['nombre'])->toArray();
 
+		//obtenemos los valores del filtro para el buscador
         $subject = TableRegistry::get('Subjects');
         $modulos = $subject->find()
                             ->select(['modulo'])
@@ -128,148 +130,171 @@ class UsersController extends AppController
                             ->distinct(['semestre']);
 
         $asignaturas = $subject->find()
-                            ->select(['nombre']);
+                            ->select(['nombre'])
+                            ->distinct(['nombre']);
 
-        $session = TableRegistry::get('Sessions');
 
         //print_r('esta en el controlador adecuado');
-        //print_r($_POST);
+        print_r($_POST);
 
 
         //print_r($this->request->params['sessionsFiltradas']);
-        //obtenemos los elementos del filtro
-		if(!empty($_POST['modulo']))
-			$modulo = $_POST['modulo'];
-		else $modulo = array();
-		//print_r($modulo);
 
-		if(!empty($_POST['materia']))
-			$materia = $_POST['materia'];
-		else $materia = array();
-		//print_r($materia);
-
-		if(!empty($_POST['curso']))
-			$curso = $_POST['curso'];
-		else $curso = array();
-		//print_r($curso);
-
-		if(!empty($_POST['semestre']))
-			$semestre = $_POST['semestre'];
-		else $semestre = array();
-		//print_r($semestre);
-
-
-		//obtenemos las palabras clave introducidas en el input
-		if(!empty($_POST['search']))
-			$search = $_POST['search'];
-		else $search = "";
-		//print_r($search);
-
-
-		$conditions=array();
-		foreach ($modulo as $m)
-		{
-			$conditions[] = array('Subjects.modulo LIKE' => $m);
-			//print_r($conditions);
-		}
-
-		foreach ($materia as $ma)
-		{
-			$conditions[] = array('Subjects.materia LIKE' => $ma);
-			//print_r($conditions);
-		}
-
-		foreach ($curso as $c)
-		{
-			$conditions[] = array('Subjects.curso LIKE' =>  $c);
-			//print_r($conditions);
-		}
-
-		foreach ($semestre as $s)
-		{
-			$conditions[] = array('Subjects.semestre LIKE' => $s);
-			//print_r($conditions);
-		}
-		//print_r($conditions);
-
-
-		$asig = TableRegistry::get('Subjects');
-
-		//comprobamos si hay condiciones o no
-		//si hay condiciones obtenemos las asignaturas que las cumplen
-		$asignaturas=array();
-		if(!empty($conditions)){
-			$asignaturas = $asig->find('all', array('fields' => array('Subjects.id'), 'conditions' => array('AND' => $conditions)))->toArray();
-			//print_r('entra en if,  hay condiciones');
-
-
-		}
-		/*else {
-			$asignaturas = $asig->find('all', array('fields' => array('Subjects.id')))->toArray();
-			//print_r('entra en else, no hay condiciones');
-		}*/
-		//print_r($asignaturas);
-		//hasta aqui esta bien saca las asignaturas que tienen q salir
-
-
-		if(!empty($asignaturas)){
-			$conditions2 = array();
-			foreach ($asignaturas as $a) {
-        	# code...
-        	//print_r($a['id']);
-        	$conditions2[] = array('Sessions.subject_id LIKE' => $a['id']);
-        	print_r(' entra en bucle for asignaturas');
-        	}
-		} else
-		{
-			print_r(' no entra en bucle for asignaturas');
-		}
-
-		//print_r($sesiones);
-
-		//$sesiones = $this->request->session()->read('sesiones');
-
-
-
-        //print_r($conditions2);
-        $ses = TableRegistry::get('Sessions');
-        //$sessionsFiltradas = $ses->find('all');
-
-        if(empty($sesiones))
+        //no nos pasan nada
+        if(empty($_POST) || (empty($_POST['modulo']) && empty($_POST['materia']) && empty($_POST['curso']) && empty($_POST['semestre']) && empty($_POST['search'])))
         {
-        	print_r(' sesiones vacio');
-        	if(!empty($conditions2))
-        	{
-        		print_r(' conditions 2 no vacio');
-        		$sessionesFiltradas = $ses->find('all', array('conditions' => array('OR' => $conditions2)));
-	        }
-	        else
-	        {
-	        	print_r(' conditions2 vacio');
-	        	$sessionesFiltradas = $session->find();
-	        }
-	        $sesiones = $sessionesFiltradas;
-	        print_r(' las legundas sesiones    ' . $sesiones);
+        	//si no recibimos ningun parametro mostramos todas las sesiones
+
+        	$ses = TableRegistry::get('Sessions');
+        	$sesiones = $ses->find('all');
+
+        	$paginador = $this->paginate($sesiones, array('limit' => 6));
+	        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas','keywords', 'sesiones'));
+	        $this->set('_serialize', ['sesiones']);
+	        print_r("entro a post vacio");
+	        //correcto
+
+
+        }
+        else
+	    {
+        	//si hay parametros comprobamos cuales y filtramos según los datos introducidos
+	    	print_r('estamos en el primer else de parametros');
+        	//obtenemos los elementos del filtro
+			if(!empty($_POST['modulo']))
+				$modulo = $_POST['modulo'];
+			else $modulo = array();
+			//print_r($modulo);
+
+			if(!empty($_POST['materia']))
+				$materia = $_POST['materia'];
+			else $materia = array();
+			//print_r($materia);
+
+			if(!empty($_POST['curso']))
+				$curso = $_POST['curso'];
+			else $curso = array();
+			//print_r($curso);
+
+			if(!empty($_POST['semestre']))
+				$semestre = $_POST['semestre'];
+			else $semestre = array();
+			//print_r($semestre);
+
+			//creamos las condiciones para obtener las asignaturas que cumplan el filtro
+			$conditions=array();
+			foreach ($modulo as $m)
+			{
+				$conditions[] = array('Subjects.modulo LIKE' => $m);
+				//print_r($conditions);
+			}
+
+			foreach ($materia as $ma)
+			{
+				$conditions[] = array('Subjects.materia LIKE' => $ma);
+				//print_r($conditions);
+			}
+
+			foreach ($curso as $c)
+			{
+				$conditions[] = array('Subjects.curso LIKE' =>  $c);
+				//print_r($conditions);
+			}
+
+			foreach ($semestre as $s)
+			{
+				$conditions[] = array('Subjects.semestre LIKE' => $s);
+				//print_r($conditions);
+			}
+			//print_r($conditions);
+
+			//obtenemos el id de las asignaturas que cumplen con el filtro
+			$asig = TableRegistry::get('Subjects');
+			//comprobamos si hay condiciones o no
+			if(!empty($conditions)){
+				//si hay condiciones obtenemos los id asignaturas que las cumplen
+				$id_asig = $asig->find('all', array('fields' => array('Subjects.id'), 'conditions' => array('AND' => $conditions)))->toArray();
+				//print_r('entra en if,  hay condiciones');
+			}
+			else {
+				//si no obtenemos todos los id
+				$id_asig = $asig->find('all', array('fields' => array('Subjects.id')))->toArray();
+				//print_r('entra en else, no hay condiciones');
+			}
+			//print_r($asignaturas);
+			//hasta aqui esta bien saca las asignaturas que tienen q salir
+			//creamos el array de condiones para obtener las sesiones
+
+			foreach ($id_asig as $i) {
+				# code...
+				$condicionesAsignaturas[] = array('Sessions.subject_id LIKE' => $i['id']);
+				}
+
+			$session = TableRegistry::get('Sessions');
+
+			//obtenemos las palabras clave introducidas en el input
+			if(!empty($_POST['search'])){
+				//si han introducido palabras clave obtenemos las sesiones relacionadas con esas palabras clave
+
+				$search = $_POST['search'];
+				$palabras = preg_split('[,]', $search);
+				//print_r($palabras);
+
+				//para cada palabra lo añadimos al array de condiciones
+				foreach ($palabras as $p) {
+					# code...
+					$condicionesKeywords[] = array('Keywords.nombre LIKE' => $p);
+				}
+
+				//print_r($conditions2);
+
+				//obtenemos el identificador de las palabras que nos han introducido
+				$idKeywords = $keyword->find('all', array('fields' => array('Keywords.id'), 'conditions' => array('OR' => $condicionesKeywords )))->toArray();
+
+				//obtenemos las sesiones que cumplan las asignaturas y las palabras clave
+				foreach ($idKeywords as $idk) {
+					# code...
+					$condicKeySes[] = array('KeywordsSessions.keyword_id LIKE' => $idk);
+				}
+
+				//obtenemos los id de sesion que tiene relacion con las palabras introducidas
+				$keyses = TableRegistry::get('KeywordsSessions');
+				$palyses = $keyses->find('all', array('fields' => array('Sessions.id'),  'conditions' => array('OR' => $condicKeySes)))->toArray();
+				//print_r($palyses);
+				foreach ($palyses as $ps) {
+					# code...
+					$sesionFiltro[] = array('Sessions.id LIKE' => $ps);
+
+				}
+
+				//obtenemos las sesiones con las dos condiciones, filtro y keywords
+
+				$sesiones = $session->find('all', array('conditions' => array('OR' => $condicionesAsignaturas)))->toArray();
+
+
+				print_r($sesiones1);
+
+
+
+
+			}
+			else {
+				//si no nos han introducido palabras clave mostramos las sesiones
+				//sesiones que correspondan a las asignaturas
+
+				$sesiones = $session->find('all', array('conditions' => array('AND' => array('OR' => $sesionFiltro) , 'OR' => $condicionesAsignaturas)))->toArray();
+
+
+			}
+
+
+
+	        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones','keywords'));
+			$this->set('_serialize', ['sesiones']);
+
+
         }
 
-/*
-        if(empty($sessionsFiltradas) && empty($sesiones))
-        {
-        	$sesiones = $session->find();
-        	print_r('entra en primer if sesiones');
-        } else {
-        	if(empty($sesiones)){
-        		$sesiones = $sessionsFiltradas;
-        		print_r('entra en 2 if sesiones');
-        	}
-        	//print_r('entra en else sesiones');
-        }*/
-
-        //$this->request->session()->write('sesiones', $sesiones);
-
-
-        $paginador = $this->paginate($sesiones, array('limit' => 6));
-        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones','keywords', 'paginador'));
 
     }
 
@@ -360,7 +385,9 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('El usuario no se ha podido modificar. Por favor, inténtelo de nuevo.'));
         }
-        $this->set(compact('user'));
+        $roles = array('Usuario básico', 'Usuario avanzado', 'Administrador', 'Súper administrador');
+        $teachers = $this->Users->Teachers->find('list', array('conditions'=>array('Teachers.hasUser'=>0), 'order' => array('Teachers.apellidos')));
+        $this->set(compact('user', 'teachers', 'roles'));
         $this->set('_serialize', ['user']);
     }
 

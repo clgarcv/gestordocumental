@@ -17,7 +17,6 @@
                 <th scope="col"><?= $this->Paginator->sort('codigo', 'Código') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('nombre') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('subject_id', 'Asignatura') ?></th>
-                <th scope="col" class="actions"><?= __('Acciones') ?></th>
             </tr>
         </thead>
         <tbody>
@@ -25,12 +24,17 @@
             <tr>
                 <td><?= $this->Number->format($session->id) ?></td>
                 <td><?= h($session->codigo) ?></td>
-                <td><?= h($session->nombre) ?></td>
+                <td><?= $this->Html->link(__($session->nombre), ['action' => 'view', $session->id]) ?></td>
                 <td><?= $session->has('subject') ? $this->Html->link($session->subject->nombre, ['controller' => 'Subjects', 'action' => 'view', $session->subject->id]) : '' ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('Ver'), ['action' => 'view', $session->id], ['class' => 'btn btn-info']) ?>
-                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $session->id], ['class' => 'btn btn-warning']) ?>
-                    <?= $this->Html->link(__('Eliminar'), ['action' => 'delete', $session->id], ['confirm' => __('¿Seguro que desea eliminar la sesión #{0}?', $session->nombre), 'class' => 'btn btn-danger']) ?>
+                <?php if ($current_user['role'] == 3): ?>
+                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $session->id], ['class' => 'btn btn-default']) ?>
+                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $session->id], ['confirm' => __('¿Seguro que desea eliminar la sesión #{0}?', $session->nombre), 'class' => 'btn btn-default']) ?>
+                <?php endif; ?>
+                <?php if ($current_user['role'] == 1 && $current_user['teacher_id'] === $session->subject->teacher_id): ?>
+                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $session->id], ['class' => 'btn btn-default']) ?>
+                <?php endif; ?>
+
                 </td>
             </tr>
             <?php endforeach; ?>

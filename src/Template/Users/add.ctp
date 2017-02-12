@@ -28,10 +28,10 @@
     <fieldset>
         <legend><?= __('Añadir Usuario') ?></legend>
         <?php
-            echo $this->Form->input('username');
-            echo $this->Form->input('password');
-            echo $this->Form->input('role', ['options' => array('Usuario básico')]);
-            echo $this->Form->input('teacher_id', ['options' => $teachers]);
+            echo $this->Form->input('username', array('label' => 'Usuario'));
+            echo $this->Form->input('password', array('label' => 'Contraseña'));
+            echo $this->Form->input('role', array ('label' => 'Rol', 'options' => array('Usuario básico')));
+            echo $this->Form->input('teacher_id', array ('label' => 'Profesor', 'options' => $teachers));
         ?>
     </fieldset>
     <!--

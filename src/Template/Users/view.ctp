@@ -16,32 +16,25 @@
     <h3><?= h($user->username) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Username: ') ?></th>
+            <th scope="row"><?= __('Usuario: ') ?></th>
             <td><?= h($user->username) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Password:' ) ?></th>
+            <th scope="row"><?= __('Contraseña:' ) ?></th>
             <td><?= h($user->password) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Role: ') ?></th>
+            <th scope="row"><?= __('Rol: ') ?></th>
             <td><?= h($user->role) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Teacher: ') ?></th>
-            <td><?= $user->has('teacher') ? $this->Html->link($user->teacher->id, ['controller' => 'Teachers', 'action' => 'view', $user->teacher->id]) : '' ?></td>
+            <th scope="row"><?= __('Profesor: ') ?></th>
+            <td><?= $user->has('teacher') ? $this->Html->link($user->teacher->full_name, ['controller' => 'Teachers', 'action' => 'view', $user->teacher->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($user->id) ?></td>
         </tr>
-        <tr>
-            <th scope="row"><?= __('Created') ?></th>
-            <td><?= h($user->created) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Modified') ?></th>
-            <td><?= h($user->modified) ?></td>
-        </tr>
+
     </table>
 </div>

@@ -15,12 +15,12 @@
         <thead>
             <tr>
                 <th scope="col"><?= $this->Paginator->sort('id') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('username') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('password') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('role') ?></th>
-                <th scope="col"><?= $this->Paginator->sort('teacher_id') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('username', 'Usuario') ?></th>
+                <!-- <th scope="col"><?= $this->Paginator->sort('password') ?></th> -->
+                <th scope="col"><?= $this->Paginator->sort('role', 'Rol') ?></th>
+                <th scope="col"><?= $this->Paginator->sort('teacher_id', 'Profesor') ?></th>
 
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <!-- <th scope="col" class="actions"><?= __('Actions') ?></th>-->
             </tr>
         </thead>
         <tbody>
@@ -28,7 +28,7 @@
             <tr>
                 <td><?= $this->Number->format($user->id) ?></td>
                 <td><?= h($user->username) ?></td>
-                <td><?= h($user->password) ?></td>
+                <!-- <td><?= h($user->password) ?></td> -->
                 <?php
                     switch ($user->role):
                         case 0:

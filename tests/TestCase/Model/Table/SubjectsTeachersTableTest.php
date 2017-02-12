@@ -28,6 +28,9 @@ class SubjectsTeachersTableTest extends TestCase
         'app.teachers',
         'app.users',
         'app.subjects',
+        'app.sessions',
+        'app.keywords',
+        'app.keywords_sessions',
         'app.degrees',
         'app.degrees_subjects'
     ];

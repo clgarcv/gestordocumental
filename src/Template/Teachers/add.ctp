@@ -14,8 +14,8 @@
     <fieldset>
         <legend><?= __('Añadir Profesor') ?></legend>
         <?php
-            echo $this->Form->input('nombre', ['style' => 'text-transform:uppercase']);
-            echo $this->Form->input('apellidos');
+            echo $this->Form->input('nombre', ['style' => 'text-transform:uppercase', 'onchange'=>'this.value = this.value.toUpperCase();']);
+            echo $this->Form->input('apellidos', ['style' => 'text-transform:uppercase', 'onchange'=>'this.value = this.value.toUpperCase();']);
             echo $this->Form->input('email');
             echo $this->Form->input('subjects._ids', array('label' => 'Asignaturas'), ['options' => $subjects]);
         ?>

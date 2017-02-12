@@ -73,6 +73,10 @@ class DegreesTable extends Table
             ->requirePresence('nombre', 'create')
             ->notEmpty('nombre');
 
+        $validator
+            ->requirePresence('teacher_id', 'create')
+            ->notEmpty('teacher_id');
+
         return $validator;
     }
 

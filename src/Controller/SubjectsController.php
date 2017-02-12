@@ -95,6 +95,7 @@ class SubjectsController extends AppController
                 $this->Flash->error(__('La asignatura no se ha podido añadir. Por favor, inténtelo de nuevo.'));
             }
         }
+        ;
         $degrees = $this->Subjects->Degrees->find('list');
         $teachers = $this->Subjects->Teachers->find('list');
 

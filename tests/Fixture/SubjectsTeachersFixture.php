@@ -43,8 +43,8 @@ class SubjectsTeachersFixture extends TestFixture
             'id' => 1,
             'teacher_id' => 1,
             'subject_id' => 1,
-            'created' => '2017-01-19 16:22:19',
-            'modified' => '2017-01-19 16:22:19'
+            'created' => '2017-02-11 15:12:55',
+            'modified' => '2017-02-11 15:12:55'
         ],
     ];
 }

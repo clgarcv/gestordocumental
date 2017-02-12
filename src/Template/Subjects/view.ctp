@@ -46,75 +46,44 @@
             <th scope="row"><?= __('Curso') ?></th>
             <td><?= h($subject->curso) ?></td>
         </tr>
-        <tr>
+        <!-- <tr>
             <th scope="row"><?= __('Teacher Id') ?></th>
             <td><?= $this->Number->format($subject->teacher_id) ?></td>
-        </tr>
-        <tr>
+        </tr> -->
+        <!-- <tr>
             <th scope="row"><?= __('Created') ?></th>
             <td><?= h($subject->created) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Modified') ?></th>
             <td><?= h($subject->modified) ?></td>
-        </tr>
+        </tr> -->
     </table>
-    <div class="related">
-        <h4><?= __('Related Sessions') ?></h4>
-        <?php if (!empty($subject->sessions)): ?>
+	<div class="related">
+        <h4><?= __('Profesores Asociados') ?></h4>
+        <?php if (!empty($subject->teachers)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Codigo') ?></th>
                 <th scope="col"><?= __('Nombre') ?></th>
-                <th scope="col"><?= __('Descripcion') ?></th>
-                <th scope="col"><?= __('Subject Id') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
+                <th scope="col"><?= __('Apellidos') ?></th>
+                <th scope="col"><?= __('Email') ?></th>
+                <!--<th scope="col"><?= __('Created') ?></th>
                 <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th> -->
             </tr>
-            <?php foreach ($subject->sessions as $sessions): ?>
+            <?php foreach ($subject->teachers as $teachers): ?>
             <tr>
-                <td><?= h($sessions->id) ?></td>
-                <td><?= h($sessions->codigo) ?></td>
-                <td><?= h($sessions->nombre) ?></td>
-                <td><?= h($sessions->descripcion) ?></td>
-                <td><?= h($sessions->subject_id) ?></td>
-                <td><?= h($sessions->created) ?></td>
-                <td><?= h($sessions->modified) ?></td>
+                <td><?= h($teachers->id) ?></td>
+                <td><?= h($teachers->nombre) ?></td>
+                <td><?= h($teachers->apellidos) ?></td>
+                <td><?= h($teachers->email) ?></td>
+                <!--<td><?= h($teachers->created) ?></td>
+                <td><?= h($teachers->modified) ?></td> -->
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Sessions', 'action' => 'view', $sessions->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Sessions', 'action' => 'edit', $sessions->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Sessions', 'action' => 'delete', $sessions->id], ['confirm' => __('¿Esta seguro que desea eliminar la sesión # {0}?', $sessions->nombre)]) ?>
-                </td>
-            </tr>
-            <?php endforeach; ?>
-        </table>
-        <?php endif; ?>
-    </div>
-    <div class="related">
-        <h4><?= __('Related Degrees') ?></h4>
-        <?php if (!empty($subject->degrees)): ?>
-        <table cellpadding="0" cellspacing="0">
-            <tr>
-                <th scope="col"><?= __('Id') ?></th>
-                <th scope="col"><?= __('Codigo') ?></th>
-                <th scope="col"><?= __('Nombre') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
-            </tr>
-            <?php foreach ($subject->degrees as $degrees): ?>
-            <tr>
-                <td><?= h($degrees->id) ?></td>
-                <td><?= h($degrees->codigo) ?></td>
-                <td><?= h($degrees->nombre) ?></td>
-                <td><?= h($degrees->created) ?></td>
-                <td><?= h($degrees->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Degrees', 'action' => 'view', $degrees->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Degrees', 'action' => 'edit', $degrees->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Degrees', 'action' => 'delete', $degrees->id], ['confirm' => __('Are you sure you want to delete # {0}?', $degrees->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'Teachers', 'action' => 'view', $teachers->id], ['class' => 'btn btn-default']) ?>
+                    <!--<?= $this->Html->link(__('Edit'), ['controller' => 'Teachers', 'action' => 'edit', $teachers->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Teachers', 'action' => 'delete', $teachers->id], ['confirm' => __('Are you sure you want to delete # {0}?', $teachers->id)]) ?> -->
                 </td>
             </tr>
             <?php endforeach; ?>
@@ -123,34 +92,67 @@
     </div>
 
     <div class="related">
-        <h4><?= __('Related Teachers') ?></h4>
-        <?php if (!empty($subject->teachers)): ?>
+        <h4><?= __('Sesiones Relacionas') ?></h4>
+        <?php if (!empty($subject->sessions)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
                 <th scope="col"><?= __('Id') ?></th>
+                <th scope="col"><?= __('Codigo') ?></th>
                 <th scope="col"><?= __('Nombre') ?></th>
-                <th scope="col"><?= __('Apellidos') ?></th>
-                <th scope="col"><?= __('Email') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
+                <th scope="col"><?= __('Descripcion') ?></th>
+                <th scope="col"><?= __('Subject Id') ?></th>
+                <!-- <th scope="col"><?= __('Created') ?></th>
                 <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th> -->
             </tr>
-            <?php foreach ($subject->teachers as $teachers): ?>
+            <?php foreach ($subject->sessions as $sessions): ?>
             <tr>
-                <td><?= h($teachers->id) ?></td>
-                <td><?= h($teachers->nombre) ?></td>
-                <td><?= h($teachers->apellidos) ?></td>
-                <td><?= h($teachers->email) ?></td>
-                <td><?= h($teachers->created) ?></td>
-                <td><?= h($teachers->modified) ?></td>
+                <td><?= h($sessions->id) ?></td>
+                <td><?= h($sessions->codigo) ?></td>
+                <td><?= h($sessions->nombre) ?></td>
+                <td><?= h($sessions->descripcion) ?></td>
+                <td><?= h($sessions->subject_id) ?></td>
+                <!--<td><?= h($sessions->created) ?></td>
+                <td><?= h($sessions->modified) ?></td> -->
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Teachers', 'action' => 'view', $teachers->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Teachers', 'action' => 'edit', $teachers->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Teachers', 'action' => 'delete', $teachers->id], ['confirm' => __('Are you sure you want to delete # {0}?', $teachers->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'Sessions', 'action' => 'Ver', $sessions->id], ['class' => 'btn btn-default']) ?>
+                    <!-- <?= $this->Html->link(__('Edit'), ['controller' => 'Sessions', 'action' => 'edit', $sessions->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Sessions', 'action' => 'delete', $sessions->id], ['confirm' => __('¿Esta seguro que desea eliminar la sesión # {0}?', $sessions->nombre)]) ?> -->
                 </td>
             </tr>
             <?php endforeach; ?>
         </table>
         <?php endif; ?>
     </div>
+    <div class="related">
+        <h4><?= __('Titulaciones Relacionas') ?></h4>
+        <?php if (!empty($subject->degrees)): ?>
+        <table cellpadding="0" cellspacing="0">
+            <tr>
+                <th scope="col"><?= __('Id') ?></th>
+                <th scope="col"><?= __('Codigo') ?></th>
+                <th scope="col"><?= __('Nombre') ?></th>
+                <!--<th scope="col"><?= __('Created') ?></th>
+                <th scope="col"><?= __('Modified') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th> -->
+            </tr>
+            <?php foreach ($subject->degrees as $degrees): ?>
+            <tr>
+                <td><?= h($degrees->id) ?></td>
+                <td><?= h($degrees->codigo) ?></td>
+                <td><?= h($degrees->nombre) ?></td>
+                <!-- <td><?= h($degrees->created) ?></td>
+                <td><?= h($degrees->modified) ?></td> -->
+                <td class="actions">
+                    <?= $this->Html->link(__('View'), ['controller' => 'Degrees', 'action' => 'view', $degrees->id], ['class' => 'btn btn-default']) ?>
+                    <!--<?= $this->Html->link(__('Edit'), ['controller' => 'Degrees', 'action' => 'edit', $degrees->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Degrees', 'action' => 'delete', $degrees->id], ['confirm' => __('Are you sure you want to delete # {0}?', $degrees->id)]) ?> -->
+                </td>
+            </tr>
+            <?php endforeach; ?>
+        </table>
+        <?php endif; ?>
+    </div>
+
+
 </div>

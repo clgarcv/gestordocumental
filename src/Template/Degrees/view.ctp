@@ -15,7 +15,7 @@
     <h3><?= h($degree->id) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Codigo') ?></th>
+            <th scope="row"><?= __('Código') ?></th>
             <td><?= h($degree->codigo) ?></td>
         </tr>
         <tr>
@@ -23,24 +23,24 @@
             <td><?= h($degree->nombre) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Teacher') ?></th>
+            <th scope="row"><?= __('Director') ?></th>
             <td><?= $degree->has('teacher') ? $this->Html->link($degree->teacher->id, ['controller' => 'Teachers', 'action' => 'view', $degree->teacher->id]) : '' ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($degree->id) ?></td>
         </tr>
-        <tr>
+        <!-- <tr>
             <th scope="row"><?= __('Created') ?></th>
             <td><?= h($degree->created) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Modified') ?></th>
             <td><?= h($degree->modified) ?></td>
-        </tr>
+        </tr> -->
     </table>
     <div class="related">
-        <h4><?= __('Related Subjects') ?></h4>
+        <h4><?= __('Asignaturas de la titulación') ?></h4>
         <?php if (!empty($degree->subjects)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>
@@ -52,9 +52,9 @@
                 <th scope="col"><?= __('Semestre') ?></th>
                 <th scope="col"><?= __('Materia') ?></th>
                 <th scope="col"><?= __('Teacher Id') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
+                <!-- <th scope="col"><?= __('Created') ?></th>
                 <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+                <th scope="col" class="actions"><?= __('Actions') ?></th> -->
             </tr>
             <?php foreach ($degree->subjects as $subjects): ?>
             <tr>
@@ -66,12 +66,12 @@
                 <td><?= h($subjects->semestre) ?></td>
                 <td><?= h($subjects->materia) ?></td>
                 <td><?= h($subjects->teacher_id) ?></td>
-                <td><?= h($subjects->created) ?></td>
-                <td><?= h($subjects->modified) ?></td>
+                <!--<td><?= h($subjects->created) ?></td>
+                <td><?= h($subjects->modified) ?></td> -->
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Subjects', 'action' => 'view', $subjects->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Subjects', 'action' => 'edit', $subjects->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Subjects', 'action' => 'delete', $subjects->id], ['confirm' => __('Are you sure you want to delete # {0}?', $subjects->id)]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'Subjects', 'action' => 'view', $subjects->id], ['class' => 'btn btn-default']) ?>
+                    <!-- <?= $this->Html->link(__('Edit'), ['controller' => 'Subjects', 'action' => 'edit', $subjects->id]) ?>
+                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Subjects', 'action' => 'delete', $subjects->id], ['confirm' => __('Are you sure you want to delete # {0}?', $subjects->id)]) ?> -->
                 </td>
             </tr>
             <?php endforeach; ?>

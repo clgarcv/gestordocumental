@@ -22,8 +22,7 @@
                 <th scope="col"><?= $this->Paginator->sort('curso') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('semestre') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('materia') ?></th>
-				<th scope="col"><?= $this->Paginator->sort('teacher_id') ?></th>
-                <th scope="col" class="actions"><?= __('Acciones') ?></th>
+				<!-- <th scope="col"><?= $this->Paginator->sort('teacher_id', 'Profesor') ?></th> -->
             </tr>
         </thead>
         <tbody>
@@ -31,16 +30,19 @@
             <tr>
                 <td><?= $this->Number->format($subject->id) ?></td>
                 <td><?= h($subject->codigo) ?></td>
-                <td><?= h($subject->nombre) ?></td>
+                <td><?= $this->Html->link(__($subject->nombre), ['action' => 'view', $subject->id]) ?></td>
+                <!-- <td><?= h($subject->nombre) ?></td> -->
                 <td><?= h($subject->modulo) ?></td>
                 <td><?= h($subject->curso) ?></td>
                 <td><?= h($subject->semestre) ?></td>
                 <td><?= h($subject->materia) ?></td>
-                <td><?= $this->Number->format($subject->teacher_id) ?></td>
+                <!-- <td><?= $this->Number->format($subject->teacher_id) ?></td> -->
                 <td class="actions">
-                    <?= $this->Html->link(__('Ver'), ['action' => 'view', $subject->id], ['class' => 'btn btn-default']) ?>
+                    <!-- <?= $this->Html->link(__('Ver'), ['action' => 'view', $subject->id], ['class' => 'btn btn-default']) ?> -->
+                    <?php if ($current_user['role'] == 3): ?>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $subject->id], ['class' => 'btn btn-default']) ?>
-                    <?= $this->Html->link(__('Eliminar'), ['action' => 'delete', $subject->id], ['confirm' => __('¿Seguro que desea eliminar la asignatura # {0}?', $subject->nombre), 'class' => 'btn btn-default']) ?>
+                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $subject->id], ['confirm' => __('¿Seguro que desea eliminar la asignatura # {0}?', $subject->nombre), 'class' => 'btn btn-default']) ?>
+                <?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>

@@ -4,8 +4,7 @@
         <div class="col-xs-6 col-sm-3">
             <div class="well">
                 <div id="accordion">
-                <div class="panel-body" >
-
+                <div class="panel-body">
 				<form method="post" accept-charset="utf-8" class="form-search" role="form" action="/gestordocumental/users/buscador">
 				<div style="display:none;">
 					<input type="hidden" name="_method" value="POST"/>
@@ -125,32 +124,39 @@
 
 
     <div class="page-header">
+    <?php if (!empty($sesiones)): ?>
         <h3>Sesiones encontradas....</h3>
+    <?php endif; ?>
+    <?php if (empty($sesiones)): ?>
+        <h3>No hay sesiones para mostrar... Por favor, realice una búsqueda</h3>
+    <?php endif; ?>
     </div>
 
     <?php $i=0; ?>
-      <?php foreach ($sesiones as $s): ?>
-        <?php if ($i == 0): ?>
-          <div class="row grid-divider">
-        <?php endif; ?>
-        <div class="col-sm-4">
-          <div class="col-padding">
-            <h3><?= $this->Html->link($s['nombre'] ,
-                    array('controller' => 'sessions', 'action' => 'view', $s['id'] ))?></h3>
-            <p><?= $s['descripcion'] ?></p>
-          </div>
-        </div>
-        <?php $i++; ?>
-        <?php if ($i ==3): ?>
-        </div>
-        <?php $i=0; ?>
-        <?php endif; ?>
-      <?php endforeach; ?>
-
+	 <?php if (!empty($sesiones)): ?>
+	      <?php foreach ($sesiones as $s): ?>
+	        <?php if ($i == 0): ?>
+	          <div class="row grid-divider">
+	        <?php endif; ?>
+	        <div class="col-sm-4">
+	          <div class="col-padding">
+	            <h3><?= $this->Html->link($s['nombre'] ,
+	                    array('controller' => 'sessions', 'action' => 'view', $s['id'] ))?></h3>
+	            <p><?= $s['descripcion'] ?></p>
+	          </div>
+	        </div>
+	        <?php $i++; ?>
+	        <?php if ($i ==3): ?>
+	        </div>
+	        <?php $i=0; ?>
+	        <?php endif; ?>
+	      <?php endforeach; ?>
+	<?php endif; ?>
     </div>
 
 
   </div>
+
   <div class="row">
   	<div class="col-xs-6 col-xs-offset-3">
 

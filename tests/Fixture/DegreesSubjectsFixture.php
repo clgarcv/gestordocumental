@@ -43,8 +43,8 @@ class DegreesSubjectsFixture extends TestFixture
             'id' => 1,
             'degree_id' => 1,
             'subject_id' => 1,
-            'created' => '2017-01-19 16:22:15',
-            'modified' => '2017-01-19 16:22:15'
+            'created' => '2017-02-11 15:12:32',
+            'modified' => '2017-02-11 15:12:32'
         ],
     ];
 }

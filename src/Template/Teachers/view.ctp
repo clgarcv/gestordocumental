@@ -32,16 +32,16 @@
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($teacher->id) ?></td>
         </tr>
-        <tr>
+        <!--<tr>
             <th scope="row"><?= __('Created') ?></th>
             <td><?= h($teacher->created) ?></td>
         </tr>
         <tr>
             <th scope="row"><?= __('Modified') ?></th>
             <td><?= h($teacher->modified) ?></td>
-        </tr>
+        </tr> -->
     </table>
-    <div class="related">
+    <!-- <div class="related">
         <h4><?= __('Related Users') ?></h4>
         <?php if (!empty($teacher->users)): ?>
         <table cellpadding="0" cellspacing="0">
@@ -51,7 +51,7 @@
                 <th scope="col"><?= __('Password') ?></th>
                 <th scope="col"><?= __('Role') ?></th>
                 <th scope="col"><?= __('Teacher Id') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
+                <!--<th scope="col"><?= __('Created') ?></th>
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th>
             </tr>
@@ -65,8 +65,8 @@
                 <td><?= h($users->created) ?></td>
                 <td><?= h($users->modified) ?></td>
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Users', 'action' => 'view', $users->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Users', 'action' => 'edit', $users->id]) ?>
+                    <?= $this->Html->link(__('View'), ['controller' => 'Users', 'action' => 'view', $users->id], ['class' => 'btn btn-default']) ?>
+                    <!--<?= $this->Html->link(__('Edit'), ['controller' => 'Users', 'action' => 'edit', $users->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Users', 'action' => 'delete', $users->id], ['confirm' => __('Are you sure you want to delete # {0}?', $users->id)]) ?>
                 </td>
             </tr>
@@ -74,9 +74,9 @@
         </table>
         <?php endif; ?>
         <p> <?= $teacher->full_name?> </p>
-    </div>
+    </div> -->
     <div class="related">
-        <h4><?= __('Related Subjects') ?></h4>
+        <h4><?= __('Asignaturas Relacionadas') ?></h4>
         <?php if (!empty($teacher->subjects)): ?>
         <table cellpadding="0" cellspacing="0">
             <tr>

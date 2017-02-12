@@ -18,6 +18,12 @@ class KeywordsSessionsControllerTest extends IntegrationTestCase
     public $fixtures = [
         'app.keywords_sessions',
         'app.sessions',
+        'app.subjects',
+        'app.teachers',
+        'app.users',
+        'app.subjects_teachers',
+        'app.degrees',
+        'app.degrees_subjects',
         'app.keywords'
     ];
 

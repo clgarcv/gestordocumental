@@ -35,11 +35,7 @@ html, body { height: 100%;}
 }
 
 td {
-	padding: 5px;
-}
-
-table {
-	width: 100%;
+	padding: 5px 8px 5px 8px;
 }
 
 

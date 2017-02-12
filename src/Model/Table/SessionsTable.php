@@ -74,6 +74,11 @@ class SessionsTable extends Table
             ->requirePresence('descripcion', 'create')
             ->notEmpty('descripcion');
 
+        $validator
+            ->requirePresence('subject_id', 'create')
+            ->notEmpty('subject_id');
+
+
         return $validator;
     }
 

@@ -30,12 +30,14 @@ class KeywordsController extends AppController
 		$this->autoRender = false;
 	}
 
+
+
 	public function isAuthorized($user)
 	{
 	   //return true;
 		if(isset($user['role']) && $user['role'] == 2){
 			//damos autorizacion a determinadas acciones del controlador
-			if(in_array($this->request->action, array('edit', 'add', 'index', 'view'))){
+			if(in_array($this->request->action, array('add', 'index', 'view'))){
 				return true;
 			} else {
 				if($this->Auth->user('id')){
@@ -49,7 +51,7 @@ class KeywordsController extends AppController
 		}
 		if(isset($user['role']) && $user['role'] == 1){
 			//damos autorizacion a determinadas acciones del controlador
-			if(in_array($this->request->action, array('edit', 'add', 'index', 'view'))){
+			if(in_array($this->request->action, array('add', 'index', 'view'))){
 				return true;
 			} else {
 				if($this->Auth->user('id')){
@@ -128,6 +130,7 @@ class KeywordsController extends AppController
 				$this->Flash->error(__('La palabra clave no se ha podido añadir. Por favor, inténtelo de nuevo.'));
 			}
 		}
+
 		$sessions = $this->Keywords->Sessions->find('list');
 		$this->set(compact('keyword', 'sessions'));
 		$this->set('_serialize', ['keyword']);
