@@ -53,7 +53,7 @@ Router::scope('/', function (RouteBuilder $routes) {
 
     /**
      * ...and connect the rest of 'Pages' controller's URLs.
-     */    
+     */
 
     $routes->connect('/buscador', ['controller' => 'Users', 'action' => 'buscador']);
 

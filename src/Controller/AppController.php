@@ -17,6 +17,7 @@ namespace App\Controller;
 use Cake\Controller\Controller;
 use Cake\Event\Event;
 
+
 /**
  * Application Controller
  *
@@ -85,6 +86,11 @@ class AppController extends Controller
             in_array($this->response->type(), ['application/json', 'application/xml'])
         ) {
             $this->set('_serialize', true);
+        }
+        if ($this->response->statusCode() == '404' || $this->response->statusCode() == '400') {
+        	return $this->redirect([
+                         			'controller' => 'Users',
+                           			'action' => 'buscador']);
         }
     }
 

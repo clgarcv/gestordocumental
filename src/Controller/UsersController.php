@@ -7,7 +7,7 @@ use Cake\ORM\Query;
 use Cake\ORM\TableRegistry;
 use Cake\View\Helper\SessionHelper;
 use Cake\Core\Configure;
-
+use Cake\Mailer\Email;
 
 /**
  * Users Controller
@@ -353,6 +353,14 @@ class UsersController extends AppController
                     ->set(['hasUser' => 1])
                     ->where(['id' => $teacher_id])
                     ->execute();
+
+				/*$email = new Email('default');
+				$email->from(['soporte.practicas@unirioja.es' => 'My Site'])
+				    ->to('soporte.practicas@unirioja.es')
+				    ->subject('About')
+				    ->send('Prueba');
+				    */
+
 
                 return $this->redirect(['action' => 'index']);
             } else {

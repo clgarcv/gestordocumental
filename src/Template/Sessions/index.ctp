@@ -31,9 +31,11 @@
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $session->id], ['class' => 'btn btn-default']) ?>
                     <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $session->id], ['confirm' => __('¿Seguro que desea eliminar la sesión #{0}?', $session->nombre), 'class' => 'btn btn-default']) ?>
                 <?php endif; ?>
+
                 <?php if ($current_user['role'] == 1 && $current_user['teacher_id'] === $session->subject->teacher_id): ?>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $session->id], ['class' => 'btn btn-default']) ?>
                 <?php endif; ?>
+
 
                 </td>
             </tr>

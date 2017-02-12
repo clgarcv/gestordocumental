@@ -95,10 +95,17 @@ class SubjectsController extends AppController
                 $this->Flash->error(__('La asignatura no se ha podido añadir. Por favor, inténtelo de nuevo.'));
             }
         }
-        ;
-        $degrees = $this->Subjects->Degrees->find('list');
-        $teachers = $this->Subjects->Teachers->find('list');
 
+
+        //mostramos solo las titulaciones de las cuales es director
+        if($this->Auth->user()['role']==2){
+        	$degrees = $this->Subjects->Degrees->find('list', array('conditions'=>array('Degrees.teacher_id'=>$this->Auth->user()['teacher_id']), array ('order' => 'Degrees.nombre')));
+        } else {
+        	$degrees = $this->Subjects->Degrees->find('list', array('order' => 'Degrees.nombre'));
+        }
+        $teachers = $this->Subjects->Teachers->find('list', array('order' => 'Teachers.nombre'));
+
+ 		//$this->Auth->user()['teacher_id'];
 
         $this->set(compact('subject', 'degrees', 'teachers'));
         $this->set('_serialize', ['subject']);

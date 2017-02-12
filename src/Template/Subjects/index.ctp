@@ -40,9 +40,12 @@
                 <td class="actions">
                     <!-- <?= $this->Html->link(__('Ver'), ['action' => 'view', $subject->id], ['class' => 'btn btn-default']) ?> -->
                     <?php if ($current_user['role'] == 3): ?>
-                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $subject->id], ['class' => 'btn btn-default']) ?>
-                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $subject->id], ['confirm' => __('¿Seguro que desea eliminar la asignatura # {0}?', $subject->nombre), 'class' => 'btn btn-default']) ?>
-                <?php endif; ?>
+	                    <?= $this->Html->link(__('Editar'), ['action' => 'edit', $subject->id], ['class' => 'btn btn-default']) ?>
+	                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $subject->id], ['confirm' => __('¿Seguro que desea eliminar la asignatura # {0}?', $subject->nombre), 'class' => 'btn btn-default']) ?>
+                	<?php endif; ?>
+                	<?php if ($current_user['role'] == 2 &&  $current_user['teacher_id'] === $subject->teacher_id ): ?>
+                		<?= $this->Html->link(__('Editar'), ['action' => 'edit', $subject->id], ['class' => 'btn btn-default']) ?>
+                	<?php endif; ?>
                 </td>
             </tr>
             <?php endforeach; ?>
