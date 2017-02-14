@@ -1,6 +1,6 @@
 
 <!-- File: src/Template/Users/login.ctp -->
-<!-- 
+<!--
 <div class="users form">
 <?= $this->Flash->render('auth') ?>
 <?= $this->Form->create() ?>
@@ -13,22 +13,22 @@
 <?= $this->Form->end() ?>
 </div>
 -->
-<div class="login"> 
+<div class="login">
     <div class="container">
         <div class="row">
             <div class="col-md-4 col-md-offset-4 col-xs-4-offset-2">
-                <?= $this->Html->image('UR.jpeg', array('alt' => 'Universidad de La Rioja', 'class' => 'img-responsive'));?>       
-            </div>    
+                <?= $this->Html->image('UR.jpeg', array('alt' => 'Universidad de La Rioja', 'class' => 'img-responsive'));?>
+            </div>
         </div>
         <div class="row">
             <div class="col-md-4 col-md-offset-4 col-xs-4-offset-2">
-            <?= $this->Flash->render('auth') ?>    
+            <?= $this->Flash->render('auth') ?>
                     <div class="panel-body">
                         <?= $this->Form->create() ?>
                         <fieldset>
                             <div class="form-group">
                                 <?= $this->Form->input('username', ['class' => 'form-control input-lg', 'placeholder' => 'Usuario', 'label' => false, 'required']) ?>
-                                
+
                             </div>
                             <div class="form-group">
                                 <?= $this->Form->password('password', ['class' => 'form-control input-lg', 'placeholder' => 'Contraseña', 'label' => false, 'required']) ?>

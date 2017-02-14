@@ -208,6 +208,97 @@ class UsersController extends AppController
 			}
 			//print_r($conditions);
 
+			//comprobamos si han seleccionado filtro y palabras clave
+			if((!empty($_POST['modulo']) || !empty($_POST['materia']) || !empty($_POST['curso']) || !empty($_POST['semestre']) ) && (!empty($_POST['search'])))
+			{
+				print_r("nos han pasado las dos cosas");
+			}
+			else
+			{
+				//nos han filtrado unicamente por keywords
+				if(!empty($_POST['search'])) {
+					print_r("Nos han pasado keywords");
+
+					$search = $_POST['search'];
+					$palabras = preg_split('[,]', $search);
+					//print_r($palabras);
+
+					//para cada palabra lo añadimos al array de condiciones
+					foreach ($palabras as $p) {
+						# code...
+						$condicionesKeywords[] = array('Keywords.nombre LIKE' => $p);
+					}
+
+					print_r($condicionesKeywords);
+
+					//obtenemos el identificador de las palabras que nos han introducido
+					$idKeywords = $keyword->find('all', array('fields' => array('Keywords.id'), 'conditions' => array('OR' => $condicionesKeywords )))->toArray();
+
+					print_r($idKeywords);
+
+					//obtenemos las sesiones que cumplan las asignaturas y las palabras clave
+					foreach ($idKeywords as $idk) {
+						# code...
+						$condicKeySes[] = array('KeywordsSessions.keyword_id LIKE' => $idk['id']);
+					}
+
+					print_r($condicKeySes);
+
+					//obtenemos los id de sesion que tiene relacion con las palabras introducidas
+					$keyses = TableRegistry::get('KeywordsSessions');
+					$palyses = $keyses->find('all', array('fields' => array('KeywordsSessions.session_id'),  'conditions' => array('OR' => $condicKeySes)))->toArray();
+					//print_r($palyses);
+					foreach ($palyses as $ps) {
+						# code...
+						$sesionFiltro[] = array('Sessions.id LIKE' => $ps['session_id']);
+
+					}
+					print_r($sesionFiltro);
+					//obtenemos las sesiones con las dos condiciones, filtro y keywords
+					$session = TableRegistry::get('Sessions');
+					$sesiones = $session->find('all', array('conditions' => array('OR' => $sesionFiltro)));
+
+
+					$paginador = $this->paginate($sesiones, array('limit' => 6));
+			        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas','keywords', 'sesiones'));
+			        $this->set('_serialize', ['sesiones']);
+
+
+				}
+
+				////nos han filtrado unicamente por asignatura
+				if(!empty($_POST['modulo']) || !empty($_POST['materia']) || !empty($_POST['curso'])|| !empty($_POST['semestre'])) {
+					print_r("Nos han pasado filtro");
+
+					//obtenemos el id de las asignaturas que cumplen con el filtro
+					$asig = TableRegistry::get('Subjects');
+					//comprobamos si hay condiciones o no
+						//si hay condiciones obtenemos los id asignaturas que las cumplen
+						$id_asig = $asig->find('all', array('fields' => array('Subjects.id'), 'conditions' => array('AND' => $conditions)))->toArray();
+						//print_r('entra en if,  hay condiciones');
+
+					//print_r($asignaturas);
+					//hasta aqui esta bien saca las asignaturas que tienen q salir
+					//creamos el array de condiones para obtener las sesiones
+
+					foreach ($id_asig as $i) {
+						# code...
+						$condicionesAsignaturas[] = array('Sessions.subject_id LIKE' => $i['id']);
+						}
+
+					$session = TableRegistry::get('Sessions');
+					$sesiones = $session->find('all', array('conditions' => array('OR' => $condicionesAsignaturas)));
+
+					$paginador = $this->paginate($sesiones, array('limit' => 6));
+					$this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones','keywords'));
+					$this->set('_serialize', ['sesiones']);
+
+				}
+			}
+
+
+			/*
+
 			//obtenemos el id de las asignaturas que cumplen con el filtro
 			$asig = TableRegistry::get('Subjects');
 			//comprobamos si hay condiciones o no
@@ -286,9 +377,9 @@ class UsersController extends AppController
 
 
 			}
+*/
 
-
-
+			//poner estas lineas en cada caso...
 	        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones','keywords'));
 			$this->set('_serialize', ['sesiones']);
 

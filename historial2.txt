@@ -1,0 +1,487 @@
+    1  cd .ssh
+    2  ls
+    3  less authorized_keys 
+    4  cd .ssh
+    5  ñs
+    6  ls
+    7  pwd
+    8  cd /etc/ssh
+    9  ls
+   10  vi ssh_config
+   11  vi sshd_config
+   12  cd /home/soprac/
+   13  cd .ssh
+   14  less authorized_keys 
+   15  cd /etc/ssh
+   16  vi sshd_config
+   17  systemctl ssh reload
+   18  ./systemctl sshs reload
+   19  ./systemctl sshd reload
+   20  service sshd reloa
+   21  ./systemctl
+   22  systemctl
+   23  ls
+   24  vi ssh_config
+   25  vi sshd_config
+   26  systemctl reload sshd
+   27  ls
+   28  less sshd_config
+   29  cd /home/soprac/
+   30  ls -al .
+   31  cd .ssh
+   32  ls
+   33  ssh-keygen -t rsa
+   34  cd /root/.ssh/id_rsa.pub
+   35  cd /root/.ssh
+   36  ls
+   37  ls -alrt .
+   38  cat id_rsa.pub >> authorized_keys 
+   39  less id_rsa
+   40  less authorized_keys 
+   41  vi authorized_keys 
+   42  less authorized_keys 
+   43  cd /etc/ssh
+   44  ls
+   45  vi sshd_config
+   46  systemctl reload sshd
+   47  vi sshd_config
+   48  cd ..
+   49  service ntpd stop
+   50  service ntp stop
+   51  service ntp start
+   52  service ntpd start
+   53  systemctl | grep ntp
+   54  apt-get install ntp
+   55  ls -al ntp*
+   56  service ntpd status
+   57  mv ntp.conf old.ntp.conf
+   58  service ntp start
+   59  service ntp status
+   60  ntpdate -u 10.0.1.11
+   61  apt-get install ntpdate
+   62  ntpdate -u 10.0.1.11
+   63  ntpq
+   64  less ntp.conf
+   65  cd /var/lib/ntp/
+   66  ls
+   67  cd -
+   68  ls
+   69  less ntp.conf
+   70  cd 7var/lib/ntp
+   71  ls
+   72  cd /var/lib/ntp
+   73  ls
+   74  ls -al .
+   75  chown ntp:ntp ntp.drift 
+   76  ls -al .
+   77  service ntp reload
+   78  update-rc.d ntp start 20 3 4 5
+   79  apt-get install chkconfig
+   80  reboot
+   81  last
+   82  top
+   83  passwd root
+   84  exit
+   85  CG-1705-rs
+   86  exit
+   87  cd /etc/init.d
+   88  cd network-scripts
+   89  cd ..
+   90  cd sysconfig
+   91  ls
+   92  cd network
+   93  ls
+   94  less interfaces
+   95  vi interfaces
+   96  /etc/init.d/networking restart
+   97  ifconfig
+   98  vi interfaces
+   99  /etc/init.d/networking stop
+  100  ifconfig
+  101  /etc/init.d/networking start
+  102  ifconfig
+  103  passwd
+  104  ls
+  105  less interfaces
+  106  /etc/init.d/networking stop
+  107  /etc/init.d/networking start
+  108  reboot
+  109  ifconfig -a
+  110  ifconfig
+  111  passwd
+  112  exit
+  113  w
+  114  tcpdump 
+  115  shutdown -h now
+  116  cd /root/
+  117  ls
+  118  wget http://www.webmin.com/jcameron-key.asc
+  119  apt-key add jcameron-key.asc 
+  120  apt-get update
+  121  apt-get install apt-transport-https
+  122  apt-get install webmin
+  123  apt-get libapache-php
+  124  apt-get install libapache-php
+  125  apt-get install libapache2-php
+  126  apt-get install libapache2-php7
+  127  libapache2-mod-php
+  128  libapache2-mod-php7
+  129  apt-get libapache2-mod-php
+  130  apt-get libapache2-mod-php7
+  131  apt-get install libapache2-mod-php7
+  132  apt-get install libapache2-mod-php
+  133  service webmin start
+  134  nano /etc/iproute2/rt_tables 
+  135  find / -name iptables
+  136  cd /usr/share/iptables/
+  137  ls
+  138  nano iptables.xslt 
+  139  /etc/init.d/iptables stop
+  140  service iptables stop
+  141  service --status-all
+  142  cd..
+  143  cd ..
+  144  service ufw
+  145  service ufw stop
+  146  service ufw status
+  147  service ufw 
+  148  service ufw stop
+  149  service ufw status
+  150  service ufw restart
+  151  service ufw status
+  152  find / -name ufw
+  153  cd usr/share/
+  154  cd ufw/
+  155  ls
+  156  nano ufw.conf 
+  157  cd iptables/
+  158  ls
+  159  nano user
+  160  nano user.rules 
+  161  ufw disable
+  162  nano /etc/php/7.0/apache2/php.ini 
+  163  ls
+  164  cd ..
+  165  ls
+  166  cd ..
+  167  ls
+  168  cd ..
+  169  cd /etc/apache2/
+  170  ls
+  171  cd mods-available/
+  172  ls
+  173  nano rewrite.load 
+  174  cd ..
+  175  ls
+  176  cd mods-enabled/
+  177  ls
+  178  cd ..
+  179  ls
+  180  apt-cache search enmod
+  181  apt-cache search en2mod
+  182  apt-cache search e2mod
+  183  apt-cache search enmod
+  184  a2enmod rewrite
+  185  service apache2 restart
+  186  ls
+  187  cd mods-enabled/
+  188  ls
+  189  nano rewrite.load 
+  190  cd..
+  191  ls
+  192  cd ..
+  193  ls
+  194  nano apache2.conf
+  195  cd conf-enabled/
+  196  ls
+  197  cd ..
+  198  ,s
+  199  cd ..
+  200  s
+  201  ls
+  202  cd /var/www/html/
+  203  ls
+  204  nano /etc/proftpd/proftpd.conf
+  205  service proftpd restart
+  206  service proftpd force-reload
+  207  nano /etc/proftpd/proftpd.conf
+  208  service --status-all
+  209  htop
+  210  top
+  211  service vsftp
+  212  apt-get install htop
+  213  htop
+  214  nano .htaccess 
+  215  nano /etc/apache2/apache2.conf
+  216  service apache2 restart
+  217  service apachectl restart
+  218  service apache2ctl restart
+  219  service --status-all
+  220  iptables -A INPUT -p tcp --dport 10000 -j ACCEPT
+  221  ufw restart
+  222  ufw enable
+  223  mv .htaccess p.htaccess
+  224  apt-cache cakephp
+  225  apt-cache search cakephp
+  226  apt-get install cakephp
+  227  apt-get install cakephp  cakephp-instaweb php-pgsql | php5-pgsql php-sqlite3 | php5-sqlite
+  228  apt-get install cakephp  cakephp-instaweb
+  229  apt-get install cakephp
+  230  service apacha2 restart
+  231  service apache2 restart
+  232  service apache2 force-reload
+  233  cd /home/soprac/
+  234  history >> historial.txt
+  235  chown -R root:www-data tmp
+  236  apache2ctl -M
+  237  a2enmod rewrite
+  238  /etc/apache2 
+  239  cd /etc/apache2 
+  240  nano  apache2.conf
+  241  cd /var/www/html/Config
+  242  cd /var/www/html/config
+  243  ls
+  244  mv database.php.default default.php
+  245  nano app.php 
+  246  pico /etc/apache2/sites-available/000-default.conf 
+  247  service apache2 restart
+  248  service apache2 force-reload
+  249  apache2ctl restart
+  250  cd ..
+  251  ls
+  252  [Capt.get install c[C
+  253  apt-get install composer
+  254  ls
+  255  composer create-project --prefer-dist cakephp/app prueba
+  256  apt-get install cakephp
+  257  composer create-project --prefer-dist cakephp/app prueba
+  258  composer create-project --prefer-dist cakephp/app preba2
+  259  apt-cache search cakephp
+  260  exit
+  261  cd /usr/share/lintian/overrides/cakephp 
+  262  ls
+  263  cd /usr/share/lintian/overrides
+  264  ls
+  265  cd ..
+  266  ls
+  267  cd ..
+  268  ls
+  269  cd ..
+  270  cake 
+  271  apt-get purge cakephp
+  272  nano /etc/apache2/sites-enabled/000-default.conf 
+  273  nano /etc/apache2/sites-available/000-default.conf 
+  274  nano /etc/apache2/ports.conf 
+  275  nano /etc/php/7.0/apache2/php.ini 
+  276  service apche2 restart
+  277  service apache2 restart
+  278  apt-get install cakephp
+  279  cake 
+  280  cake -app /var/www/html/webroot/
+  281  cake -app /var/www/html/
+  282  cake -app /var/www/html/webroot/
+  283  nano /etc/apache2/sites-enabled/000-default.conf 
+  284  nano /etc/apache2/sites-available/000-default.conf 
+  285  ls
+  286  apt-get install mbstring
+  287  apt-cache search mbstring
+  288  apt-get install 
+  289  E: Unable to locate package mbstring
+  290  root@SO-V-SoportePracticas:/# apt-cache search mbstrin
+  291  php-mbstring - MBSTRING module for PHP [default]
+  292  php-patchwork-utf8 - UTF-8 strings handling for PHP
+  293  apt-get install php7.0-mbstring
+  294  apt-get install php-mbstring
+  295  nano /etc/php/7.0/apache2/php.ini 
+  296  ls
+  297  cd /etc/php/7.0/
+  298  ls
+  299  cd mods-available/
+  300  ls
+  301  nano mbstring.ini 
+  302  cd ..
+  303  cd apache2/mods-enabled/
+  304  ls
+  305  nano rewrite.load 
+  306  cd ..
+  307  cd /usr/share/webmin/
+  308  ls
+  309  cd webmin
+  310  ls
+  311  nano config
+  312  apache2 -v
+  313  cd ..
+  314  ls
+  315  cd /etc/apache2/
+  316  ls
+  317  cd conf-available/
+  318  ls
+  319  cd ..
+  320  ls
+  321  cd ..
+  322  cd php/7.0/
+  323  cd apache2/
+  324  ls
+  325  cdc
+  326  cd conf.d/
+  327  ls
+  328  cd ..
+  329  ls
+  330  cd ..
+  331  ls
+  332  cd ..
+  333  ls
+  334  cd ..
+  335  cd apache2/
+  336  ls
+  337  cd sites-enabled/
+  338  ls
+  339  cd ..
+  340  find / -name httpd.conf
+  341  cd /etc/apache2/
+  342  ls
+  343  nano apache2.conf
+  344  service apache2 restart
+  345  apache2ctl restart
+  346  cd /var/www/html
+  347  wget https://codeload.github.com/cakephp/cakephp/legacy.zip/2.5.2
+  348  sudo unzip 2.5.2
+  349  unzip 2.5.2
+  350  apt-get install unzip
+  351  unzip 2.5.2
+  352  mv cakephp-cakephp-736e999/ cake
+  353  cd cake
+  354  chown -R root:www-data app/tmp
+  355  chmod -R 775 app/tmp
+  356  apache2ctl -M
+  357  a2enmod rewrite
+  358  cd /etc/apache2
+  359  nano apache2.conf
+  360  service apache2 restart
+  361  cd /var/www/html/cake/app/Config
+  362  mv database.php.default default.php
+  363  nano database.php
+  364  ls
+  365  cd ..
+  366  rm -R cake/
+  367  ls
+  368  rm -R 2.5.2 
+  369  apt-get install git
+  370  git clone https://github.com/cakephp/cakephp.git
+  371  ls
+  372  mv cakephp/ cake
+  373  cd cake/
+  374  chown -R root:www-data app/tmp
+  375  ls
+  376  cd src/
+  377  ls
+  378  cd ..
+  379  ls
+  380  nano VERSION.txt 
+  381  cd tests/
+  382  ls
+  383  cd ..
+  384  ls
+  385  cd contrib/
+  386  ls
+  387  cd ..
+  388  cd src/
+  389  ls
+  390  cd ..
+  391  ls
+  392  cmake
+  393  cmake ./
+  394  cd ..
+  395  ls
+  396  cls
+  397  cd ..
+  398  c d..
+  399  www/
+  400  ls
+  401  cd www/html/
+  402  ls
+  403  rm -R cake
+  404  ls
+  405  rm -R *
+  406  ls
+  407  cd /home/soprac/
+  408  ls
+  409  cd gestordocumental/
+  410  ls
+  411  cp 
+  412  cp --help
+  413  cd /etc/httpd
+  414  cd /etc/apache2/
+  415  ls
+  416  cd sites-enabled/
+  417  ls
+  418  vi 000-default.conf 
+  419  cd ..
+  420  cd mods-enabled/
+  421  ls
+  422  cd /var/www/html
+  423  ls
+  424  vi .htaccess 
+  425  cd -
+  426  vi php7.0.conf 
+  427  cd ..
+  428  cd sites-available/
+  429  vi 000-default.conf 
+  430  apache2ctl configtest
+  431  service apache2 restart
+  432  cd ..
+  433  vi mods-available/
+  434  cd mods-available/
+  435  ls
+  436  cd ../mods-enabled
+  437  ls
+  438  cat rewrite.load 
+  439  cd ..
+  440  vi sites-available/000-default.conf 
+  441  vi /var/www/html/.htaccess 
+  442  vi /var/www/html/webroot/.htaccess 
+  443  vi sites-available/000-default.conf 
+  444  apache2ctl graceful
+  445  cat /var/www/html/index.php
+  446  cat /var/www/html/webroot/index.php 
+  447  cd /var/log
+  448  ls
+  449  cd apache2/
+  450  ls
+  451  tail -f *.log
+  452  cd /var/www/html/
+  453  ls
+  454  cd config/
+  455  ls
+  456  vi bootstrap.php 
+  457  ls
+  458  cd ..
+  459  ls
+  460  tail /var/log/apache2/*.log
+  461  cd /etc/php/7.0/apache2/
+  462  ls
+  463  vi php.ini
+  464  apachectl configtest
+  465  apachectl graceful
+  466  tail -f /var/log/apache2/*.log
+  467  vi /var/www/html/config/bootstrap.php 
+  468  locate intl.so
+  469  cat /etc/debian_version 
+  470  apt-get search php7-intl
+  471  apt-get install php7-intl
+  472  apt-cache search php intl
+  473  apt-get install php7.0-intl
+  474  tail -f /var/log/apache2/*.log
+  475  apachectl stop
+  476  apachectl start
+  477* tail -f /var/log/apache2/*.log7va
+  478  cd /var/www
+  479  ls -la
+  480  cdhtml
+  481  cd html
+  482  ls
+  483  ls -la
+  484  ls -l /var/log/apache2/
+  485  cat /etc/passwd |grep www
+  486  chown -R www-data *
+  487  history >> historial2.txt

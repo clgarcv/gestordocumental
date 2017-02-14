@@ -32,12 +32,13 @@ class KeywordsController extends AppController
 
 
 
+
 	public function isAuthorized($user)
 	{
 	   //return true;
 		if(isset($user['role']) && $user['role'] == 2){
 			//damos autorizacion a determinadas acciones del controlador
-			if(in_array($this->request->action, array('add', 'index', 'view'))){
+			if(in_array($this->request->action, array('add', 'index', 'view', 'searchJSON'))){
 				return true;
 			} else {
 				if($this->Auth->user('id')){
@@ -51,7 +52,7 @@ class KeywordsController extends AppController
 		}
 		if(isset($user['role']) && $user['role'] == 1){
 			//damos autorizacion a determinadas acciones del controlador
-			if(in_array($this->request->action, array('add', 'index', 'view'))){
+			if(in_array($this->request->action, array('add', 'index', 'view', 'searchJSON'))){
 				return true;
 			} else {
 				if($this->Auth->user('id')){
@@ -66,7 +67,7 @@ class KeywordsController extends AppController
 		}
 		if(isset($user['role']) && $user['role'] == 0){
 			//damos autorizacion a determinadas acciones del controlador
-			if(in_array($this->request->action, array('index', 'view'))){
+			if(in_array($this->request->action, array('index', 'view', 'searchJSON'))){
 				return true;
 			} else {
 				if($this->Auth->user('id')){
