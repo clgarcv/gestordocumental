@@ -24,7 +24,8 @@
             echo $this->Form->input('password');
             if ($current_user['role'] == 3):
             echo $this->Form->input('role',array('label' => 'Rol'), ['options' => $roles, 'empty' => true]);
-        	echo $this->Form->input('teacher_id', ['options' => $teachers, 'empty' => true]);
+        	//echo $this->Form->input('teacher_id', ['options' => $teachers, 'empty' => true]);
+        	//el profesor asignado a un usuario no se puede modificar
             //echo $this->Form->input('teacher_id',['options' => $teachers, 'disabled' => true]);
             endif;
 

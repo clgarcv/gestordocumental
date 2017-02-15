@@ -87,9 +87,7 @@
                 <th scope="col"><?= __('Curso') ?></th>
                 <th scope="col"><?= __('Semestre') ?></th>
                 <th scope="col"><?= __('Materia') ?></th>
-                <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+
             </tr>
             <?php foreach ($teacher->subjects as $subjects): ?>
             <tr>
@@ -100,13 +98,7 @@
                 <td><?= h($subjects->curso) ?></td>
                 <td><?= h($subjects->semestre) ?></td>
                 <td><?= h($subjects->materia) ?></td>
-                <td><?= h($subjects->created) ?></td>
-                <td><?= h($subjects->modified) ?></td>
-                <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Subjects', 'action' => 'view', $subjects->id]) ?>
-                    <?= $this->Html->link(__('Edit'), ['controller' => 'Subjects', 'action' => 'edit', $subjects->id]) ?>
-                    <?= $this->Form->postLink(__('Delete'), ['controller' => 'Subjects', 'action' => 'delete', $subjects->id], ['confirm' => __('Are you sure you want to delete # {0}?', $subjects->id)]) ?>
-                </td>
+
             </tr>
             <?php endforeach; ?>
         </table>

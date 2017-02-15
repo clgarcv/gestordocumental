@@ -31,7 +31,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Ver'), ['action' => 'view', $teacher->id], ['class' => 'btn btn-default']) ?>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $teacher->id], ['class' => 'btn btn-default']) ?>
-                    <?= $this->Html->link(__('Eliminar'), ['action' => 'delete', $teacher->id], ['confirm' => __('¿Seguro que desea eliminar el profesor # {0}?', $teacher->full_name), 'class' => 'btn btn-default']) ?>
+                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $teacher->id], ['confirm' => __('¿Seguro que desea eliminar el profesor # {0}?', $teacher->full_name), 'class' => 'btn btn-default']) ?>
 
 
                 </td>

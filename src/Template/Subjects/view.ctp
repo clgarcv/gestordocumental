@@ -16,10 +16,10 @@
 </nav>
 -->
 <div class="col-md-9 col-md-offset-2">
-    <h3><?= h($subject->id) ?></h3>
+    <h3><?= h($subject->codigo . ' - ' . h($subject->nombre)) ?></h3>
     <table class="vertical-table">
         <tr>
-            <th scope="row"><?= __('Codigo') ?></th>
+            <th scope="row"><?= __('Código') ?></th>
             <td><?= h($subject->codigo) ?></td>
         </tr>
         <tr>
@@ -27,7 +27,7 @@
             <td><?= h($subject->nombre) ?></td>
         </tr>
         <tr>
-            <th scope="row"><?= __('Modulo') ?></th>
+            <th scope="row"><?= __('Módulo') ?></th>
             <td><?= h($subject->modulo) ?></td>
         </tr>
         <tr>
@@ -81,7 +81,7 @@
                 <!--<td><?= h($teachers->created) ?></td>
                 <td><?= h($teachers->modified) ?></td> -->
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Teachers', 'action' => 'view', $teachers->id], ['class' => 'btn btn-default']) ?>
+                    <?= $this->Html->link(__('Ver'), ['controller' => 'Teachers', 'action' => 'view', $teachers->id], ['class' => 'btn btn-default']) ?>
                     <!--<?= $this->Html->link(__('Edit'), ['controller' => 'Teachers', 'action' => 'edit', $teachers->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Teachers', 'action' => 'delete', $teachers->id], ['confirm' => __('Are you sure you want to delete # {0}?', $teachers->id)]) ?> -->
                 </td>
@@ -100,7 +100,6 @@
                 <th scope="col"><?= __('Codigo') ?></th>
                 <th scope="col"><?= __('Nombre') ?></th>
                 <th scope="col"><?= __('Descripcion') ?></th>
-                <th scope="col"><?= __('Subject Id') ?></th>
                 <!-- <th scope="col"><?= __('Created') ?></th>
                 <th scope="col"><?= __('Modified') ?></th>
                 <th scope="col" class="actions"><?= __('Actions') ?></th> -->
@@ -111,11 +110,11 @@
                 <td><?= h($sessions->codigo) ?></td>
                 <td><?= h($sessions->nombre) ?></td>
                 <td><?= h($sessions->descripcion) ?></td>
-                <td><?= h($sessions->subject_id) ?></td>
-                <!--<td><?= h($sessions->created) ?></td>
+                <!--<td><?= h($sessions->subject_id) ?></td>
+                <td><?= h($sessions->created) ?></td>
                 <td><?= h($sessions->modified) ?></td> -->
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Sessions', 'action' => 'Ver', $sessions->id], ['class' => 'btn btn-default']) ?>
+                    <?= $this->Html->link(__('Ver'), ['controller' => 'Sessions', 'action' => 'Ver', $sessions->id], ['class' => 'btn btn-default']) ?>
                     <!-- <?= $this->Html->link(__('Edit'), ['controller' => 'Sessions', 'action' => 'edit', $sessions->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Sessions', 'action' => 'delete', $sessions->id], ['confirm' => __('¿Esta seguro que desea eliminar la sesión # {0}?', $sessions->nombre)]) ?> -->
                 </td>

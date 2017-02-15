@@ -128,7 +128,7 @@
         <h3>Sesiones encontradas....</h3>
     <?php endif; ?>
     <?php if (empty($sesiones)): ?>
-        <h3>No hay sesiones para mostrar... Por favor, realice una búsqueda</h3>
+        <h3>No hay sesiones para mostrar... Por favor, realice otra búsqueda</h3>
     <?php endif; ?>
     </div>
 

@@ -25,7 +25,13 @@
                 <td><?= $this->Number->format($session->id) ?></td>
                 <td><?= h($session->codigo) ?></td>
                 <td><?= $this->Html->link(__($session->nombre), ['action' => 'view', $session->id]) ?></td>
-                <td><?= $session->has('subject') ? $this->Html->link($session->subject->nombre, ['controller' => 'Subjects', 'action' => 'view', $session->subject->id]) : '' ?></td>
+                <?php if ($current_user['role'] < 2): ?>
+                	<td><?= $session->has('subject') ? $session->subject->nombre : '' ?></td>
+                <?php endif; ?>
+                <?php if ($current_user['role'] >= 2): ?>
+                	<td><?= $session->has('subject') ? $this->Html->link($session->subject->nombre, ['controller' => 'Subjects', 'action' => 'view', $session->subject->id]) : '' ?></td>
+                <?php endif; ?>
+
                 <td class="actions">
                 <?php if ($current_user['role'] == 3): ?>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $session->id], ['class' => 'btn btn-default']) ?>

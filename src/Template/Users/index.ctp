@@ -51,7 +51,7 @@
                 <td class="actions">
                     <?= $this->Html->link(__('Ver'), ['action' => 'view', $user->id], ['class' => 'btn btn-default']) ?>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $user->id], ['class' => 'btn btn-default']) ?>
-                    <?= $this->Html->link(__('Eliminar'), ['action' => 'delete', $user->id], ['confirm' => __('¿Seguro que desea eliminar el usuario # {0}?', $user->username),'class' => 'btn btn-default']) ?>
+                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $user->id], ['confirm' => __('¿Seguro que desea eliminar el usuario # {0}?', $user->username),'class' => 'btn btn-default']) ?>
                 </td>
             </tr>
             <?php endforeach; ?>
