@@ -212,6 +212,107 @@ class UsersController extends AppController
 			if((!empty($_POST['modulo']) || !empty($_POST['materia']) || !empty($_POST['curso']) || !empty($_POST['semestre']) ) && (!empty($_POST['search'])))
 			{
 				print_r("nos han pasado las dos cosas");
+				//obtenemos en un array los ids de las aignaturas q cumplen el filtro
+				//obtenemos el id de las asignaturas que cumplen con el filtro
+				$asig = TableRegistry::get('Subjects');
+				//comprobamos si hay condiciones o no
+					//si hay condiciones obtenemos los id asignaturas que las cumplen
+				//print_r($conditions);
+				$id_asig = $asig->find('all', array('fields' => array('Subjects.id'), 'conditions' => array('AND' => $conditions)))->toArray();
+					//print_r('entra en if,  hay condiciones');
+				//print_r($id_asig);
+
+				//print_r($asignaturas);
+				//hasta aqui esta bien saca las asignaturas que tienen q salir
+				//creamos el array de condiones para obtener las sesiones
+
+				//obtenemos los id de las asignaturas
+				foreach ($id_asig as $i)
+				{
+					# code...
+					$condicionesAsignaturas[] = array($i['id']);
+				}
+				//print_r($condicionesAsignaturas);
+
+
+				//obtenemos los id de las sesiones q contienen las palabras clave que nos han introducido
+				$search = $_POST['search'];
+				$palabras = preg_split('[,]', $search);
+				//print_r($palabras);
+
+				//para cada palabra lo añadimos al array de condiciones
+				foreach ($palabras as $p) {
+					# code...
+					$condicionesKeywords[] = array('Keywords.nombre LIKE' => $p);
+				}
+
+				//print_r($condicionesKeywords);
+
+				//obtenemos el identificador de las palabras que nos han introducido
+				$idKeywords = $keyword->find('all', array('fields' => array('Keywords.id'), 'conditions' => array('OR' => $condicionesKeywords )))->toArray();
+
+				//print_r($idKeywords);
+
+				//obtenemos las sesiones que cumplan las asignaturas y las palabras clave
+				foreach ($idKeywords as $idk) {
+					# code...
+					$condicKeySes[] = array('KeywordsSessions.keyword_id LIKE' => $idk['id']);
+				}
+
+
+				//print_r($condicKeySes);
+
+				//obtenemos los id de sesion que tiene relacion con las palabras introducidas
+				$keyses = TableRegistry::get('KeywordsSessions');
+				$palyses = $keyses->find('all', array('fields' => array('KeywordsSessions.session_id'),  'conditions' => array('OR' => $condicKeySes)))->toArray();
+				//print_r($palyses);
+
+				foreach ($palyses as $ps) {
+					# code...
+					$sesionFiltro[] = array($ps['session_id']);
+
+				}
+
+				//print_r($sesionFiltro);
+				//print_r($condicionesAsignaturas);
+				foreach ($sesionFiltro as $ss ) {
+					# code...
+					$aux[] = $ss[0];
+					//print_r($inIdAsig);
+				}
+				$inIdAsig = implode(',', $aux);
+				print_r('(' . $inIdAsig .')') ;
+
+				foreach ($condicionesAsignaturas as $ca ) {
+					# code...
+					$aux2[] = $ca[0];
+					//print_r($inIdAsig);
+				}
+				$inIdSes = implode(',', $aux2);
+				print_r('(' . $inIdSes .')') ;
+
+				//print_r($idAsig);
+
+				$session = TableRegistry::get('Sessions');
+				//$sesiones = $session->find('all', array('conditions' => array('Sessions.id' => $sesionFiltro , 'Sessions.subject_id' => $condicionesAsignaturas)));
+				$sesiones = $session->find()
+    							  ->where(['Sessions.id IN' => $inIdSes, 'Sessions.subject_id' => $inIdAsig]);
+    			//print_r($sesiones);
+				//print_r($sesiones->toArray());
+
+
+
+
+
+				$paginador = $this->paginate($sesiones, array('limit' => 6));
+		        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas','keywords', 'sesiones'));
+		        $this->set('_serialize', ['sesiones']);
+
+
+
+
+
+
 			}
 			else
 			{
@@ -274,7 +375,7 @@ class UsersController extends AppController
 					$asig = TableRegistry::get('Subjects');
 					//comprobamos si hay condiciones o no
 						//si hay condiciones obtenemos los id asignaturas que las cumplen
-						$id_asig = $asig->find('all', array('fields' => array('Subjects.id'), 'conditions' => array('AND' => $conditions)))->toArray();
+					$id_asig = $asig->find('all', array('fields' => array('Subjects.id'), 'conditions' => array('AND' => $conditions)))->toArray();
 						//print_r('entra en if,  hay condiciones');
 
 					//print_r($asignaturas);
