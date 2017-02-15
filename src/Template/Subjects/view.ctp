@@ -143,7 +143,7 @@
                 <!-- <td><?= h($degrees->created) ?></td>
                 <td><?= h($degrees->modified) ?></td> -->
                 <td class="actions">
-                    <?= $this->Html->link(__('View'), ['controller' => 'Degrees', 'action' => 'view', $degrees->id], ['class' => 'btn btn-default']) ?>
+                    <?= $this->Html->link(__('Ver'), ['controller' => 'Degrees', 'action' => 'view', $degrees->id], ['class' => 'btn btn-default']) ?>
                     <!--<?= $this->Html->link(__('Edit'), ['controller' => 'Degrees', 'action' => 'edit', $degrees->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Degrees', 'action' => 'delete', $degrees->id], ['confirm' => __('Are you sure you want to delete # {0}?', $degrees->id)]) ?> -->
                 </td>

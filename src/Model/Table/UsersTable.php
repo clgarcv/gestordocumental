@@ -70,10 +70,13 @@ class UsersTable extends Table
             ->requirePresence('role', 'create')
             ->notEmpty('role');
 
+        $validator
+            ->requirePresence('teacher_id', 'create')
+            ->notEmpty('teacher_id');
         return $validator;
     }
 
-    
+
 
     /**
      * Returns a rules checker object that will be used for validating
