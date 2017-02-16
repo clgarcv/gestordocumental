@@ -112,7 +112,7 @@ class UsersController extends AppController
                             ->select(['nombre'])->toArray();
         foreach ($keys as $k) {
         	# code...
-        	$palabras[] = '"' . $k['nombre'] . '"';
+        	$palabras[] = $k['nombre'];
         }
         $keywords = '[' . implode(',', $palabras) . ']';
         //print_r($keywords);
@@ -217,7 +217,7 @@ class UsersController extends AppController
 			//comprobamos si han seleccionado filtro y palabras clave
 			if((!empty($_POST['modulo']) || !empty($_POST['materia']) || !empty($_POST['curso']) || !empty($_POST['semestre']) ) && (!empty($_POST['search'])))
 			{
-				//print_r("nos han pasado las dos cosas");
+				print_r("nos han pasado las dos cosas");
 				//print_r($conditions);
 				//obtenemos en un array los ids de las aignaturas q cumplen el filtro
 				//obtenemos el id de las asignaturas que cumplen con el filtro
@@ -239,6 +239,7 @@ class UsersController extends AppController
 				//comprobar que hay asignaturas que cumplan ese criterio
 				if(count($id_asig) != 0)
 				{
+					print_r('hay alguna aignatura');
 					//print_r('entra en id_asig no vacio');
 					//obtenemos los id de las asignaturas
 					foreach ($id_asig as $i)
@@ -265,72 +266,85 @@ class UsersController extends AppController
 
 					//obtenemos el identificador de las palabras que nos han introducido
 					$idKeywords = $keyword->find('all', array('fields' => array('Keywords.id'), 'conditions' => array('OR' => $condicionesKeywords )))->toArray();
+					print_r($idKeywords);
 
-					//print_r($idKeywords);
-
-					//obtenemos las sesiones que cumplan las asignaturas y las palabras clave
-					foreach ($idKeywords as $idk)
+					if(count($idKeywords) != 0)
 					{
-						# code...
-						$condicKeySes[] = array('KeywordsSessions.keyword_id LIKE' => $idk['id']);
+						print_r('entramos al if');
+						//obtenemos las sesiones que cumplan las asignaturas y las palabras clave
+						foreach ($idKeywords as $idk)
+						{
+							# code...
+							$condicKeySes[] = array('KeywordsSessions.keyword_id LIKE' => $idk['id']);
+						}
+
+
+						//print_r($condicKeySes);
+
+						//obtenemos los id de sesion que tiene relacion con las palabras introducidas
+						$keyses = TableRegistry::get('KeywordsSessions');
+						$palyses = $keyses->find('all', array('fields' => array('KeywordsSessions.session_id'),  'conditions' => array('OR' => $condicKeySes)))->toArray();
+						//print_r($palyses);
+
+						foreach ($palyses as $ps)
+						{
+							# code...
+							$sesionFiltro[] = array($ps['session_id']);
+
+						}
+
+						//print_r($sesionFiltro);
+						//print_r($condicionesAsignaturas);
+						foreach ($sesionFiltro as $ss )
+						{
+							# code...
+							$aux[] = $ss[0];
+							//print_r($inIdAsig);
+						}
+						$inIdSes = implode(',', $aux);
+						print_r('(' . $inIdSes .')') ;
+
+						foreach ($condicionesAsignaturas as $ca )
+						{
+							# code...
+							$aux2[] = $ca[0];
+							//print_r($inIdAsig);
+						}
+						$inIdAsig = implode(',', $aux2);
+						print_r('(' . $inIdAsig .')') ;
+
+						//print_r($idAsig);
+
+						$session = TableRegistry::get('Sessions');
+						$sesiones = $session->find('all')
+		    							    ->where(['sessions.id IN' => $inIdSes])
+		    							    ->andWhere(['sessions.subject_id IN' => $inIdAsig]);
+
+		    			print_r($sesiones);
+
+						if(count($sesiones) != 0)
+						{
+							$paginador = $this->paginate($sesiones, array('limit' => 200));
+					        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas','keywords', 'sesiones'));
+					        $this->set('_serialize', ['sesiones']);
+					    }
+
+
+					}
+					else
+					{
+						//print_r('entra en condiciones vacio');
+
+						$session = TableRegistry::get('Sessions');
+						$sesiones = array();
+
+						$this->paginate();
+						$this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones','keywords'));
+						$this->set('_serialize', ['sesiones']);
 					}
 
 
-					//print_r($condicKeySes);
 
-					//obtenemos los id de sesion que tiene relacion con las palabras introducidas
-					$keyses = TableRegistry::get('KeywordsSessions');
-					$palyses = $keyses->find('all', array('fields' => array('KeywordsSessions.session_id'),  'conditions' => array('OR' => $condicKeySes)))->toArray();
-					//print_r($palyses);
-
-					foreach ($palyses as $ps)
-					{
-						# code...
-						$sesionFiltro[] = array($ps['session_id']);
-
-					}
-
-					//print_r($sesionFiltro);
-					//print_r($condicionesAsignaturas);
-					foreach ($sesionFiltro as $ss )
-					{
-						# code...
-						$aux[] = $ss[0];
-						//print_r($inIdAsig);
-					}
-					$inIdSes = implode(',', $aux);
-					//print_r('(' . $inIdSes .')') ;
-
-					foreach ($condicionesAsignaturas as $ca )
-					{
-						# code...
-						$aux2[] = $ca[0];
-						//print_r($inIdAsig);
-					}
-					$inIdAsig = implode(',', $aux2);
-					//print_r('(' . $inIdAsig .')') ;
-
-					//print_r($idAsig);
-
-					$session = TableRegistry::get('Sessions');
-					//$sesiones = $session->find('all', array('conditions' => array('Sessions.id' => $sesionFiltro , 'Sessions.subject_id' => $condicionesAsignaturas)));
-					$sesiones = $session->find()
-	    							  ->where(['Sessions.id IN' => $inIdSes, 'Sessions.subject_id IN' => $inIdAsig]);
-	    			//print_r($sesiones);
-					//print_r($sesiones->toArray());
-					if(empty($sesiones))
-					{
-						$paginador = $this->paginate($sesiones, array('limit' => 200));
-				        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas','keywords', 'sesiones'));
-				        $this->set('_serialize', ['sesiones']);
-				    }
-				    else
-				    {
-
-						$paginador = $this->paginate($sesiones, array('limit' => 200));
-				        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas','keywords', 'sesiones'));
-				        $this->set('_serialize', ['sesiones']);
-				    }
 
 				} else {
 					//print_r('entra en condiciones vacio');
@@ -369,47 +383,54 @@ class UsersController extends AppController
 
 					//print_r($idKeywords);
 
-					//obtenemos las sesiones que cumplan las asignaturas y las palabras clave
-					foreach ($idKeywords as $idk) {
-						# code...
-						$condicKeySes[] = array('KeywordsSessions.keyword_id LIKE' => $idk['id']);
-					}
-
-					//print_r($condicKeySes);
-
-
-					//obtenemos los id de sesion que tiene relacion con las palabras introducidas
-					if(count($id_condicKeySesasig) != 0)
+					if(count($idKeywords)!= 0)
 					{
-						$keyses = TableRegistry::get('KeywordsSessions');
-						$palyses = $keyses->find('all', array('fields' => array('KeywordsSessions.session_id'),  'conditions' => array('OR' => $condicKeySes)))->toArray();
-						//print_r($palyses);
-						foreach ($palyses as $ps) {
+						print_r("entro");
+						//obtenemos las sesiones que cumplan las asignaturas y las palabras clave
+						foreach ($idKeywords as $idk) {
 							# code...
-							$sesionFiltro[] = array('Sessions.id LIKE' => $ps['session_id']);
+							$condicKeySes[] = array('KeywordsSessions.keyword_id LIKE' => $idk['id']);
+						}
+
+						//print_r($condicKeySes);
+
+
+						//obtenemos los id de sesion que tiene relacion con las palabras introducidas
+						if(count($condicKeySes) != 0)
+						{
+							$keyses = TableRegistry::get('KeywordsSessions');
+							$palyses = $keyses->find('all', array('fields' => array('KeywordsSessions.session_id'),  'conditions' => array('OR' => $condicKeySes)))->toArray();
+							//print_r($palyses);
+							foreach ($palyses as $ps) {
+								# code...
+								$sesionFiltro[] = array('Sessions.id LIKE' => $ps['session_id']);
+
+							}
+							//print_r($sesionFiltro);
+							//obtenemos las sesiones con las dos condiciones, filtro y keywords
+							$session = TableRegistry::get('Sessions');
+							$sesiones = $session->find('all', array('conditions' => array('OR' => $sesionFiltro)));
+
+
+							$paginador = $this->paginate($sesiones, array('limit' => 150));
+					        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas','keywords', 'sesiones'));
+					        $this->set('_serialize', ['sesiones']);
 
 						}
-						//print_r($sesionFiltro);
-						//obtenemos las sesiones con las dos condiciones, filtro y keywords
-						$session = TableRegistry::get('Sessions');
-						$sesiones = $session->find('all', array('conditions' => array('OR' => $sesionFiltro)));
 
-
-						$paginador = $this->paginate($sesiones, array('limit' => 150));
-				        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas','keywords', 'sesiones'));
-				        $this->set('_serialize', ['sesiones']);
 
 					}
 					else
-					{
-						$session = TableRegistry::get('Sessions');
-						$sesiones = array();
+						{
+							$session = TableRegistry::get('Sessions');
+							$sesiones = array();
 
-						$this->paginate();
-						$this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones','keywords'));
-						$this->set('_serialize', ['sesiones']);
+							$this->paginate();
+							$this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones','keywords'));
+							$this->set('_serialize', ['sesiones']);
 
-					}
+						}
+
 
 
 

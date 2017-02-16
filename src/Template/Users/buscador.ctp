@@ -1,5 +1,5 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-<script> keywordList = json_encode($keywords, JSON_UNESCAPED_UNICODE)</script>"
+
 <div class="container-fluid mb-2">
     <div class="row">
         <div class="col-xs-6 col-sm-3">

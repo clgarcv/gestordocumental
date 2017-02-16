@@ -26,9 +26,7 @@ use Cake\Core\Configure;
     <?= $this->Html->meta('icon') ?>
 
     <?= $this->Html->css(['bootstrap.min', 'bootstrap-theme.min', 'menu', 'estiloweb', 'jquery-ui.min']) ?>
-    <?php
-    echo "<script> keywordList = ". json_encode($keywords, JSON_UNESCAPED_UNICODE) ."</script>";
-	?>
+
     <?= $this->Html->script(['jquery-3.1.1.min', 'bootstrap.min', 'menuppal', 'jquery-ui.min', 'autocompletar']) ?>
 
     <?= $this->fetch('meta') ?>
