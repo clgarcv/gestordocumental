@@ -18,7 +18,7 @@
                 <th scope="col"><?= $this->Paginator->sort('nombre') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('apellidos') ?></th>
                 <th scope="col"><?= $this->Paginator->sort('email') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th>
+
             </tr>
         </thead>
         <tbody>

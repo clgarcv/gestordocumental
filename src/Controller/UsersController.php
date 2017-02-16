@@ -316,9 +316,29 @@ class UsersController extends AppController
 						//print_r($idAsig);
 
 						$session = TableRegistry::get('Sessions');
-						$sesiones = $session->find('all')
-		    							    ->where(['sessions.id IN' => $inIdSes])
-		    							    ->andWhere(['sessions.subject_id IN' => $inIdAsig]);
+						//$sesiones = $session->find('all', array('conditions' => array('sessions.subject_id in' => $inIdAsig , 'sessions.id in' => $inIdSes)));
+
+						$sesiones = $session->find()
+	    							  		->where(['Sessions.id IN' => $inIdSes, 'Sessions.subject_id IN' => $inIdAsig]);
+
+	    				$sesiones = $session->find()
+    							  ->where(['Sessions.id IN' => $inIdSes, 'Sessions.subject_id IN' => $inIdAsig]);
+
+
+
+						//print_r($sesiones->toArray());
+
+
+						/*
+						$sesiones = $session->find()
+		    							    ->where(['sessions.id' => $inIdSes , 'sessions.subject_id' => $inIdAsig]);
+		    							    */
+
+						//	$sesiones = $session->find()->where(['sessions.id' => $inIdSes], ['sessions.id' => 'integer[]'])->andWhere(['sessions.subject_id' => $inIdAsig], ['sessions.subject_id' => 'integer[]']);
+
+		    			//$palyses = $keyses->find('all', array('fields' => array('KeywordsSessions.session_id'),  'conditions' => array('OR' => $condicKeySes)))->toArray();
+
+		    			//$sesiones = $session->find('all', array('conditions' => array('OR' => $sesionFiltro)));
 
 		    			print_r($sesiones);
 

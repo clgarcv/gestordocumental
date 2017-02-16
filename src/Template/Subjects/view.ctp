@@ -114,7 +114,7 @@
                 <td><?= h($sessions->created) ?></td>
                 <td><?= h($sessions->modified) ?></td> -->
                 <td class="actions">
-                    <?= $this->Html->link(__('Ver'), ['controller' => 'Sessions', 'action' => 'Ver', $sessions->id], ['class' => 'btn btn-default']) ?>
+                    <?= $this->Html->link(__('Ver'), ['controller' => 'Sessions', 'action' => 'view', $sessions->id], ['class' => 'btn btn-default']) ?>
                     <!-- <?= $this->Html->link(__('Edit'), ['controller' => 'Sessions', 'action' => 'edit', $sessions->id]) ?>
                     <?= $this->Form->postLink(__('Delete'), ['controller' => 'Sessions', 'action' => 'delete', $sessions->id], ['confirm' => __('¿Esta seguro que desea eliminar la sesión # {0}?', $sessions->nombre)]) ?> -->
                 </td>

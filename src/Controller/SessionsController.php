@@ -78,7 +78,7 @@ class SessionsController extends AppController
         $this->paginate = [
             'contain' => ['Subjects']
         ];
-        $sessions = $this->paginate($this->Sessions);
+        $sessions = $this->paginate($this->Sessions, array('limit' => 15));
 
         $this->set(compact('sessions'));
         $this->set('_serialize', ['sessions']);

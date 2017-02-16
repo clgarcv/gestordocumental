@@ -98,6 +98,9 @@
                 <td><?= h($subjects->curso) ?></td>
                 <td><?= h($subjects->semestre) ?></td>
                 <td><?= h($subjects->materia) ?></td>
+                <td class="actions">
+                    <?= $this->Html->link(__('Ver'), ['controller' => 'Subjects', 'action' => 'view', $subjects->id], ['class' => 'btn btn-default']) ?>
+                </td>
 
             </tr>
             <?php endforeach; ?>
