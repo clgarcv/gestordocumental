@@ -15,7 +15,7 @@
     </ul>
 </nav>
 -->
-<div class="col-md-9 col-md-offset-2">
+<div class="col-md-9 col-md-offset-2 mb-2">
     <h3><?= h($subject->codigo . ' - ' . h($subject->nombre)) ?></h3>
     <table class="vertical-table">
         <tr>

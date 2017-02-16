@@ -13,7 +13,7 @@
     </ul>
 </nav>
 -->
-<div class="col-md-9 col-md-offset-2">
+<div class="col-md-9 col-md-offset-2 mb-2">
     <?= $this->Form->create($session) ?>
     <fieldset>
         <legend><?= __('Editar Sesión') ?></legend>

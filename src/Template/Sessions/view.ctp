@@ -10,7 +10,7 @@
     </ul>
 </nav> -->
 
-<div class="col-md-9 col-md-offset-2">
+<div class="col-md-9 col-md-offset-2 mb-2">
     <h3><?= h($session->codigo). ' - ' . h($session->nombre)?></h3>
     <!--
     <table class="vertical-table">

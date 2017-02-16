@@ -9,7 +9,7 @@
     </ul>
 </nav>
 -->
-<div class="col-md-9 col-md-offset-2">
+<div class="col-md-9 col-md-offset-2 mb-2">
     <?= $this->Form->create($teacher) ?>
     <fieldset>
         <legend><?= __('Añadir Profesor') ?></legend>

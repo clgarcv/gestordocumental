@@ -1,5 +1,6 @@
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
-<div class="container-fluid">
+<script> keywordList = json_encode($keywords, JSON_UNESCAPED_UNICODE)</script>"
+<div class="container-fluid mb-2">
     <div class="row">
         <div class="col-xs-6 col-sm-3">
             <div class="well">
@@ -156,7 +157,7 @@
 
 
   </div>
-
+<?php if (!empty($sesiones)): ?>
   <div class="row">
   	<div class="col-xs-6 col-xs-offset-3">
 
@@ -175,6 +176,7 @@
 
 		</div>
     </div>
+<?php endif; ?>
 </div>
 
 

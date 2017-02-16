@@ -9,7 +9,7 @@
     </ul>
 </nav>
 -->
-<div class="col-md-9 col-md-offset-2">
+<div class="col-md-9 col-md-offset-2 mb-2">
     <h3><?= __('Profesores') ?></h3>
     <table cellpadding="0" cellspacing="0">
         <thead>
