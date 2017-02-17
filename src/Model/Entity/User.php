@@ -43,6 +43,7 @@ class User extends Entity
         'password'
     ];
 
+    //funcion para hassear las contraseñas
     protected function _setPassword($password)
     {
         return (new DefaultPasswordHasher)->hash($password);

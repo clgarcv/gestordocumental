@@ -1,17 +1,3 @@
-<!--
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit User'), ['action' => 'edit', $user->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete User'), ['action' => 'delete', $user->id], ['confirm' => __('Are you sure you want to delete # {0}?', $user->username)]) ?> </li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Teachers'), ['controller' => 'Teachers', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Teacher'), ['controller' => 'Teachers', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
--->
-
 <div class="col-md-9 col-md-offset-2 mb-2">
     <h3><?= h($user->username) ?></h3>
     <table class="vertical-table">
@@ -25,7 +11,10 @@
         </tr>
         <tr>
             <th scope="row"><?= __('Rol: ') ?></th>
-            <td><?= h($user->role) ?></td>
+           <?php if ($user->role == 0): ?> <td><?= h('Usuario básico') ?></td><?php endif;?>
+           <?php if ($user->role == 1): ?> <td><?= h('Usuario avanzado') ?></td><?php endif;?>
+           <?php if ($user->role == 2): ?> <td><?= h('Administrador') ?></td><?php endif;?>
+           <?php if ($user->role == 3): ?> <td><?= h('Superadministrador') ?></td><?php endif;?>
         </tr>
         <tr>
             <th scope="row"><?= __('Profesor: ') ?></th>

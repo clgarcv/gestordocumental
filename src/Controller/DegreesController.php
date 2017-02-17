@@ -12,10 +12,9 @@ class DegreesController extends AppController
 {
     public function isAuthorized($user)
     {
-        //return true;
+    	//damos autorizacion a determinadas acciones del controlador
+        //a las titulaciones solo tendra acceso el super administrador
         if(isset($user['role']) && $user['role'] == 2){
-            //damos autorizacion a determinadas acciones del controlador
-            //a las titulaciones solo tendra acceso el super administrador
             $this->Flash->error(__('No tiene permisos de acceso.'));
                     return $this->redirect([
                         'controller' => 'Users',
@@ -23,7 +22,6 @@ class DegreesController extends AppController
                     ]);
         }
         if(isset($user['role']) && $user['role'] == 1){
-            //damos autorizacion a determinadas acciones del controlador
            $this->Flash->error(__('No tiene permisos de acceso.'));
                     return $this->redirect([
                         'controller' => 'Users',
@@ -31,7 +29,6 @@ class DegreesController extends AppController
                     ]);
         }
         if(isset($user['role']) && $user['role'] == 0){
-            //damos autorizacion a determinadas acciones del controlador
             $this->Flash->error(__('No tiene permisos de acceso.'));
                     return $this->redirect([
                         'controller' => 'Users',

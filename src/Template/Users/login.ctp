@@ -1,18 +1,3 @@
-
-<!-- File: src/Template/Users/login.ctp -->
-<!--
-<div class="users form">
-<?= $this->Flash->render('auth') ?>
-<?= $this->Form->create() ?>
-    <fieldset>
-        <legend><?= __('Inicio de sesión') ?></legend>
-        <?= $this->Form->input('username') ?>
-        <?= $this->Form->input('password') ?>
-    </fieldset>
-<?= $this->Form->button(__('Entrar')); ?>
-<?= $this->Form->end() ?>
-</div>
--->
 <div class="login">
     <div class="container">
         <div class="row">
@@ -34,13 +19,9 @@
                                 <?= $this->Form->password('password', ['class' => 'form-control input-lg', 'placeholder' => 'Contraseña', 'label' => false, 'required']) ?>
                             </div>
                             <?= $this->Html->link(__('Registrarse'), ['controller' => 'Users', 'action' => 'add']) ?>
-                            <!--div class="checkbox">
-                                <label>
-                                    <input name="remember" type="checkbox" value="Remember Me"> Recuerdamé
-                                </label>
-                            </div-->
+
                             <?= $this->Form->button('Entrar', ['class' => 'btn btn-lg btn-success btn-block']) ?>
-                            <!--?= $this->Html->link('Registrarse',['controller' => 'Users', 'action' => 'add'], ['class' => 'col-xs-6 col-sm-6 col-md-6']) ?-->
+
                         </fieldset>
                         <?= $this->Form->end() ?>
                     </div>

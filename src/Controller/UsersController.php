@@ -56,8 +56,7 @@ class UsersController extends AppController
     {
         //return true;
         if(isset($user['role']) && $user['role'] == 2){
-            //damos autorizacion a determinadas acciones del controlador
-            if(in_array($this->request->action, array('add', 'buscador', 'logout', 'edit', 'buscarSesiones'))){
+            if(in_array($this->request->action, array('add', 'buscador', 'logout', 'edit'))){
                 return true;
             } else {
                 if($this->Auth->user('id')){
@@ -70,8 +69,7 @@ class UsersController extends AppController
             }
         }
         if(isset($user['role']) && $user['role'] == 1){
-            //damos autorizacion a determinadas acciones del controlador
-            if(in_array($this->request->action, array('add', 'edit', 'buscador', 'buscarSesiones','logout'))){
+            if(in_array($this->request->action, array('add', 'edit', 'buscador','logout'))){
                 return true;
             } else {
                 if($this->Auth->user('id')){
@@ -85,8 +83,7 @@ class UsersController extends AppController
             }
         }
         if(isset($user['role']) && $user['role'] == 0){
-            //damos autorizacion a determinadas acciones del controlador
-            if(in_array($this->request->action, array('add', 'edit', 'buscador', 'buscarSesiones','logout'))){
+            if(in_array($this->request->action, array('add', 'edit', 'buscador','logout'))){
                 return true;
             } else {
                 if($this->Auth->user('id')){
@@ -106,7 +103,6 @@ class UsersController extends AppController
     {
 
     	//print_r($sesiones);
-
     	$keyword = TableRegistry::get('Keywords');
     	$keys = $keyword->find()
                             ->select(['nombre'])->toArray();
@@ -115,7 +111,6 @@ class UsersController extends AppController
         	$palabras[] = $k['nombre'];
         }
         $keywords = '[' . implode(',', $palabras) . ']';
-        //print_r($keywords);
 
 		//obtenemos los valores del filtro para el buscador
         $subject = TableRegistry::get('Subjects');
@@ -139,13 +134,6 @@ class UsersController extends AppController
                             ->select(['nombre'])
                             ->distinct(['nombre']);
 
-
-        //print_r('esta en el controlador adecuado');
-        //print_r($_POST);
-
-
-        //print_r($this->request->params['sessionsFiltradas']);
-
         //no nos pasan nada
         if(empty($_POST) || (empty($_POST['modulo']) && empty($_POST['materia']) && empty($_POST['curso']) && empty($_POST['semestre']) && empty($_POST['search'])))
         {
@@ -157,15 +145,11 @@ class UsersController extends AppController
         	$paginador = $this->paginate($sesiones, array('limit' => 6));
 	        $this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas','keywords', 'sesiones'));
 	        $this->set('_serialize', ['sesiones']);
-	        //print_r("entro a post vacio");
-	        //correcto
-
 
         }
         else
 	    {
         	//si hay parametros comprobamos cuales y filtramos según los datos introducidos
-	    	//print_r('estamos en el primer else de parametros');
         	//obtenemos los elementos del filtro
 			if(!empty($_POST['modulo']))
 				$modulo = $_POST['modulo'];
@@ -217,29 +201,14 @@ class UsersController extends AppController
 			//comprobamos si han seleccionado filtro y palabras clave
 			if((!empty($_POST['modulo']) || !empty($_POST['materia']) || !empty($_POST['curso']) || !empty($_POST['semestre']) ) && (!empty($_POST['search'])))
 			{
-				print_r("nos han pasado las dos cosas");
-				//print_r($conditions);
-				//obtenemos en un array los ids de las aignaturas q cumplen el filtro
-				//obtenemos el id de las asignaturas que cumplen con el filtro
+
 				$asig = TableRegistry::get('Subjects');
-				//comprobamos si hay condiciones o no
-				//si hay condiciones obtenemos los id asignaturas que las cumplen
-				//print_r($conditions);
 				$id_asig = $asig->find('all', array('fields' => array('Subjects.id'), 'conditions' => array('AND' => $conditions)));
-				//print_r('entra en if,  hay condiciones');
-				//print_r(count(array()));
 
-				//print_r($id_asig->toArray());
-				//if(isset($id_asig) ? print_r('true') : print_r('false'));
-
-				//print_r($asignaturas);
-				//hasta aqui esta bien saca las asignaturas que tienen q salir
-				//creamos el array de condiones para obtener las sesiones
 
 				//comprobar que hay asignaturas que cumplan ese criterio
 				if(count($id_asig) != 0)
 				{
-					print_r('hay alguna aignatura');
 					//print_r('entra en id_asig no vacio');
 					//obtenemos los id de las asignaturas
 					foreach ($id_asig as $i)
@@ -247,13 +216,11 @@ class UsersController extends AppController
 						# code...
 						$condicionesAsignaturas[] = array($i['id']);
 					}
-					//print_r($condicionesAsignaturas);
 
 
 					//obtenemos los id de las sesiones q contienen las palabras clave que nos han introducido
 					$search = $_POST['search'];
 					$palabras = preg_split('[,]', $search);
-					//print_r($palabras);
 
 					//para cada palabra lo añadimos al array de condiciones
 					foreach ($palabras as $p)
@@ -262,15 +229,11 @@ class UsersController extends AppController
 						$condicionesKeywords[] = array('Keywords.nombre LIKE' => $p);
 					}
 
-					//print_r($condicionesKeywords);
-
 					//obtenemos el identificador de las palabras que nos han introducido
 					$idKeywords = $keyword->find('all', array('fields' => array('Keywords.id'), 'conditions' => array('OR' => $condicionesKeywords )))->toArray();
-					print_r($idKeywords);
 
 					if(count($idKeywords) != 0)
 					{
-						print_r('entramos al if');
 						//obtenemos las sesiones que cumplan las asignaturas y las palabras clave
 						foreach ($idKeywords as $idk)
 						{
@@ -278,13 +241,10 @@ class UsersController extends AppController
 							$condicKeySes[] = array('KeywordsSessions.keyword_id LIKE' => $idk['id']);
 						}
 
-
-						//print_r($condicKeySes);
-
 						//obtenemos los id de sesion que tiene relacion con las palabras introducidas
 						$keyses = TableRegistry::get('KeywordsSessions');
 						$palyses = $keyses->find('all', array('fields' => array('KeywordsSessions.session_id'),  'conditions' => array('OR' => $condicKeySes)))->toArray();
-						//print_r($palyses);
+
 
 						foreach ($palyses as $ps)
 						{
@@ -292,55 +252,24 @@ class UsersController extends AppController
 							$sesionFiltro[] = array($ps['session_id']);
 
 						}
-
-						//print_r($sesionFiltro);
-						//print_r($condicionesAsignaturas);
 						foreach ($sesionFiltro as $ss )
 						{
 							# code...
 							$aux[] = $ss[0];
-							//print_r($inIdAsig);
 						}
 						$inIdSes = implode(',', $aux);
-						print_r('(' . $inIdSes .')') ;
 
 						foreach ($condicionesAsignaturas as $ca )
 						{
 							# code...
 							$aux2[] = $ca[0];
-							//print_r($inIdAsig);
 						}
 						$inIdAsig = implode(',', $aux2);
-						print_r('(' . $inIdAsig .')') ;
+						$condicion = 'sessions.subject_id in (' . $inIdAsig .') AND sessions.id in(' . $inIdSes .')';
 
-						//print_r($idAsig);
 
 						$session = TableRegistry::get('Sessions');
-						//$sesiones = $session->find('all', array('conditions' => array('sessions.subject_id in' => $inIdAsig , 'sessions.id in' => $inIdSes)));
-
-						$sesiones = $session->find()
-	    							  		->where(['Sessions.id IN' => $inIdSes, 'Sessions.subject_id IN' => $inIdAsig]);
-
-	    				$sesiones = $session->find()
-    							  ->where(['Sessions.id IN' => $inIdSes, 'Sessions.subject_id IN' => $inIdAsig]);
-
-
-
-						//print_r($sesiones->toArray());
-
-
-						/*
-						$sesiones = $session->find()
-		    							    ->where(['sessions.id' => $inIdSes , 'sessions.subject_id' => $inIdAsig]);
-		    							    */
-
-						//	$sesiones = $session->find()->where(['sessions.id' => $inIdSes], ['sessions.id' => 'integer[]'])->andWhere(['sessions.subject_id' => $inIdAsig], ['sessions.subject_id' => 'integer[]']);
-
-		    			//$palyses = $keyses->find('all', array('fields' => array('KeywordsSessions.session_id'),  'conditions' => array('OR' => $condicKeySes)))->toArray();
-
-		    			//$sesiones = $session->find('all', array('conditions' => array('OR' => $sesionFiltro)));
-
-		    			print_r($sesiones);
+						$sesiones = $session->find('all', array('all', 'conditions' => $condicion, ));
 
 						if(count($sesiones) != 0)
 						{
@@ -349,12 +278,9 @@ class UsersController extends AppController
 					        $this->set('_serialize', ['sesiones']);
 					    }
 
-
 					}
 					else
 					{
-						//print_r('entra en condiciones vacio');
-
 						$session = TableRegistry::get('Sessions');
 						$sesiones = array();
 
@@ -363,11 +289,7 @@ class UsersController extends AppController
 						$this->set('_serialize', ['sesiones']);
 					}
 
-
-
-
 				} else {
-					//print_r('entra en condiciones vacio');
 
 					$session = TableRegistry::get('Sessions');
 					$sesiones = array();
@@ -377,56 +299,52 @@ class UsersController extends AppController
 					$this->set('_serialize', ['sesiones']);
 				}
 
-
 			}
 			else
 			{
 				//nos han filtrado unicamente por keywords
 				if(!empty($_POST['search']))
 				{
-					//print_r("Nos han pasado keywords");
-
 					$search = $_POST['search'];
 					$palabras = preg_split('[,]', $search);
-					//print_r($palabras);
 
 					//para cada palabra lo añadimos al array de condiciones
 					foreach ($palabras as $p) {
 						# code...
-						$condicionesKeywords[] = array('Keywords.nombre LIKE' => $p);
+						$condicionesKeywords[] = array($p);
 					}
 
-					//print_r($condicionesKeywords);
+					foreach ($condicionesKeywords as $ck )
+						{
+							# code...
+							$aux[] = "'" . trim($ck[0]) . "'";
+						}
+
+					$palabras = implode(',', $aux);
+					$condicionKey = 'keywords.nombre in (' . $palabras .')';
 
 					//obtenemos el identificador de las palabras que nos han introducido
-					$idKeywords = $keyword->find('all', array('fields' => array('Keywords.id'), 'conditions' => array('OR' => $condicionesKeywords )))->toArray();
-
-					//print_r($idKeywords);
+					$idKeywords = $keyword->find('all', array('fields' => array('Keywords.id'), 'conditions' => $condicionKey));
 
 					if(count($idKeywords)!= 0)
 					{
-						print_r("entro");
 						//obtenemos las sesiones que cumplan las asignaturas y las palabras clave
 						foreach ($idKeywords as $idk) {
 							# code...
 							$condicKeySes[] = array('KeywordsSessions.keyword_id LIKE' => $idk['id']);
 						}
 
-						//print_r($condicKeySes);
-
-
 						//obtenemos los id de sesion que tiene relacion con las palabras introducidas
 						if(count($condicKeySes) != 0)
 						{
 							$keyses = TableRegistry::get('KeywordsSessions');
 							$palyses = $keyses->find('all', array('fields' => array('KeywordsSessions.session_id'),  'conditions' => array('OR' => $condicKeySes)))->toArray();
-							//print_r($palyses);
+
 							foreach ($palyses as $ps) {
 								# code...
 								$sesionFiltro[] = array('Sessions.id LIKE' => $ps['session_id']);
 
 							}
-							//print_r($sesionFiltro);
 							//obtenemos las sesiones con las dos condiciones, filtro y keywords
 							$session = TableRegistry::get('Sessions');
 							$sesiones = $session->find('all', array('conditions' => array('OR' => $sesionFiltro)));
@@ -452,23 +370,18 @@ class UsersController extends AppController
 						}
 
 
-
-
 				}
 
 				//nos han filtrado unicamente por asignatura
 				if(!empty($_POST['modulo']) || !empty($_POST['materia']) || !empty($_POST['curso'])|| !empty($_POST['semestre'])) {
-					//print_r("Nos han pasado filtro");
 
 					//obtenemos el id de las asignaturas que cumplen con el filtro
 					$asig = TableRegistry::get('Subjects');
 					//comprobamos si hay condiciones o no
-						//si hay condiciones obtenemos los id asignaturas que las cumplen
-					//print_r($conditions);
+					//si hay condiciones obtenemos los id asignaturas que las cumplen
 					$id_asig = $asig->find('all', array('fields' => array('Subjects.id'), 'conditions' => array('AND' => $conditions)))->toArray();
 
-					//print_r($id_asig);
-					//print_r($asignaturas);
+
 					//hasta aqui esta bien saca las asignaturas que tienen q salir
 					//creamos el array de condiones para obtener las sesiones
 					//comprobar que hay asignaturas que cumplan ese criterio
@@ -499,18 +412,9 @@ class UsersController extends AppController
 
 					}
 
-
-
 				}
 			}
-			//poner estas lineas en cada caso...
-	        //$this->set(compact('modulos', 'materias', 'cursos', 'semestres', 'asignaturas', 'sesiones','keywords'));
-			//$this->set('_serialize', ['sesiones']);
-
-
         }
-
-
     }
 
 
@@ -562,20 +466,13 @@ class UsersController extends AppController
             if ($this->Users->save($user)) {
                 $this->Flash->success(__('Usuario añadido correctamente.'));
                 $data = $this->request->data();
+                //modificamos el valor hasUser del profesor
                 $teacher_id = $data['teacher_id'];
                 $query = $teacher->query();
                 $query->update()
                     ->set(['hasUser' => 1])
                     ->where(['id' => $teacher_id])
                     ->execute();
-
-				/*$email = new Email('default');
-				$email->from(['soporte.practicas@unirioja.es' => 'My Site'])
-				    ->to('soporte.practicas@unirioja.es')
-				    ->subject('About')
-				    ->send('Prueba');
-				    */
-
 
                 return $this->redirect(['action' => 'index']);
             } else {
@@ -608,7 +505,7 @@ class UsersController extends AppController
             }
             $this->Flash->error(__('El usuario no se ha podido modificar. Por favor, inténtelo de nuevo.'));
         }
-        $roles = array('Usuario básico', 'Usuario avanzado', 'Administrador', 'Súper administrador');
+        $roles = array('Usuario básico', 'Usuario avanzado', 'Administrador', 'Superadministrador');
         $teachers = $this->Users->Teachers->find('list', array('conditions'=>array('Teachers.hasUser'=>0), 'order' => array('Teachers.apellidos')));
         $this->set(compact('user', 'teachers', 'roles'));
         $this->set('_serialize', ['user']);
@@ -629,9 +526,9 @@ class UsersController extends AppController
 	        $user = $this->Users->get($id);
 	        $data = $this->request->data();
             $teacher_id = $user['teacher_id'];
-            print_r($teacher_id);
 
 	        if ($this->Users->delete($user)) {
+	        	//modificamos el valor hasUser del profesor
 	        	$query = $teacher->query();
                 $query->update()
                     ->set(['hasUser' => 0])

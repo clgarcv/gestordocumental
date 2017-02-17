@@ -14,7 +14,6 @@ class SubjectsController extends AppController
     {
         //return true;
         if(isset($user['role']) && $user['role'] == 2){
-            //damos autorizacion a determinadas acciones del controlador
             if(in_array($this->request->action, array('add', 'edit', 'view', 'index'))){
                 return true;
             } else {
@@ -28,7 +27,6 @@ class SubjectsController extends AppController
             }
         }
         if(isset($user['role']) && $user['role'] == 1){
-            //damos autorizacion a determinadas acciones del controlador
             $this->Flash->error(__('No tiene permisos de acceso.'));
                     return $this->redirect([
                         'controller' => 'Users',
@@ -37,7 +35,6 @@ class SubjectsController extends AppController
         }
 
         if(isset($user['role']) && $user['role'] == 0){
-            //damos autorizacion a determinadas acciones del controlador
             $this->Flash->error(__('No tiene permisos de acceso.'));
                     return $this->redirect([
                         'controller' => 'Users',

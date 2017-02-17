@@ -1,16 +1,4 @@
-<!--
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('Edit Degree'), ['action' => 'edit', $degree->id]) ?> </li>
-        <li><?= $this->Form->postLink(__('Delete Degree'), ['action' => 'delete', $degree->id], ['confirm' => __('Are you sure you want to delete # {0}?', $degree->id)]) ?> </li>
-        <li><?= $this->Html->link(__('List Degrees'), ['action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Degree'), ['action' => 'add']) ?> </li>
-        <li><?= $this->Html->link(__('List Subjects'), ['controller' => 'Subjects', 'action' => 'index']) ?> </li>
-        <li><?= $this->Html->link(__('New Subject'), ['controller' => 'Subjects', 'action' => 'add']) ?> </li>
-    </ul>
-</nav>
--->
+
 <div class="col-md-9 col-md-offset-2 mb-2">
     <h3><?= h($degree->id) ?></h3>
     <table class="vertical-table">
@@ -30,14 +18,7 @@
             <th scope="row"><?= __('Id') ?></th>
             <td><?= $this->Number->format($degree->id) ?></td>
         </tr>
-        <!-- <tr>
-            <th scope="row"><?= __('Created') ?></th>
-            <td><?= h($degree->created) ?></td>
-        </tr>
-        <tr>
-            <th scope="row"><?= __('Modified') ?></th>
-            <td><?= h($degree->modified) ?></td>
-        </tr> -->
+
     </table>
     <div class="related">
         <h4><?= __('Asignaturas de la titulación') ?></h4>
@@ -51,10 +32,7 @@
                 <th scope="col"><?= __('Curso') ?></th>
                 <th scope="col"><?= __('Semestre') ?></th>
                 <th scope="col"><?= __('Materia') ?></th>
-                <th scope="col"><?= __('Teacher Id') ?></th>
-                <!-- <th scope="col"><?= __('Created') ?></th>
-                <th scope="col"><?= __('Modified') ?></th>
-                <th scope="col" class="actions"><?= __('Actions') ?></th> -->
+
             </tr>
             <?php foreach ($degree->subjects as $subjects): ?>
             <tr>
@@ -65,9 +43,7 @@
                 <td><?= h($subjects->curso) ?></td>
                 <td><?= h($subjects->semestre) ?></td>
                 <td><?= h($subjects->materia) ?></td>
-                <td><?= h($subjects->teacher_id) ?></td>
-                <!--<td><?= h($subjects->created) ?></td>
-                <td><?= h($subjects->modified) ?></td> -->
+
                 <td class="actions">
                     <?= $this->Html->link(__('Ver'), ['controller' => 'Subjects', 'action' => 'view', $subjects->id], ['class' => 'btn btn-default']) ?>
                     <!-- <?= $this->Html->link(__('Edit'), ['controller' => 'Subjects', 'action' => 'edit', $subjects->id]) ?>

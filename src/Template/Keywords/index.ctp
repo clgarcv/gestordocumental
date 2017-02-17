@@ -1,11 +1,3 @@
-<!-- <nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New Keyword'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Sessions'), ['controller' => 'Sessions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Session'), ['controller' => 'Sessions', 'action' => 'add']) ?></li>
-    </ul>
-</nav> -->
 
 <div class="col-md-9 col-md-offset-2 mb-2">
     <h3><?= __('Palabras Clave') ?></h3>
@@ -27,7 +19,7 @@
 
                 <?php if ($current_user['role'] == 3): ?>
                     <?= $this->Html->link(__('Editar'), ['action' => 'edit', $keyword->id], ['class' => 'btn btn-default']) ?>
-                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $keyword->id], ['confirm' => __('¿Seguro que desea eliminar la palabra clave #{0}?', $keyword->nombre), 'class' => 'btn btn-default']) ?>
+                    <?= $this->Form->postLink(__('Eliminar'), ['action' => 'delete', $keyword->id], ['confirm' => __('¿Seguro que desea eliminar la palabra clave # {0}?', $keyword->nombre), 'class' => 'btn btn-default']) ?>
                 <?php endif; ?>
                 </td>
             </tr>

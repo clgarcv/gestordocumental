@@ -135,16 +135,6 @@
           </ul>
         </li>
         <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
-            <ul class="dropdown-menu">
-            <li><?= $this->Html->link('Añadir usuario' ,
-                    array('controller' => 'users', 'action' => 'add'))?></li>
-            <li role="separator" class="divider"></li>
-            <li><?= $this->Html->link('Ver Todos' ,
-                    array('controller' => 'users', 'action' => 'index'))?></li>
-          </ul>
-        </li>
-        <li class="dropdown">
             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Profesores <span class="caret"></span></a>
             <ul class="dropdown-menu">
             <li><?= $this->Html->link('Añadir profesor' ,
@@ -152,6 +142,16 @@
             <li role="separator" class="divider"></li>
             <li><?= $this->Html->link('Ver Todos' ,
                     array('controller' => 'teachers', 'action' => 'index'))?></li>
+          </ul>
+        </li>
+        <li class="dropdown">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Usuarios <span class="caret"></span></a>
+            <ul class="dropdown-menu">
+            <li><?= $this->Html->link('Añadir usuario' ,
+                    array('controller' => 'users', 'action' => 'add'))?></li>
+            <li role="separator" class="divider"></li>
+            <li><?= $this->Html->link('Ver Todos' ,
+                    array('controller' => 'users', 'action' => 'index'))?></li>
           </ul>
         </li>
       </ul>
@@ -164,12 +164,6 @@
                     array('controller' => 'users', 'action' => 'edit', $current_user['id']), array('class' => 'nav navbar-nav'))?></li>
 
         <li><a class='nav navbar-nav'> <span class="glyphicon glyphicon-user"></span> Hola, <?= $current_user['username'] ?>
-        <!--
-            <li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-            -->
-            <!-- <a class="navbar-brand" href="./logout">
-                <span class="glyphicon glyphicon-off"></span> Cerrar Sesión
-            </a> -->
 
         <?= $this->Html->link('Cerrar Sesión' ,
                         array('controller' => 'users', 'action' => 'logout'), array('class' => 'nav navbar-nav'))?> </li>

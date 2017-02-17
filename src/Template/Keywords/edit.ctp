@@ -1,18 +1,3 @@
-<!--<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Form->postLink(
-                __('Delete'),
-                ['action' => 'delete', $keyword->id],
-                ['confirm' => __('Are you sure you want to delete # {0}?', $keyword->id)]
-            )
-        ?></li>
-        <li><?= $this->Html->link(__('List Keywords'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Sessions'), ['controller' => 'Sessions', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Session'), ['controller' => 'Sessions', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
--->
 <div class="col-md-9 col-md-offset-2 mb-2">
     <?= $this->Form->create($keyword) ?>
     <fieldset>

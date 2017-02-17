@@ -1,14 +1,3 @@
-<!--
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('New User'), ['action' => 'add']) ?></li>
-        <li><?= $this->Html->link(__('List Teachers'), ['controller' => 'Teachers', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Teacher'), ['controller' => 'Teachers', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
--->
-
 <div class="col-md-9 col-md-offset-2 mb-2">
     <h3><?= __('Usuarios') ?></h3>
     <table cellpadding="0" cellspacing="0">
@@ -41,7 +30,7 @@
                             echo "<td>Administrador</td>";
                             break;
                         case 3:
-                            echo "<td>Súper administrador</td>";
+                            echo "<td>Superadministrador</td>";
                             break;
                         default:
                             echo "<td></td>";

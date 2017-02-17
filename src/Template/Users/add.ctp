@@ -1,14 +1,3 @@
-<!--
-<nav class="large-3 medium-4 columns" id="actions-sidebar">
-    <ul class="side-nav">
-        <li class="heading"><?= __('Actions') ?></li>
-        <li><?= $this->Html->link(__('List Users'), ['action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('List Teachers'), ['controller' => 'Teachers', 'action' => 'index']) ?></li>
-        <li><?= $this->Html->link(__('New Teacher'), ['controller' => 'Teachers', 'action' => 'add']) ?></li>
-    </ul>
-</nav>
--->
-
 <?php if (!isset($current_user)): ?>
 <div class="cab">
   	<header>
@@ -34,11 +23,7 @@
             echo $this->Form->input('teacher_id', array ('label' => 'Profesor', 'options' => $teachers));
         ?>
     </fieldset>
-    <!--
-    //$this->Form->button('Home', array('onclick' => "location.href='".$this->Html->url($url)."'"));
-        //$this->Html->link($this->Form->button('Button'), array('action' => 'viewSomethin',$id), array('escape'=>false,'title' => "Click to view somethin"));
-        //$this->Html->link("Cancelar", array('controller' => 'Users','action'=> 'index'), array( 'class' => 'button'));
-        //$this->Form->button('Cancelar', array('onclick' => "location.href='".$this->Html->url($url)."'")); ?>-->
+
     <?= $this->Form->button('Cancelar', array('type' => 'button','onclick' => 'location.href=\'../users/buscador\';')); ?>
     <?= $this->Form->button('Guardar') ?>
     <?= $this->Form->end() ?>

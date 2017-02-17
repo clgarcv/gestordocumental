@@ -18,7 +18,6 @@ class SessionsController extends AppController
     {
         //Administrador
         if(isset($user['role']) && $user['role'] == 2){
-            //damos autorizacion a determinadas acciones del controlador
             if(in_array($this->request->action, array('add', 'edit', 'index', 'view'))){
                 return true;
             } else {
@@ -34,7 +33,6 @@ class SessionsController extends AppController
         }
         //usuario avanzado
         if(isset($user['role']) && $user['role'] == 1){
-            //damos autorizacion a determinadas acciones del controlador
             if(in_array($this->request->action, array('add', 'edit', 'index', 'view'))){
                 return true;
             } else {
@@ -50,7 +48,6 @@ class SessionsController extends AppController
         }
         //usuario basico
         if(isset($user['role']) && $user['role'] == 0){
-            //damos autorizacion a determinadas acciones del controlador
             if(in_array($this->request->action, array('index', 'view'))){
                 return true;
             } else {

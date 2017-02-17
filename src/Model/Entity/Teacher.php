@@ -33,8 +33,8 @@ class Teacher extends Entity
         'id' => false
     ];
 
-    //protected $_virtual = ['full_name'];
 
+    //creamos un campo virtual para poder mostrar nombre y apellidos de un profesor en determinadas operaciones
     protected function _getFullName()
     {
         return $this->_properties['apellidos'] . ', ' . $this->_properties['nombre'];

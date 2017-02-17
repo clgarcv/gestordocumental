@@ -18,10 +18,6 @@ class SendEmailMailer extends Mailer
 
     public function sendEmail(array $data)
 	{
-	     $this->from('soporte.practicas@unirioja.es','Users')
-	                ->to('cuenta soporte.practicas@unirioja.es')
-	                ->subject(sprintf('Welcome %s', $data->name))
-	                ->template('default','default')
-	                ->set(['data'=>$data->first_name]);
+
 	}
 }
